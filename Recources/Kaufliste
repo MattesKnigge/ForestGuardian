@@ -1,0 +1,99 @@
+**Microcontroller:**
+
+
+- **Raspberry Pi Zero W**
+  - Preis: 18,40€
+  - Link: [Conrad Raspberry Pi Zero W](https://www.conrad.de/de/p/raspberry-pi-zero-w-w-o-gpio-raspberry-pi-zero-w-512-mb-1-x-1-0-ghz-1693283.html?refresh=true)
+  - Begründung:
+    - USB-A-Anschluss
+    - Einfache Kameraverbindung
+  - Nachteile:
+    - Nicht gekennzeichnete Pins
+    - Mäßig hoher Stromverbrauch (0,5-0,7 Watt): [Quelle](https://www.energie.web.de/ratgeber/verbrauch/stromverbrauch-rasperry/)
+
+**Energy:**
+
+- **Solar Panels:**
+  - **Sygonix QUTQ6-15 Polykristallines Solarmodul 0.9W 6V**
+    - 2 Stück
+    - Einzelpreis: 14,28€
+    - Link: [Conrad Sygonix Solar Panel](https://www.conrad.de/de/p/sygonix-qutq6-15-polykristallines-solarmodul-0-9-w-6-v-1719872.html)
+    - Abmessungen: 120mm*82mm*3mm
+    - Spannung: 6V
+    - Leistung: 0,9W
+
+  - **TRU COMPONENTS POLY-PVZ-60100-6V Polykristallines Solarmodul 0.72 W 6 V**
+    - Preis: 9,24€
+    - Link: [Conrad TRU COMPONENTS Solar Panel](https://www.conrad.de/de/p/tru-components-poly-pvz-8080-5v-polykristallines-solarmodul-0-6-w-5-v-1569024.html)
+    - Abmessungen: 100mm*60mm*2,7mm
+    - Spannung: 6V
+    - Leistung: 0,72W
+
+- **Laderegler: Adafruit Powerboost 1000C (2465)**
+  - Preis: 18,55€
+  - Link: [Mouser Adafruit Powerboost 1000C](https://www.mouser.de/ProductDetail/Adafruit/2465?qs=N%2F3wi2MvZWC9dGVTptgsXg%3D%3D)
+  - Micro-USB und JST-Anschluss
+  - Keine I2C- oder SPI-Unterstützung
+  - Keine Möglichkeit zur Überprüfung des Batteriestatus
+
+- **Batterie: PKNERGY Lithium-Ionen-Batterie Pack ICR 18650 3.7V 6600mAh LiPo Li-Ion mit JST-PH-Anschluss**
+  - Preis: 19,29€
+  - Link: [Conrad PKNERGY Lithium-Ionen-Batterie](https://www.conrad.de/de/p/pknergy-lithium-ion-battery-pack-icr-18650-3-7v-6600mah-lipo-li-ion-with-jst-ph-connector-871055382.html)
+  - Spannung: 3,7V
+  - JST-Anschluss
+
+**Sensoren:**
+
+- **Lichtsensor: Seeed Studio 101020030**
+  - Preis: 6,71€
+  - Link: [Conrad Seeed Studio Lichtsensor](https://www.conrad.de/de/p/seeed-studio-101020030-digitaler-lichtsensor-1-st-1369529.html)
+  - Unterstützt I2C
+
+- **Bodendurchfeuchtungssensor: Adafruit STEMMA Soil Sensor**
+  - Preis: 8,20€
+  - Link: [Conrad Adafruit STEMMA Soil Sensor](https://www.conrad.de/de/p/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor-802236965.html)
+  - Unterstützt I2C
+
+- **Temperatur-, Luftfeuchtigkeits- und Luftdrucksensor: Joy-it-SEN-BME680**
+  - Preis: 19,99€
+  - Link: [Conrad Joy-it-SEN-BME680 Sensor](https://www.conrad.at/de/p/joy-it-sen-bme680-sensor-modul-1-st-1884870.html)
+
+- **Luftqualitätssensor (CO2-Äquivalenzkonzentration): MIKROE-2896**
+  - Preis: 29,76€
+  - Link: [Mouser MIKROE-2896 Sensor](https://www.mouser.de/ProductDetail/Mikroe/MIKROE-2896?qs=rrS6PyfT74dEs6OzyttedA%3D%3D)
+
+**LTE:**
+
+- **GNSS / GPS Development Tools SIM7600CE-T 4G (LTE) Arduino Shield**
+  - Preis: 64,17€
+  - Link: [Mouser SIM7600CE-T Arduino Shield](https://www.mouser.de/ProductDetail/DFRobot/TEL0124?qs=17u8i%2FzlE88MEbXRJuYFsA%3D%3
+
+D)
+
+- **LTE SIM-Karte**
+
+**Kamera:**
+
+- **Python-programmierbare Kamera**
+  - Preis: 66,50€
+  - Link: [Mouser Python-Programmierbare Kamera](https://www.mouser.de/ProductDetail/Seeed-Studio/102991322?qs=wnTfsH77Xs7O6DKdriajug%3D%3D)
+
+**Kabel:**
+
+- **Micro-USB-Kabel**
+  - Preis: 5,03€
+  - Link: [Conrad Micro-USB-Kabel](https://www.conrad.de/de/p/samsung-handy-kabel-1x-usb-stecker-1x-micro-usb-stecker-1-50-m-1891336.html)
+
+- **Jumper-Kabel-Set (mit Breadboard)**
+  - Preis: 16,80€
+  - Link: [Conrad Jumper-Kabel-Set mit Breadboard](https://www.conrad.de/de/p/az-delivery-breadboard-kit-3x-jumper-wire-m2m-f2m-f2f-3er-set-mb102-breadbord-kompatibel-mit-arduino-raspberry-pi-850038804.html)
+
+**Werkzeuge:**
+
+- Lötkolben (Lötzinn, Lötlitze)
+- Multimeter
+- USB-Multimeter: [Conrad USB-Multimeter](https://www.conrad.de/de/p/joy-it-jt-um25c-usb-multimeter-1874702.html) (31,08€)
+- Vogelhaus(oder Materialien)
+
+**Summe:**
+303,62€
