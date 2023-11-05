@@ -1,35 +1,33 @@
-/* Body styles */
-body {
-    font-family: Arial, sans-serif;
-    background-color: #1E1F1E;
+/* Reset default styles */
+body, h1, p {
     margin: 0;
     padding: 0;
-    overflow: hidden;
+}
+
+/* Body styles */
+body {
+    font-family: Dosis, sans-serif;
+    background-color: #1C352E;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* Header styles */
 .header {
-    background-color: #484A47;
-    padding: 0.5vh;
+    background-color: #D4A82B;
+    padding: 1vh 2vw;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    height: 5vh;
-    width: 100vw;
-
+    height: 3.5rem;
+    box-sizing: border-box;
 }
 
-.header-content {
-    display: flex;
-    align-items: center;
+.header h1 {
+    font-family: Dosis, sans-serif;
+    font-size: 3rem;
 }
 
-header h1 {
-    font-size: 1vw;
-    margin: 0;
-    font-family: 'Outfit', cursive;
-    color: #537A5A;
-}
 
 /* Button styles */
 .header-button {
@@ -38,90 +36,39 @@ header h1 {
 
 /* PlotDisplay styles */
 .headline-plot {
-    font-size: 2vw;
+    font-size: 1rem;
     margin: 0;
-    color: #537A5A;
+    color: #91A799;
     cursor: default;
-
+    font-family: Dosis, sans-serif;
 }
-
 .sensor-name {
-    font-size: 2vw;
+    font-size: 1rem;
     margin: 0;
-    color: #537A5A;
+    color: #91A799;
     cursor: default;
-}
-
-.gauge-container{
-    font-size: 1vw;
-    cursor: default;
-}
-
-/* Credits styles */
-.credits-container {
-    color: #484A47;
-    padding: 1vw;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: fixed;
-    bottom: -2.5vw;
-    left: 0;
-    right: 0;
-    height: 10vh;
-    font-size: 1vw;
-    cursor: default;
-}
-
-.credits-content {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100vw;
-    padding: 2rem;
-    color: #484A47;
-}
-
-.credit-link {
-    color: #484A47;
-    text-decoration: none;
-    transition: text-decoration 0.3s, color 0.3s, cursor 0.3s;
-    cursor: pointer;
-}
-
-.country {
-    text-decoration: none;
-    color: inherit;
-}
-
-.country:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.credit-link:hover {
-    text-decoration: underline;
-    cursor: pointer;
+    font-family: Dosis, sans-serif;
 }
 
 .gauge-container {
+    font-size: 1rem;
+    cursor: default;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     text-align: center;
+    font-family: Dosis, sans-serif;
 }
 
-.gauge-item {
+.gauge-item, .temp, .hum, .pres {
     margin: 10px;
-    width: 300px;
-    height: 180px;
 }
 
 .temp {
-    width: 600px;
+    width: 400px;
     height: 400px;
+    margin-bottom: -150px;
 }
 
 .hum-pres {
@@ -131,11 +78,88 @@ header h1 {
     text-align: center;
 }
 
-.hum,
-.pres {
-    margin: 10px;
-    width: 400px;
-    height: 240px;
+.hum, .pres {
+    height: 280px;
+}
+
+/* Credits styles */
+.credits-container {
+    padding: .5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    height: 5vh;
+    font-size: 1rem;
+    cursor: default;
+}
+
+.credits-content {
+    font-family: Bebas Neue, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 2rem;
+    color: #8E6F52;
+    box-sizing: border-box;
+}
+
+.credit-link, .country {
+    color: #8E6F52;
+    text-decoration: none;
+    transition: text-decoration 0.3s, color 0.3s, cursor 0.3s;
+    cursor: pointer;
+}
+
+.credit-link:hover, .country:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+    .gauge-item, .temp, .hum, .pres {
+        width: 300px;
+        height: 150px;
+        margin: 10% auto;
+    }
+    body {
+        font-family: Dosis, sans-serif;
+        background-color: #1C352E;
+        overflow-y: auto;
+    }
+
+    .credits-container {
+        color: #484A47;
+        display: compact;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+        position: relative;
+        font-size: 0.4rem;
+        cursor: default;
+    }
+    .header h1 {
+        font-size: 2rem;
+    }
+
+    .headline-plot {
+        font-size: 1rem;
+        margin: 0;
+        color: #91A799;
+        cursor: default;
+        font-family: Dosis, sans-serif;
+    }
+    .sensor-name {
+        font-size: 1rem;
+        margin: 0;
+        color: #91A799;
+        cursor: default;
+        font-family: Dosis, sans-serif;
+    }
+
 }
 
 .detail {

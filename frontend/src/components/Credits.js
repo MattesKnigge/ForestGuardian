@@ -2,9 +2,9 @@ import React from 'react';
 
 const contributors = [
     { name: 'Niklas Lugowski', githubUsername: 'NiklasLugi' },
+    { name: 'Mattes Knigge', githubUsername: 'whosmattes' },
     { name: 'Julian Schöpe', githubUsername: 'j.schoepe' },
     { name: 'Alireza Jalili Baleh', githubUsername: 'Alireza.Jalili' },
-    { name: 'Mattes Knigge', githubUsername: 'whosmattes' },
     { name: 'Hooman Taghi Zadehi', githubUsername: 'hooman.taghi' },
 ];
 
@@ -25,10 +25,12 @@ const Credits = () => {
         <div className="credits-container">
             <div className="credits-content">
                 <p>
-                    Build by: {contributorsList} |
+                    Built by: {contributorsList}
+                    {" | "}
                     <span className="credit-link" onClick={() => handleGitHubLinkClick('whosmattes/sensorknoten-vogelhaus')}>
-            Visit our GitLab |
+             Visit our GitLab
           </span>
+                    {" | "}
                     <a className="country" href="https://5g-smart-country.de" target="_blank" rel="noreferrer">
                         5G Smart Country
                     </a> | 2023

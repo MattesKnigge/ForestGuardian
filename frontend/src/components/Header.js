@@ -1,44 +1,36 @@
 import React, { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
-import LocalFireDepartmentIcon from '@mui/icons-material/LocalFireDepartment';
 import InfoDialog from "./InfoDialog";
 import QuestionMarkRoundedIcon from '@mui/icons-material/QuestionMarkRounded';
 import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
 
 const Header = ({ data }) => {
-
     const [isInfoOpen, setIsInfoOpen] = useState(false);
 
     const buttonStyle = {
-        backgroundColor: '#537A5A',
-        marginLeft: '1vw',
-        borderRadius: '25%',
+        backgroundColor: '#8E6F52',
+        marginLeft: '.5rem',
+        borderRadius: '20%',
+        color: '#333333',
+        padding: '.5rem',
+        transition: 'background-color 0.3s, transform 0.2s',
+        '&:hover': {
+            backgroundColor: '#6E4A33',
+            transform: 'scale(0.95) rotate(10deg)',
+        },
     };
+
     const buttonContainerStyle = {
         display: 'flex',
         alignItems: 'center',
-        marginLeft: '25%',
-    }
+    };
 
     const headerStyle = {
         fontFamily: 'Arial, sans-serif',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
-        cursor: "default"
-    };
-
-    const iconsContainerStyle = {
-        display: 'flex',
-        alignItems: 'center',
-        marginLeft: '-35%',
-    };
-
-    const fireIconStyle = {
-        marginRight: '5%',
-        color: "#C36F09",
-        //TODO: Change color according to temperature
-        //maybe look up correlation for all three values | Fire Color: #C36F09
+        cursor: 'default',
     };
 
     const handleRefreshClick = () => {
@@ -54,38 +46,32 @@ const Header = ({ data }) => {
     };
 
     const titleStyle = {
-        fontSize: '3.5vh',
-        fontFamily: 'Outfit, sans-serif',
-        color: '#537A5A',
-        marginRight: '1vw',
+        color: '#333333',
+        display: 'flex',
         alignItems: 'center',
+        marginLeft: '-1%',
     };
 
     return (
         <header className="header" style={headerStyle}>
             <div className="header-content">
                 <h1 style={titleStyle}>ForestGuardian</h1>
-                <img
-                    src="/birdhouse.svg"
-                    alt="Birdhouse"
-                    width="35vw"
-                    height="35vh"
-                />
             </div>
             <div className="header-button">
-                <div style={iconsContainerStyle}>
-                    <LocalFireDepartmentIcon style={fireIconStyle} />
-                    <LocalFireDepartmentIcon style={fireIconStyle} />
-                    <LocalFireDepartmentIcon style={fireIconStyle} />
+                <div style={buttonContainerStyle}>
+                    <IconButton
+                        sx={buttonStyle}
+                        onClick={handleRefreshClick}
+                    >
+                        <RefreshRoundedIcon />
+                    </IconButton>
+                    <IconButton
+                        sx={buttonStyle}
+                        onClick={handleInfoClick}
+                    >
+                        <QuestionMarkRoundedIcon />
+                    </IconButton>
                 </div>
-                    <div style={buttonContainerStyle}>
-                <IconButton style={buttonStyle} onClick={handleRefreshClick}>
-                    <RefreshRoundedIcon />
-                </IconButton>
-                <IconButton style={buttonStyle} onClick={handleInfoClick}>
-                    <QuestionMarkRoundedIcon  />
-                </IconButton>
-                    </div>
             </div>
             <InfoDialog open={isInfoOpen} onClose={handleCloseInfo} />
         </header>

@@ -43,20 +43,19 @@ const PlotDisplay = () => {
         segments,
         customSegmentLabels: Array(segments).fill({}),
         segmentColors,
-        textColor: '#537A5A',
+        textColor: '#91A799',
     });
 
     return (
         <div className="plot-display-content">
             <div className="sensor-name">
-                <h1 style={{ textAlign: 'center' }}>Air Sensors {data.temperature.timestamp}</h1>
+                <h1 style={{ textAlign: 'center' }}>Test House Data {data.temperature.timestamp}</h1>
             </div>
             <div className="gauge-container">
                 <div className="gauge-item temp">
                     <h3 className="headline-plot">Temperature</h3>
                     <Speedometer {...gaugeConfig(data.temperature.value, -25, 45, '°C', 8, ["#8f0000", "red", "orange", "green", "green", "orange", "red", "#8b0000"])} />
                 </div>
-                <div className="gauge-item hum-pres">
                     <div className="gauge-item hum">
                         <h3 className="headline-plot">Humidity</h3>
                         <Speedometer {...gaugeConfig(data.humidity.value, 0, 110, '%', 6, ["#8f0000", "red", "orange", "green", "green", "green"])} />
@@ -65,7 +64,6 @@ const PlotDisplay = () => {
                         <h3 className="headline-plot">Pressure</h3>
                         <Speedometer {...gaugeConfig(data.pressure.value, 800, 1110, 'hPa', 3, ["red", "orange", "green"])} />
                     </div>
-                </div>
             </div>
             <Snackbar
                 open={openErrorSnackbar}
