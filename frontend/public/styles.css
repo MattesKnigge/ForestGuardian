@@ -138,8 +138,15 @@ header h1 {
     height: 240px;
 }
 
+.detail {
+    max-width: 40vw;
+}
 
-
-
-
-
+.detail-layout {
+    display: grid;
+    grid-template-areas:
+            "a a b"
+            "c d d"
+            "c d d"
+            "c e e";
+}

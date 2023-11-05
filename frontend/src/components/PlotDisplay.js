@@ -22,7 +22,7 @@ const PlotDisplay = () => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get("http://127.0.0.1:8000/sensorknoten-vogelhaus/test");
+                const response = await axios.get("/sensorknoten-vogelhaus/location/random");
                 setData(response.data);
             } catch (error) {
                 setError('An error occurred while fetching sensor data.');
