@@ -1,4 +1,5 @@
 import datetime
+import time
 import random
 
 from rest_framework.decorators import api_view
@@ -44,7 +45,8 @@ def get_location(request, location_name: str):
         }
     else:
         data = {}
-        measured_params = MeasuredParameter.objects.filter(location=Location.objects.get(name=location_name)).prefetch_related('parameter').all()
+        location = Location.objects.get(name=location_name)
+        measured_params = MeasuredParameter.objects.filter(location=location).prefetch_related('parameter').all()
         for mp in measured_params:
             sv = SensorValue.objects.filter(measuredParameter=mp).latest('created_at')
             data[mp.parameter.name] = {
@@ -67,7 +69,7 @@ def get_measured_parameter_details(request, measured_parameter_id: str):
         'sensor': mp.sensor.name,
         'parameter_description': mp.parameter.description,
         'sensor_description': mp.sensor.description,
-        'values': [{'timestamp': v.created_at, 'value': v.value} for v in values]
+        'values': [{'timestamp': time.mktime(v.created_at.timetuple()), 'value': v.value} for v in values]
     }
 
     return Response(data)
