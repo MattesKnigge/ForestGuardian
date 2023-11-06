@@ -1,0 +1,54 @@
+{
+  "name": "react-gauge",
+  "version": "0.0.5",
+  "description": "ReactJS Gauge Component",
+  "main": "dist/react-gauge.js",
+  "scripts": {
+    "build:src": "babel src/  --out-dir dist",
+    "build:example": "npm run build:src; browserify example/example.js > example/example.bundle.js"
+  },
+  "browserify": {
+    "extensions": [
+      ".js"
+    ],
+    "transform": [
+      "babelify"
+    ],
+    "resolve": {}
+  },
+  "babel": {
+    "presets": [
+      "es2015",
+      "stage-0",
+      "react"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/michigan-com/react-gauge.git"
+  },
+  "keywords": [
+    "react-component",
+    "react",
+    "svg"
+  ],
+  "author": "Mike Varano",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/michigan-com/react-gauge/issues"
+  },
+  "homepage": "https://github.com/michigan-com/react-gauge#readme",
+  "peerDependencies": {
+    "react": "15.x"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.14.0",
+    "babel-core": "^6.14.0",
+    "babel-preset-es2015": "^6.14.0",
+    "babel-preset-react": "^6.11.1",
+    "babel-preset-stage-0": "^6.5.0",
+    "babelify": "^7.3.0",
+    "react": "^15.3.1",
+    "react-dom": "^15.3.1"
+  }
+}
