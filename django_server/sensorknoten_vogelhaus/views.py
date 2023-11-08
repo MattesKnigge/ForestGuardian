@@ -2,6 +2,9 @@ import datetime
 import time
 import random
 
+from drf_yasg import openapi
+from drf_yasg.utils import swagger_auto_schema
+from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Location, MeasuredParameter, SensorValue
@@ -74,3 +77,11 @@ def get_measured_parameter_details(request, measured_parameter_id: str):
 
     return Response(data)
 
+
+@swagger_auto_schema(request_body=openapi.Schema(
+    type=openapi.TYPE_OBJECT,
+), method='POST')
+@api_view(['POST'])
+def post_location_data(request):
+    print(request.data)
+    return Response(status=status.HTTP_200_OK)
