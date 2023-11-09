@@ -1,6 +1,3 @@
-**Microcontroller:**
-
-
 - **Raspberry Pi Zero W**
   - Preis: 18,40€
   - Link: [Conrad Raspberry Pi Zero W](https://www.conrad.de/de/p/raspberry-pi-zero-w-w-o-gpio-raspberry-pi-zero-w-512-mb-1-x-1-0-ghz-1693283.html?refresh=true)
@@ -9,7 +6,13 @@
     - Einfache Kameraverbindung
   - Nachteile:
     - Nicht gekennzeichnete Pins
-    - Mäßig hoher Stromverbrauch (0,5-0,7 Watt): [Quelle](https://www.energie.web.de/ratgeber/verbrauch/stromverbrauch-rasperry/)
+    - Mäßig hoher Stromverbrauch (0,5-0,7 Watt): [Quelle](https://www.energie.web.de/ratgeber/verbrauch/stromverbrauch-rasperry/) 
+    
+- **Micro-SD-Card**
+    - Preis: 3,95€
+    - 16GB
+    - Link: [Reichelt Micro-SD](https://www.reichelt.de/microsdhc-speicherkarte-16gb-verbatim-class-10-verbatim-44010-p237763.html?&trstct=pol_11&nbc=1)
+    (8GB würde auch gehen, jedich sind die preislichen Unterschiede sehr gering)
 
 **Energy:**
 
@@ -21,6 +24,7 @@
   - Spannung: 6,12V
   - Leistung: 5,75W
   - Begründung: Akzeptable Größe und akzeptable Leistung, Anschluss kompatibel mit Laderegler
+  - (Solarpanel wird immer benötigt, da das Vogelhäuschen vom Kunden nicht per Kabel aufgeladen werden soll)
 
 - **Laderegler: Adafruit Universal USB / DC / Solar Lithium Ion/Polymer charger - bq24074**
   - 2 Stück
@@ -36,26 +40,13 @@
   - Spannung: 3,7V
   - JST-PH-Anschluss
   - Begründung: Durch den JST-PH-Anschluss einfach kompatibel mit Laderegler, genug Spannung, gute Speicherkapazität
-
+  
 **Sensoren:**
-
-- **Lichtsensor: Seeed Studio 101020030**
-  - Preis: 6,71€
-  - Link: [Conrad Seeed Studio Lichtsensor](https://www.conrad.de/de/p/seeed-studio-101020030-digitaler-lichtsensor-1-st-1369529.html)
-  - Unterstützt I2C
-
-- **Bodendurchfeuchtungssensor: Adafruit STEMMA Soil Sensor**
-  - Preis: 8,20€
-  - Link: [Conrad Adafruit STEMMA Soil Sensor](https://www.conrad.de/de/p/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor-802236965.html)
-  - Unterstützt I2C
 
 - **Temperatur-, Luftfeuchtigkeits- und Luftdrucksensor: Joy-it-SEN-BME680**
   - Preis: 19,99€
   - Link: [Conrad Joy-it-SEN-BME680 Sensor](https://www.conrad.at/de/p/joy-it-sen-bme680-sensor-modul-1-st-1884870.html)
-
-- **Luftqualitätssensor (CO2-Äquivalenzkonzentration): MIKROE-2896**
-  - Preis: 29,76€
-  - Link: [Mouser MIKROE-2896 Sensor](https://www.mouser.de/ProductDetail/Mikroe/MIKROE-2896?qs=rrS6PyfT74dEs6OzyttedA%3D%3D)
+  (Ausgerechnet dieser Sensor, da er zum einen 3 Werte ausgibt und Kostengünstig ist, zum anderen aber auch die meisten Use-Cases abdeckt, wie z.B. Klimaüberwachung, Brandprevention und Pflanzengesundheit)
 
 **LTE:**
 
@@ -68,32 +59,7 @@
 
 - **LTE SIM-Karte**
 
-**Kamera:**
-
-- **Pi Zero Camera**
-  - Preis: 18,30€
-  - Kein Camera-to-Zero-Adapter wird benötigt
-  - 2592 × 1944 Standbildauflösung
-  - 120° FOV (Standart RPI-Kamera: 72°)
-  - Link: [Reichelt RPIZ CAM 5MP](https://www.reichelt.de/raspberry-pi-zero-kamera-5mp-120--rpiz-cam-5mp-120-p242758.html)
-
-**Kabel:**
-
-- **Micro-USB-Kabel**
-  - Preis: 5,03€
-  - Link: [Conrad Micro-USB-Kabel](https://www.conrad.de/de/p/samsung-handy-kabel-1x-usb-stecker-1x-micro-usb-stecker-1-50-m-1891336.html)
-
-- **Jumper-Kabel-Set (mit Breadboard)**
-  - Preis: 16,80€
-  - Link: [Conrad Jumper-Kabel-Set mit Breadboard](https://www.conrad.de/de/p/az-delivery-breadboard-kit-3x-jumper-wire-m2m-f2m-f2f-3er-set-mb102-breadbord-kompatibel-mit-arduino-raspberry-pi-850038804.html)
-
 **Werkzeuge:**
 
-- Lötkolben (Lötzinn, Lötlitze)
-- Multimeter
-- USB-Multimeter: [Conrad USB-Multimeter](https://www.conrad.de/de/p/joy-it-jt-um25c-usb-multimeter-1874702.html) (31,08€)
 - Vogelhaus(oder Materialien)
 - Spanngurte 2 Stück, mindestens 1 Meter
-
-**Summe:**
-303,62€

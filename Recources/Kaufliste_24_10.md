@@ -1,3 +1,4 @@
+ 
 **Microcontroller:**
 
 
@@ -10,21 +11,29 @@
   - Nachteile:
     - Nicht gekennzeichnete Pins
     - Mäßig hoher Stromverbrauch (0,5-0,7 Watt): [Quelle](https://www.energie.web.de/ratgeber/verbrauch/stromverbrauch-rasperry/)
+    (Für diesen entschieden, da dieser die Anbindung einer Kamera vereinfacht, zum Debuggen mit WLAN verbunden werden kann und über eine I2C Schnittstelle verfügt)
+    
+- **Micro-SD-Card**
+    - Preis: 3,95€
+    - 16GB
+    - Link: [Reichelt Micro-SD](https://www.reichelt.de/microsdhc-speicherkarte-16gb-verbatim-class-10-verbatim-44010-p237763.html?&trstct=pol_11&nbc=1)
+    (8GB würde auch gehen, jedich sind die preislichen Unterschiede sehr gering)
 
 **Energy:**
 
 - **Solar Panel: Solarmodule und Solarzellen 5V 5W Solar Panel - ETFE - Voltaic P105 **
-  - 2 Stück
+  - 1 Stück zum testen genügt
   - Einzelpreis: 42,25€
   - Link: [Mouser Adafruit Solar Panel](https://www.mouser.de/ProductDetail/Adafruit/5367?qs=MyNHzdoqoQJL8FJqKm6mRw%3D%3D)
   - Abmessungen: 120mm*82mm*3mm
   - Spannung: 6,12V
   - Leistung: 5,75W
   - Begründung: Akzeptable Größe und akzeptable Leistung, Anschluss kompatibel mit Laderegler
+  (Bitte schon am Anfang kaufen, obwohl wir erstmal mit USB arbeiten könnten, da wir so direkt reale Tests durchführen können, wie gut die Spannungsversorgung über die Solarpanels ist)
 
 - **Laderegler: Adafruit Universal USB / DC / Solar Lithium Ion/Polymer charger - bq24074**
-  - 2 Stück
-  - Preis: 28,61€
+  - 1 Stück zum testen genügt
+  - Einzelpreis: 28,61€
   - Link: [EXP-Tech SparkFun Sunny Buddy](https://exp-tech.de/products/sparkfun-sunny-buddy-mppt-solar-charger)
   - USB-C und JST-Anschluss
   - Anschluss kompatibel mit Solarpanel
@@ -35,27 +44,19 @@
   - Link: [Conrad PKNERGY Lithium-Ionen-Batterie](https://www.conrad.de/de/p/pknergy-lithium-ion-battery-pack-icr-18650-3-7v-6600mah-lipo-li-ion-with-jst-ph-connector-871055382.html)
   - Spannung: 3,7V
   - JST-PH-Anschluss
-  - Begründung: Durch den JST-PH-Anschluss einfach kompatibel mit Laderegler, genug Spannung, gute Speicherkapazität
+  - (Durch den JST-PH-Anschluss einfach kompatibel mit Laderegler, genug Spannung, gute Speicherkapazität)
 
 **Sensoren:**
-
-- **Lichtsensor: Seeed Studio 101020030**
-  - Preis: 6,71€
-  - Link: [Conrad Seeed Studio Lichtsensor](https://www.conrad.de/de/p/seeed-studio-101020030-digitaler-lichtsensor-1-st-1369529.html)
-  - Unterstützt I2C
-
-- **Bodendurchfeuchtungssensor: Adafruit STEMMA Soil Sensor**
-  - Preis: 8,20€
-  - Link: [Conrad Adafruit STEMMA Soil Sensor](https://www.conrad.de/de/p/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor-802236965.html)
-  - Unterstützt I2C
 
 - **Temperatur-, Luftfeuchtigkeits- und Luftdrucksensor: Joy-it-SEN-BME680**
   - Preis: 19,99€
   - Link: [Conrad Joy-it-SEN-BME680 Sensor](https://www.conrad.at/de/p/joy-it-sen-bme680-sensor-modul-1-st-1884870.html)
+  (Dadurch, dass dieser Sensor 3 Werte abgibt, perfekt um ein Frontend mit einer Moderaten Menge an Werten zu zeigen)
 
 - **Luftqualitätssensor (CO2-Äquivalenzkonzentration): MIKROE-2896**
   - Preis: 29,76€
   - Link: [Mouser MIKROE-2896 Sensor](https://www.mouser.de/ProductDetail/Mikroe/MIKROE-2896?qs=rrS6PyfT74dEs6OzyttedA%3D%3D)
+  (Ein zweiter Sensor ist wichtig, um die Modularität des Sensor-Knotens zu demonstrieren)
 
 **LTE:**
 
@@ -76,6 +77,7 @@
   - 2592 × 1944 Standbildauflösung
   - 120° FOV (Standart RPI-Kamera: 72°)
   - Link: [Reichelt RPIZ CAM 5MP](https://www.reichelt.de/raspberry-pi-zero-kamera-5mp-120--rpiz-cam-5mp-120-p242758.html)
+  (Diese Kamera ist kostengünstig und ist in der Lage Bilder mit 120° FOV aufzunehmen und sie ist kompatibel mit dem Raspberry Pi Zero W)
 
 **Kabel:**
 
@@ -92,8 +94,7 @@
 - Lötkolben (Lötzinn, Lötlitze)
 - Multimeter
 - USB-Multimeter: [Conrad USB-Multimeter](https://www.conrad.de/de/p/joy-it-jt-um25c-usb-multimeter-1874702.html) (31,08€)
-- Vogelhaus(oder Materialien)
 - Spanngurte 2 Stück, mindestens 1 Meter
 
 **Summe:**
-303,62€
+297,63€ + SIM-Karte und Versand

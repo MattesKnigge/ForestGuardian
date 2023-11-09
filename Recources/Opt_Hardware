@@ -1,0 +1,36 @@
+**Sensoren:** 
+
+- **Lichtsensor: Seeed Studio 101020030**
+  - Preis: 6,71€
+  - Link: [Conrad Seeed Studio Lichtsensor](https://www.conrad.de/de/p/seeed-studio-101020030-digitaler-lichtsensor-1-st-1369529.html)
+  - Unterstützt I2C
+
+- **Bodendurchfeuchtungssensor: Adafruit STEMMA Soil Sensor**
+  - Preis: 8,20€
+  - Link: [Conrad Adafruit STEMMA Soil Sensor](https://www.conrad.de/de/p/adafruit-stemma-soil-sensor-i2c-capacitive-moisture-sensor-802236965.html)
+  - Unterstützt I2C
+  
+- **Luftqualitätssensor (CO2-Äquivalenzkonzentration): MIKROE-2896**
+  - Preis: 29,76€
+  - Link: [Mouser MIKROE-2896 Sensor](https://www.mouser.de/ProductDetail/Mikroe/MIKROE-2896?qs=rrS6PyfT74dEs6OzyttedA%3D%3D)
+  
+**Kamera:**
+
+- **Pi Zero Camera**
+  - Preis: 18,30€
+  - Kein Camera-to-Zero-Adapter wird benötigt
+  - 2592 × 1944 Standbildauflösung
+  - 120° FOV (Standart RPI-Kamera: 72°)
+  - Link: [Reichelt RPIZ CAM 5MP](https://www.reichelt.de/raspberry-pi-zero-kamera-5mp-120--rpiz-cam-5mp-120-p242758.html)
+
+**I2C-Hub und -Zubehör**
+
+- **I2C-Hub: Seeed Studio 103020272**
+  - Einzelpreis: 1,58€
+  - 2 Stück
+  - Link: [Mouser I2C-Hub](https://www.mouser.de/ProductDetail/Seeed-Studio/103020272?qs=wnTfsH77Xs5XV9biP9YyPQ%3D%3D)
+  
+- **Female Jumper zu Grove 4-Pin Kabel**
+  - Einzelpreis: 3,20€
+  - 2 Stück
+  - Link: [Reichelt Jumper-to-Grove](https://www.reichelt.de/arduino-grove-4-pin-female-jumper-zu-grove-4-pin-5er-pack--grv-4pin-f2grv-p191166.html?&nbc=1&trstct=lsbght_sldr::191151)
