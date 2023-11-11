@@ -1,15 +1,46 @@
-import React from 'react';
-import Header from './components/Header';
-import PlotDisplay from './components/PlotDisplay';
-import Credits from './components/Credits';
+import withSnackbar from "./withSnackbar";
+import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
+import axios from "axios";
+import Button from "@mui/material/Button";
 
-function App() {
+const App = ({ showMessage }) => {
+    const [data, setData] = useState([]);
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                const response = await axios.get(`/sensorknoten-vogelhaus/locations`);
+                setData(response.data);
+            } catch (error) {
+                console.dir(error);
+                showMessage('An error occurred while fetching data.', 'error');
+            }
+        }
+
+        fetchData();
+    }, [showMessage]);
+
+    const handleBirdhouseClick = (birdHouseName) => {
+        navigate(`/bird-house/${birdHouseName}`, { replace: true });
+    };
+
     return (
-        <div className="App">
-            <Header />
-            <PlotDisplay />
-            <Credits />
+        <div>
+            {data.map((name) => (
+                <div>
+                    <Button
+                        id={name}
+                        variant="contained"
+                        className="bottom-button"
+                        onClick={()=> handleBirdhouseClick(name)}>
+                        {name}
+                    </Button>
+                </div>
+            ))}
         </div>
     );
-}
-export default App;
+};
+
+export default withSnackbar(App);
