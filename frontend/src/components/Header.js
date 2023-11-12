@@ -2,10 +2,13 @@ import React, { useState } from 'react';
 import IconButton from '@mui/material/IconButton';
 import InfoDialog from "./InfoDialog";
 import QuestionMarkRoundedIcon from '@mui/icons-material/QuestionMarkRounded';
-import RefreshRoundedIcon from '@mui/icons-material/RefreshRounded';
+import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import { useNavigate } from 'react-router-dom';
 
 const Header = ({ data }) => {
     const [isInfoOpen, setIsInfoOpen] = useState(false);
+    const navigate = useNavigate();
+
 
     const buttonStyle = {
         backgroundColor: '#8E6F52',
@@ -33,8 +36,8 @@ const Header = ({ data }) => {
         cursor: 'default',
     };
 
-    const handleRefreshClick = () => {
-        window.location.reload();
+    const handleHomeClick = () => {
+        navigate('/');
     };
 
     const handleInfoClick = () => {
@@ -61,9 +64,9 @@ const Header = ({ data }) => {
                 <div style={buttonContainerStyle}>
                     <IconButton
                         sx={buttonStyle}
-                        onClick={handleRefreshClick}
+                        onClick={handleHomeClick}
                     >
-                        <RefreshRoundedIcon />
+                        <HomeRoundedIcon />
                     </IconButton>
                     <IconButton
                         sx={buttonStyle}
