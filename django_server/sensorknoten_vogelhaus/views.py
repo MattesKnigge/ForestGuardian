@@ -35,6 +35,13 @@ def get_location(request, location_name: str):
                 'min': 0,
                 'max': 100,
             },
+            'air_quality': {
+                'id': 'random_airQuality',
+                'timestamp': datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
+                'value': random.randint(400, 60000),
+                'min': 400,
+                'max': 60000,
+            },
             'pressure': {
                 'id': 'random_pressure',
                 'timestamp': datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
@@ -42,13 +49,6 @@ def get_location(request, location_name: str):
                 'min': 800,
                 'max': 1100,
             },
-            'co2': {
-                'id': 'random_airQuality',
-                'timestamp': datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
-                'value': random.randint(400, 60000),
-                'min': 400,
-                'max': 60000,
-            }
         }
     else:
         data = {}
