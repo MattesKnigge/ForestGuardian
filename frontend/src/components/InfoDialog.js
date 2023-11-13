@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 
 const InfoDialog = ({ open, onClose }) => {
     return (
-        <Dialog open={open} onClose={onClose}>
+        <Dialog open={open} onClose={onClose} PaperProps={{style: {backgroundColor: "#1C352E", color: "#F1FAFF"}}}>
             <DialogTitle style={styles.title}>Welcome to ForestGuardian</DialogTitle>
             <DialogContent>
                 <p style={styles.paragraph}>
@@ -17,12 +17,13 @@ const InfoDialog = ({ open, onClose }) => {
                     Explore the following features:
                 </p>
                 <ul style={styles.featuresList}>
-                    <li><strong>Refresh:</strong> Keep your data up-to-date with a single click. The latest information is always at your fingertips.</li>
+                    <li><strong>Home:</strong> Return to the main screen and navigate effortlessly through the system's features. Your starting point for a seamless and user-friendly experience.</li>
+                    <br/>
                     <li><strong>Info:</strong> Dive deeper into the system's capabilities by clicking the "Info" button and discover more about its functionalities.</li>
                 </ul>
             </DialogContent>
             <DialogActions>
-                <Button onClick={onClose} color="primary" style={styles.closeButton}>
+                <Button onClick={onClose} style={styles.closeButton}>
                     Close
                 </Button>
             </DialogActions>
@@ -44,8 +45,10 @@ const styles = {
         marginTop: '8px',
     },
     closeButton: {
-        color: '#1E1F1E',
-        backgroundColor: '#537A5A',
+        fontFamily: 'Bebas Neue, sans-serif',
+        fontSize: '1.3rem',
+        color: '#333333',
+        backgroundColor: '#8E6F52',
     },
 };
 
