@@ -42,7 +42,7 @@ def get_location(request, location_name: str):
                 'min': 800,
                 'max': 1100,
             },
-            'air_quality': {
+            'co2': {
                 'id': 'random_airQuality',
                 'timestamp': datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
                 'value': random.randint(400, 60000),
