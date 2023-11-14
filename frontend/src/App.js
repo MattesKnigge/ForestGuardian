@@ -11,6 +11,7 @@ import Credits from "./components/Credits";
 
 const App = ({ showMessage }) => {
     const [data, setData] = useState([]);
+    const [backendError, setBackendError] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -20,9 +21,10 @@ const App = ({ showMessage }) => {
                     `/sensorknoten-vogelhaus/locations`
                 );
                 setData(response.data);
+                setBackendError(false);
             } catch (error) {
                 console.dir(error);
-                showMessage("An error occurred while fetching data.", "error");
+                setBackendError(true);
             }
         }
 
@@ -36,27 +38,56 @@ const App = ({ showMessage }) => {
     return (
         <div className="layout">
             <Header />
-            <div className="content-container">
-                <Container>
-                    <Typography variant="h4" align="center" gutterBottom>
-                        Available Birdhouses
-                    </Typography>
-                    <Grid container spacing={2}>
-                        {data.map((name) => (
-                            <Grid item key={name} xs={12}>
-                                <Button
-                                    fullWidth
-                                    variant="contained"
-                                    className="bottom-button"
-                                    onClick={() => handleBirdhouseClick(name)}
-                                >
-                                    {name}
-                                </Button>
-                            </Grid>
-                        ))}
-                    </Grid>
-                </Container>
-            </div>
+            <Container>
+                {backendError ? (
+                    <div style={{ position: 'relative', textAlign: 'center' }}>
+                        <img
+                            src="/sleeping_bird.png"
+                            alt="Sleeping Bird"
+                            style={{
+                                position: 'relative',
+                                maxWidth: '100%',
+                                height: 'auto',
+                                marginBottom: '10px',
+                            }}
+                        />
+                        <Typography
+                            variant="h6"
+                            style={{
+                                position: 'absolute',
+                                bottom: '4vh',
+                                left: '50%',
+                                transform: 'translateX(-50%)',
+                                zIndex: 1,
+                                color: '#D4A82B',
+                                fontFamily: 'Dosis, sans-serif',
+                            }}
+                        >
+                            Oh no! The birds are taking a nap...
+                        </Typography>
+                    </div>
+                ) : (
+                    <>
+                        <Typography variant="h4" align="center" gutterBottom>
+                            Available Birdhouses
+                        </Typography>
+                        <Grid container spacing={2}>
+                            {data.map((name) => (
+                                <Grid item key={name} xs={12}>
+                                    <Button
+                                        fullWidth
+                                        variant="contained"
+                                        className="bottom-button"
+                                        onClick={() => handleBirdhouseClick(name)}
+                                    >
+                                        {name}
+                                    </Button>
+                                </Grid>
+                            ))}
+                        </Grid>
+                    </>
+                )}
+            </Container>
             <Credits />
         </div>
     );
