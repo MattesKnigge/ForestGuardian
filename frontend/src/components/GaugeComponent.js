@@ -3,7 +3,7 @@ import GaugeChart from 'react-gauge-chart'
 const GaugeComponent = ({ data, arcs, colours, unit, nrLevels, padding }) => {
     return (
         <GaugeChart id={data.id}
-                    percent={((data.value + Math.abs(data.min)) / (data.max + Math.abs(data.min)))}
+                    percent={(data.value - data.min) / (data.max - data.min)}
                     colors={colours}
                     arcsLength={arcs}
                     formatTextValue={() => data.value +''+ unit}
