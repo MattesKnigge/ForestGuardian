@@ -34,27 +34,29 @@ const App = ({ showMessage }) => {
     };
 
     return (
-        <div>
+        <div className="layout">
             <Header />
-            <Container>
-                <Typography variant="h4" align="center" gutterBottom>
-                    Available Birdhouses
-                </Typography>
-                <Grid container spacing={2}>
-                    {data.map((name) => (
-                        <Grid item key={name} xs={12}>
-                            <Button
-                                fullWidth
-                                variant="contained"
-                                className="bottom-button"
-                                onClick={() => handleBirdhouseClick(name)}
-                            >
-                                {name}
-                            </Button>
-                        </Grid>
-                    ))}
-                </Grid>
-            </Container>
+            <div className="content-container">
+                <Container>
+                    <Typography variant="h4" align="center" gutterBottom>
+                        Available Birdhouses
+                    </Typography>
+                    <Grid container spacing={2}>
+                        {data.map((name) => (
+                            <Grid item key={name} xs={12}>
+                                <Button
+                                    fullWidth
+                                    variant="contained"
+                                    className="bottom-button"
+                                    onClick={() => handleBirdhouseClick(name)}
+                                >
+                                    {name}
+                                </Button>
+                            </Grid>
+                        ))}
+                    </Grid>
+                </Container>
+            </div>
             <Credits />
         </div>
     );

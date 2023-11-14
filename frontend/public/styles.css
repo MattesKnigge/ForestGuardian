@@ -8,8 +8,16 @@ body, h1, p {
 body {
     font-family: Dosis, sans-serif;
     background-color: #1C352E;
-    overflow-y: auto;
-    overflow-x: hidden;
+}
+
+.layout {
+    height: 100vh;
+    display: grid;
+    grid-template-areas:
+            "header"
+            "content"
+            "footer";
+    grid-template-rows: 5vh 1fr 5vh;
 }
 
 /* Header styles */
@@ -19,15 +27,14 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 3.5rem;
     box-sizing: border-box;
+    grid-area: header;
 }
 
 .header h1 {
     font-family: Dosis, sans-serif;
     font-size: 3rem;
 }
-
 
 /* Button styles */
 .header-button {
@@ -42,6 +49,12 @@ body {
     cursor: default;
     font-family: Dosis, sans-serif;
 }
+
+.content-container {
+    grid-area: content;
+    padding-top: 1vh;
+}
+
 .sensor-name {
     font-size: 1rem;
     margin: 0;
@@ -89,10 +102,9 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
-    height: 5vh;
     font-size: 1rem;
     cursor: default;
+    grid-area: footer;
 }
 
 .credits-content {

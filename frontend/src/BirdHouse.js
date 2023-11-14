@@ -25,11 +25,13 @@ const BirdHouse = ({ showMessage }) => {
     }, [birdHouseName, showMessage]);
 
     return(
-        <>
+        <div className="layout">
             <Header data={data['temperature']}/>
-            <PlotDisplay sensors={data}/>
+            <div className="content-container">
+                <PlotDisplay sensors={data}/>
+            </div>
             <Credits />
-        </>
+        </div>
     );
 };
 
