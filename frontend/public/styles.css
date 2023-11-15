@@ -17,7 +17,7 @@ body {
             "header"
             "content"
             "footer";
-    grid-template-rows: 5vh 1fr 5vh;
+    grid-template-rows: 7vh 1fr 5vh;
 }
 
 /* Header styles */
@@ -144,6 +144,17 @@ body {
     background: #8E6F52!important;
     color: #333333!important;
 }
+
+.second-button {
+    margin-top: 1rem!important;
+    font-size: 1.5rem!important;
+    font-family: "Bebas Neue", monospace !important;
+    background: transparent !important;
+    color: #8E6F52!important;
+    box-shadow: none !important;
+    margin-top: 10rem!important;
+}
+
 
 /* Media queries for smaller screens */
 @media (max-width: 768px) {
