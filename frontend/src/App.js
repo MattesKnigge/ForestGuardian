@@ -114,7 +114,7 @@ const App = ({ showMessage }) => {
                                 open={Boolean(anchorEl)}
                                 onClose={handleMenuClose}
                                 PaperProps={{
-                                    elevation: 3,
+                                    elevation: 4,
                                     style: {
                                         backgroundColor: '#2E3B4E',
                                         width: '25rem',
@@ -125,7 +125,10 @@ const App = ({ showMessage }) => {
                                     <MenuItem
                                         key={name}
                                         onClick={() => handleBirdhouseClick(name)}
-                                        style={{ color: '#D4A82B' }}
+                                        style={{ color: '#D4A82B',
+                                            fontFamily: 'Dosis, sans-serif',
+                                        textTransform: 'uppercase',
+                                        fontSize: '1.5rem'}}
                                     >
                                         {name}
                                     </MenuItem>

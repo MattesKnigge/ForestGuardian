@@ -17,23 +17,23 @@ const handleGitHubLinkClick = (githubUsername) => {
 const Credits = () => {
     const contributorsList = contributors.map((contributor, index) => (
         <span key={index} className="credit-link" onClick={() => handleGitHubLinkClick(contributor.githubUsername)}>
-      {contributor.name}{index < contributors.length - 1 ? ', ' : ''}
-    </span>
+            {contributor.name}{index < contributors.length - 1 ? ', ' : ''}
+        </span>
     ));
 
     return (
         <div className="credits-container">
             <div className="credits-content">
                 <p>
-                    Built by: {contributorsList}
-                    {" | "}
+                    Built by: {contributorsList} |{' '}
                     <span className="credit-link" onClick={() => handleGitHubLinkClick('whosmattes/sensorknoten-vogelhaus')}>
-             Visit our GitLab
-          </span>
-                    {" | "}
+                        Visit our GitLab
+                    </span>{' '}
+                    |{' '}
                     <a className="country" href="https://5g-smart-country.de" target="_blank" rel="noreferrer">
                         5G Smart Country
-                    </a> | 2023
+                    </a>{' '}
+                    | 2023
                 </p>
             </div>
         </div>
