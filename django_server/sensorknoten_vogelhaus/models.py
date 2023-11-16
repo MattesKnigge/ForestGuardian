@@ -38,7 +38,7 @@ class MeasuredParameter(models.Model):
     parameter = models.ForeignKey(Parameter, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.location.name + " " + self.parameter.name + " " + self.sensor.name
+        return f'{self.location.name} {self.parameter.name} {self.sensor.name}'
 
 
 class SensorValue(models.Model):
@@ -47,5 +47,4 @@ class SensorValue(models.Model):
     measuredParameter = models.ForeignKey(MeasuredParameter, on_delete=models.CASCADE)
 
     def __str__(self):
-        return self.measuredParameter.location.name + " " + self.measuredParameter.parameter.name + ": " \
-            + str(self.value) + " " + self.created_at.strftime("%d.%m.%Y %H:%M:%S")
+        return f'{self.measuredParameter.location.name} {self.measuredParameter.parameter.name}: {self.value} {self.created_at.strftime("%d.%m.%Y %H:%M:%S")}'

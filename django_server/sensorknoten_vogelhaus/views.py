@@ -102,5 +102,17 @@ def get_measured_parameter_details(request, measured_parameter_id: str):
 ), method='POST')
 @api_view(['POST'])
 def post_location_data(request):
-    print(request.data)
+    loc = Location.objects.get(name='prototype')  # get Ident from payload (not name tho, then anyone could just send in random data...
+    mps = MeasuredParameter.objects.filter(location=loc).prefetch_related('parameter').all()
+
+    data = request.data
+    print(data)
+    values = []
+    for mp in mps:
+        v = data['values'].get(mp.parameter.name, None)
+        if v is not None:
+            values.append(SensorValue(value=v, measuredParameter=mp))
+
+    SensorValue.objects.bulk_create(values)
+
     return Response(status=status.HTTP_200_OK)
