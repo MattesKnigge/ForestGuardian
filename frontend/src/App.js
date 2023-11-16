@@ -8,11 +8,14 @@ import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
 import Header from "./components/Header";
 import Credits from "./components/Credits";
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const App = ({ showMessage }) => {
     const [data, setData] = useState([]);
     const [backendError, setBackendError] = useState(false);
-    const [showButtons, setShowButtons] = useState(false);
+    const [showButtons] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -36,8 +39,13 @@ const App = ({ showMessage }) => {
         navigate(`/bird-house/${birdHouseName}`, { replace: true });
     };
 
-    const toggleButtonsVisibility = () => {
-        setShowButtons(!showButtons);
+
+    const handleMenuOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handleMenuClose = () => {
+        setAnchorEl(null);
     };
 
     return (
@@ -73,44 +81,67 @@ const App = ({ showMessage }) => {
                     </div>
                 ) : (
                     <Grid container spacing={2}>
-                        <Grid item xs={12} md={6}>
+                        <Grid item xs={12} md={6} style={{ maxWidth: 'unset' }}>
+                            {!showButtons && (
+                                <Typography
+                                    variant="h6"
+                                    style={{
+                                        fontFamily: 'Dosis, sans-serif',
+                                        whiteSpace: 'pre-line',
+                                        marginBottom: '-9rem',
+                                        marginTop: '7rem'
+                                    }}
+                                >
+                                    <span style={{ color: '#D4A82B', fontSize: '1.3em' }}>Analytics</span>{'\n'}
+                                    <span style={{ color: '#9e7400', fontSize: '1.5em', textTransform: "uppercase" }}>Data-Driven{'\n'}Wilderness Insights</span>{'\n'}
+                                    <span style={{ color: "#D4A82B", fontSize: '1em' }}>Discover the forest’s hidden tales with our data-driven analytics.{'\n'}
+                                        Uncover insights into air quality, tree health, and bird activity,{'\n'}
+                                        empowering a deeper connection with nature.{'\n'}
+                                        ForestGuardian’s analytics - your path to a greener world</span>
+                                </Typography>
+                            )}
+
                             <Button
-                                style={{ width: '25rem', marginBottom: '2.5rem' }}
+                                style={{ width: '25rem', marginTop: '1rem', marginBottom: '0.5rem' }}
                                 variant="contained"
                                 className="second-button"
-                                onClick={toggleButtonsVisibility}
+                                onClick={handleMenuOpen}
                             >
-                                {showButtons ? 'Hide Birdhouses' : 'Show Our Data'}
+                                Show Our Data
                             </Button>
-                            {showButtons && (
-                                <Grid container spacing={2}>
-                                    {data.map((name) => (
-                                        <Grid item key={name} xs={12}>
-                                            <Button
-                                                fullWidth
-                                                variant="contained"
-                                                className="bottom-button"
-                                                onClick={() => handleBirdhouseClick(name)}
-                                                style={{ width: '25rem' }}
-                                            >
-                                                {name}
-                                            </Button>
-                                        </Grid>
-                                    ))}
-                                </Grid>
-                            )}
+                            <Menu
+                                anchorEl={anchorEl}
+                                open={Boolean(anchorEl)}
+                                onClose={handleMenuClose}
+                                PaperProps={{
+                                    elevation: 3,
+                                    style: {
+                                        backgroundColor: '#2E3B4E',
+                                        width: '25rem',
+                                    },
+                                }}
+                            >
+                                {data.map((name) => (
+                                    <MenuItem
+                                        key={name}
+                                        onClick={() => handleBirdhouseClick(name)}
+                                        style={{ color: '#D4A82B' }}
+                                    >
+                                        {name}
+                                    </MenuItem>
+                                ))}
+                            </Menu>
                         </Grid>
-                        <Grid item xs={20} md={4} style={{ textAlign: 'center' }}>
+                        <Grid item xs={30} md={6} style={{ textAlign: 'center', whiteSpace: 'pre-line', marginTop: '7rem' }}>
                             <img
                                 src="/tree.png"
                                 alt="Sleeping Bird"
-                                style={{ maxWidth: '70%', height: 'auto', marginLeft: '5rem', marginTop: '3rem' }}
+                                style={{ maxWidth: '55%', height: 'auto', marginLeft: '7rem', marginTop: '3rem' }}
                             />
-                            <Typography color={"#D4A82B"}>
-                                Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet.
+                            <Typography color={"#D4A82B"} style={{ textAlign: 'left', fontFamily: 'Dosis, sans-serif', maxWidth: '60%', marginLeft: '8rem', fontSize: '1.3rem' }}>
+                                ForestGuardian is a project at the Ostfalia Hochschule and features an autonomous birdhouse with sensors tracking tree health and environmental data.{'\n'} Equipped with smart sensors, it monitors the forest ecosystem, providing insights into tree health and environmental conditions. Join us in creating a smarter, greener world.
                             </Typography>
                         </Grid>
-
                     </Grid>
                 )}
             </Container>

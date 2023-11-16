@@ -149,8 +149,8 @@ body {
     margin-top: 1rem!important;
     font-size: 1.5rem!important;
     font-family: "Bebas Neue", monospace !important;
-    background: transparent !important;
-    color: #8E6F52!important;
+    background: #8E6F52 !important;
+    color: #333333!important;
     box-shadow: none !important;
     margin-top: 10rem!important;
 }
