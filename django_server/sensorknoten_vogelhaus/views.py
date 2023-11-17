@@ -99,6 +99,16 @@ def get_measured_parameter_details(request, measured_parameter_id: str):
 
 @swagger_auto_schema(request_body=openapi.Schema(
     type=openapi.TYPE_OBJECT,
+    properties={
+        'values': openapi.Schema(type=openapi.TYPE_OBJECT,
+                                 description='dictionary of all parameters with their values',
+                                 properties={
+                                     'temperature': openapi.Schema(type=openapi.TYPE_NUMBER),
+                                     'humidity': openapi.Schema(type=openapi.TYPE_NUMBER),
+                                     'pressure': openapi.Schema(type=openapi.TYPE_NUMBER),
+                                     'air_quality': openapi.Schema(type=openapi.TYPE_NUMBER)
+                                 })
+    },
 ), method='POST')
 @api_view(['POST'])
 def post_location_data(request):
