@@ -83,7 +83,6 @@ def get_measured_parameter_details(request, measured_parameter_id: str):
             'values': [{'timestamp': time.mktime(timestamps[idx].timetuple())*1000, 'value': v} for idx, v in enumerate([random.randint(mm['min'], mm['max']) for i in range(20)])]
         }
     else:
-
         mp = MeasuredParameter.objects.select_related('parameter', 'sensor').get(id=measured_parameter_id)
         values = SensorValue.objects.filter(measuredParameter=mp).all()  # how many is max count?
         data = {
@@ -95,6 +94,17 @@ def get_measured_parameter_details(request, measured_parameter_id: str):
         }
 
     return Response(data)
+
+
+@api_view(['GET'])
+def get_latest_sensor_value_timestamp(request, location_name: str):
+    location = Location.objects.get(name=location_name)
+    measured_params = MeasuredParameter.objects.filter(location=location).all()
+    max_time = datetime.datetime.min
+    for mp in measured_params:
+        max_time = max(max_time, SensorValue.objects.filter(measuredParameter=mp).latest('created_at').created_at.replace(tzinfo=None))
+
+    return Response(time.mktime(max_time.timetuple())*1000)
 
 
 @swagger_auto_schema(request_body=openapi.Schema(
