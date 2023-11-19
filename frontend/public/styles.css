@@ -8,6 +8,7 @@ body, h1, p {
 body {
     font-family: Dosis, sans-serif;
     background-color: #1C352E;
+    color: #8E6F52;
 }
 
 .layout {
@@ -40,7 +41,7 @@ body {
     display: flex;
 }
 
-/* PlotDisplay styles */
+/* Dashboard styles */
 .headline-plot {
     font-size: 1rem;
     margin: 0;
@@ -70,15 +71,29 @@ body {
     font-family: Dosis, sans-serif;
 }
 
-.gauge-container {
-    font-size: 1rem;
-    cursor: default;
+.flex-column {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
-    text-align: center;
-    font-family: Dosis, sans-serif;
+}
+
+.dashboard-row {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    max-width: 1000px;
+}
+
+.dashboard-date-picker-row {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+@media (max-width: 800px) {
+    .dashboard-row {
+        grid-template-columns: 1fr;
+    }
 }
 
 .gauge-item, .temp, .hum, .pres {

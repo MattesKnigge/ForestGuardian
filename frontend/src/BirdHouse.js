@@ -1,11 +1,11 @@
 import {useEffect, useState} from "react";
 import {useParams} from "react-router-dom";
 import axios from "axios";
+import useInterval from "./util/UseInterval";
 import withSnackbar from "./withSnackbar";
-import PlotDisplay from "./components/PlotDisplay";
+import Dashboard from "./components/Dashboard";
 import Header from "./components/Header";
 import Credits from "./components/Credits";
-import useInterval from "./util/UseInterval";
 
 const BirdHouse = ({ showMessage }) => {
     const {birdHouseName} = useParams();
@@ -28,7 +28,7 @@ const BirdHouse = ({ showMessage }) => {
         fetchData();
     }, [birdHouseName, showMessage]);
 
-    useInterval(async () => {
+    /*useInterval(async () => {
         try {
             const timeResponse = await axios.get(`/sensorknoten-vogelhaus/location/${birdHouseName}/latest`);
             if (timeResponse.data > lastTimestamp) {
@@ -41,13 +41,13 @@ const BirdHouse = ({ showMessage }) => {
             console.dir(error);
             showMessage('An error occurred while fetching data.', 'error');
         }
-    }, 5 * 1000);
+    }, 5 * 1000);*/
 
     return(
         <div className="layout">
             <Header data={data['temperature']}/>
             <div className="content-container">
-                <PlotDisplay sensors={data}/>
+                <Dashboard sensors={data}/>
             </div>
             <Credits />
         </div>

@@ -3,6 +3,9 @@ import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 import axios from 'axios';
 
 const Detail = ({ measured_parameter_id }) => {
+    const [from, setFrom] = useState(new Date(new Date().getFullYear(), new Date().getMonth(), new Date().getDate() - 7).getTime());
+    const [to, setTo] = useState(new Date().getTime());
+
     const [data, setData] = useState({
         name: '',
         sensor: '',
@@ -13,7 +16,7 @@ const Detail = ({ measured_parameter_id }) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                const response = await axios.get(`/sensorknoten-vogelhaus/measured_parameter/${measured_parameter_id}`);
+                const response = await axios.get(`/sensorknoten-vogelhaus/measured_parameter/${measured_parameter_id}?from=${from}&to=${to}`);
                 console.dir(response.data);
                 setData(response.data);
             } catch (error) {
@@ -22,7 +25,7 @@ const Detail = ({ measured_parameter_id }) => {
         }
 
         fetchData();
-    }, [measured_parameter_id]);
+    }, [from, measured_parameter_id, to]);
 
     return (
         <div className="detail">
@@ -42,10 +45,10 @@ const Detail = ({ measured_parameter_id }) => {
                             type="number"
                             scale="time"
                             domain={['dataMin', 'dataMax + 1']}
-                            tickFormatter={(unixTime) => new Date(unixTime).toLocaleString()}
+                            tickFormatter={(msTime) => new Date(msTime).toLocaleString()}
                         />
                         <YAxis />
-                        <Tooltip labelFormatter={(unixTime) => new Date(unixTime).toLocaleString()} />
+                        <Tooltip labelFormatter={(msTime) => new Date(msTime).toLocaleString()} />
                         <Line dataKey="value" data={data.values} name={data.name} dot={false} />
                     </LineChart>
                     <div style={{ marginTop: '10px', textAlign: 'center' }}>
