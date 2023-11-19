@@ -67,24 +67,34 @@ def get_location(request, location_name: str):
     return Response(data)
 
 
+@swagger_auto_schema(method='GET', manual_parameters=[
+    openapi.Parameter(name='from', in_=openapi.IN_QUERY, description='in seconds, 0 as minimum', type=openapi.TYPE_INTEGER),
+    openapi.Parameter(name='to', in_=openapi.IN_QUERY, description='in seconds', type=openapi.TYPE_INTEGER)
+])
 @api_view(['GET'])
 def get_measured_parameter_details(request, measured_parameter_id: str):
+    dt_from = datetime.datetime.utcfromtimestamp(int(request.query_params['from']))
+    dt_to = datetime.datetime.utcfromtimestamp(int(request.query_params['to']))
+
     if measured_parameter_id.startswith('random'):
+        hours_between = int((dt_to - dt_from).total_seconds() / 60 / 60)
+
         param = measured_parameter_id.split('_')
         min_max = {'temperature': {'min': -25, 'max': 42}, 'humidity': {'min': 0, 'max': 100},
                    'pressure': {'min': 800, 'max': 1100}, 'airQuality': {'min': 400, 'max': 60000}}
         mm = min_max.get(param[1])
-        timestamps = [datetime.datetime.now() - datetime.timedelta(days=20 - i) for i in range(20)]
+        timestamps = [dt_from + datetime.timedelta(hours=i) for i in range(hours_between)]
+
         data = {
             'name': param[1],
             'sensor': 'Random Sensor',
             'parameter_description': 'Random Sensor Description',
             'sensor_description': 'Random Parameter Description',
-            'values': [{'timestamp': time.mktime(timestamps[idx].timetuple())*1000, 'value': v} for idx, v in enumerate([random.randint(mm['min'], mm['max']) for i in range(20)])]
+            'values': [{'timestamp': time.mktime(timestamps[idx].timetuple())*1000, 'value': v} for idx, v in enumerate([random.randint(mm['min'], mm['max']) for i in range(hours_between)])]
         }
     else:
         mp = MeasuredParameter.objects.select_related('parameter', 'sensor').get(id=measured_parameter_id)
-        values = SensorValue.objects.filter(measuredParameter=mp).all()  # how many is max count?
+        values = SensorValue.objects.filter(measuredParameter=mp, created_at__range=(dt_from, dt_to)).all()  # how many is max count?
         data = {
             'name': mp.parameter.name,
             'sensor': mp.sensor.name,
@@ -98,6 +108,9 @@ def get_measured_parameter_details(request, measured_parameter_id: str):
 
 @api_view(['GET'])
 def get_latest_sensor_value_timestamp(request, location_name: str):
+    if location_name == 'random':
+        return Response(time.mktime(datetime.datetime.now().timetuple())*1000)
+
     location = Location.objects.get(name=location_name)
     measured_params = MeasuredParameter.objects.filter(location=location).all()
     max_time = datetime.datetime.min
