@@ -5,12 +5,12 @@ import withSnackbar from "./withSnackbar";
 import PlotDisplay from "./components/PlotDisplay";
 import Header from "./components/Header";
 import Credits from "./components/Credits";
+import useInterval from "./util/UseInterval";
 
 const BirdHouse = ({ showMessage }) => {
     const {birdHouseName} = useParams();
     const [data, setData] = useState({"paramName": { timestamp: "", value: "-25", min: "-25", max: "100" }});
-    const [lastTimestamp, setLastTimestamp] = useState();
-    const pollingFrequency = 5 * 1000;
+    const [lastTimestamp, setLastTimestamp] = useState(new Date(0).getTime());
 
     useEffect(() => {
         async function fetchData() {
@@ -24,25 +24,24 @@ const BirdHouse = ({ showMessage }) => {
                 showMessage('An error occurred while fetching data.', 'error');
             }
         }
-        
+
         fetchData();
     }, [birdHouseName, showMessage]);
 
-    const doPolling = async () => {
+    useInterval(async () => {
         try {
             const timeResponse = await axios.get(`/sensorknoten-vogelhaus/location/${birdHouseName}/latest`);
             if (timeResponse.data > lastTimestamp) {
                 setLastTimestamp(timeResponse.data);
                 const response = await axios.get(`/sensorknoten-vogelhaus/location/${birdHouseName}`);
                 setData(response.data);
+                console.log("polling")
             }
         } catch (error) {
             console.dir(error);
             showMessage('An error occurred while fetching data.', 'error');
         }
-        setTimeout(doPolling, pollingFrequency);
-    }
-    setTimeout(doPolling, pollingFrequency);
+    }, 5 * 1000);
 
     return(
         <div className="layout">
