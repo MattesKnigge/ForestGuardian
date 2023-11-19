@@ -22,7 +22,7 @@ const Credits = () => {
     ));
 
     return (
-        <div className="credits-container">
+        <div className="footer-container">
             <div className="credits-content">
                 <p>
                     Built by: {contributorsList} |{' '}
