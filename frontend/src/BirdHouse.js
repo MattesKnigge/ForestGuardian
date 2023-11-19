@@ -28,7 +28,7 @@ const BirdHouse = ({ showMessage }) => {
         fetchData();
     }, [birdHouseName, showMessage]);
 
-    /*useInterval(async () => {
+    useInterval(async () => {
         try {
             const timeResponse = await axios.get(`/sensorknoten-vogelhaus/location/${birdHouseName}/latest`);
             if (timeResponse.data > lastTimestamp) {
@@ -41,7 +41,7 @@ const BirdHouse = ({ showMessage }) => {
             console.dir(error);
             showMessage('An error occurred while fetching data.', 'error');
         }
-    }, 5 * 1000);*/
+    }, 5 * 1000);
 
     return(
         <div className="layout">
