@@ -34,11 +34,11 @@ const ChartComponent =  ({ measured_parameter_id }) => {
     return (
         <div className="flex-column">
             <div className="dashboard-date-picker-row">
-                <label>from:</label>
+                <label style={{fontFamily: 'Bebas Neue, sans-serif',}}>from:</label>
                 <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
                     <DateTimePicker value={from} onChange={(v) => setFrom(v)} maxDateTime={dayjs().subtract(1, 'day')} />
                 </LocalizationProvider>
-                <label>to:</label>
+                <label style={{fontFamily: 'Bebas Neue, sans-serif',}}>to:</label>
                 <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
                     <DateTimePicker value={to} onChange={(v) => setTo(v)} maxDateTime={dayjs()} />
                 </LocalizationProvider>
