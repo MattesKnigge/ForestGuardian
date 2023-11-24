@@ -1,8 +1,15 @@
-import React from "react";
+import React, {useState} from "react";
 import GaugeComponent from "./GaugeComponent";
 import ChartComponent from "./ChartComponent";
+import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
+import dayjs from 'dayjs';
+import 'dayjs/locale/de';
 
 const Dashboard = ({ sensors }) => {
+    const [from, setFrom] = useState(dayjs().subtract(1, 'week'));
+    const [to, setTo] = useState(dayjs());
+
     const sensorNames = {
         temperature: "Temperature",
         humidity: "Humidity",
@@ -12,6 +19,16 @@ const Dashboard = ({ sensors }) => {
 
     return (
         <div className="flex-column">
+            <div className="dashboard-date-picker-row">
+                <label style={{fontFamily: 'Bebas Neue, sans-serif',}}>from:</label>
+                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+                    <DateTimePicker value={from} onChange={(v) => setFrom(v)} maxDateTime={dayjs().subtract(1, 'day')} />
+                </LocalizationProvider>
+                <label style={{fontFamily: 'Bebas Neue, sans-serif',}}>to:</label>
+                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+                    <DateTimePicker value={to} onChange={(v) => setTo(v)} maxDateTime={dayjs()} />
+                </LocalizationProvider>
+            </div>
             {Object.keys(sensors).map((key) => (
                 <>
                     <h3 style={{fontFamily: 'Dosis, sans-serif'}}>{sensorNames[key] || key}</h3>
@@ -25,7 +42,7 @@ const Dashboard = ({ sensors }) => {
                         ) : key === "air_quality" ? (
                             <GaugeComponent data={sensors[key]} colours={["#4cda15", "#F8C630", "#EA4228"]} unit={" ppm"} />
                         ) : null}
-                        <ChartComponent measured_parameter_id={sensors[key].id}/>
+                        <ChartComponent measured_parameter_id={sensors[key].id} from={from} to={to} />
                     </div>
                 </>
             ))}

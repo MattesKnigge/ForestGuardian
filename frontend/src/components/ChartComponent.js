@@ -1,15 +1,8 @@
 import {Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import dayjs from 'dayjs';
-import 'dayjs/locale/de';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import {LocalizationProvider, DateTimePicker} from "@mui/x-date-pickers";
 
-const ChartComponent =  ({ measured_parameter_id }) => {
-    const [from, setFrom] = useState(dayjs().subtract(1, 'week'));
-    const [to, setTo] = useState(dayjs());
-
+const ChartComponent =  ({ measured_parameter_id, from, to }) => {
     const [data, setData] = useState({
         name: '',
         sensor: '',
@@ -33,16 +26,6 @@ const ChartComponent =  ({ measured_parameter_id }) => {
 
     return (
         <div className="flex-column">
-            <div className="dashboard-date-picker-row">
-                <label style={{fontFamily: 'Bebas Neue, sans-serif',}}>from:</label>
-                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
-                    <DateTimePicker value={from} onChange={(v) => setFrom(v)} maxDateTime={dayjs().subtract(1, 'day')} />
-                </LocalizationProvider>
-                <label style={{fontFamily: 'Bebas Neue, sans-serif',}}>to:</label>
-                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
-                    <DateTimePicker value={to} onChange={(v) => setTo(v)} maxDateTime={dayjs()} />
-                </LocalizationProvider>
-            </div>
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={data.values}>
                     <XAxis
