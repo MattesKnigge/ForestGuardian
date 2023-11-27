@@ -6,6 +6,7 @@ import withSnackbar from "./withSnackbar";
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Header";
 import Credits from "./components/Credits";
+import DetailedView from "./components/DetailedView";
 
 const BirdHouse = ({ showMessage }) => {
     const {birdHouseName} = useParams();
@@ -49,9 +50,9 @@ const BirdHouse = ({ showMessage }) => {
             <Header onToggleClick={() => setIsDash(!isDash)} toggleOn={isDash} showToggle={true} />
             <div className="content-container">
                 {isDash ? (
-                    <Dashboard sensors={data}/>
+                    <Dashboard sensors={data} />
                 ):
-                null
+                <DetailedView sensors={data} />
                 }
             </div>
             <Credits />

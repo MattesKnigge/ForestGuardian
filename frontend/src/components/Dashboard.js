@@ -10,6 +10,7 @@ const Dashboard = ({ sensors }) => {
     const [from, setFrom] = useState(dayjs().subtract(1, 'week'));
     const [to, setTo] = useState(dayjs());
 
+
     const sensorNames = {
         temperature: "Temperature",
         humidity: "Humidity",

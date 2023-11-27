@@ -124,6 +124,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-size: .6rem;
 }
 
 .credit-link, .country {
@@ -184,7 +185,7 @@ body {
         justify-content: flex-start;
         align-items: center;
         position: relative;
-        font-size: 0.4rem;
+        font-size: 0.2rem;
         cursor: default;
     }
     .header h1 {
