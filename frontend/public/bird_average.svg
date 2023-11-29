@@ -8,7 +8,7 @@
         <linearGradient id="averageGradient" x1="0%" y1="0%" x2="0%" y2="100%">
             <stop offset="0%" style="stop-color:#8B4513;stop-opacity:1" /> <!-- Saddle Brown -->
             <stop offset="50%" style="stop-color:#A0522D;stop-opacity:1" /> <!-- Sienna -->
-            <stop offset="100%" style="stop-color:#696969;stop-opacity:1" /> <!-- Gray -->
+            <stop offset="100%" style="stop-color:#696969;stop-opacity:1" /> <!-- Dim Gray -->
         </linearGradient>
     </defs>
 <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
