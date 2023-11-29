@@ -283,3 +283,33 @@ body::before {
         font-size: 2rem;
     }
 }
+
+.detail-layout {
+    display: grid;
+    gap: 10px;
+}
+
+.detail {
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+.line-chart {
+    width: 100%; /* Make the chart take up the full width */
+    max-width: 400px; /* Set a maximum width to prevent it from becoming too wide */
+    height: 200px; /* Adjust the height as needed for mobile screens */
+    margin: 0 auto; /* Center the chart within its container */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    .detail-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .line-chart {
+        height: 150px; /* Further reduce the height on smaller screens if necessary */
+    }
+}
