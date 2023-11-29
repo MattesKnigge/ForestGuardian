@@ -10,7 +10,7 @@ import Overview from "./components/Overview";
 
 const BirdHouse = ({ showMessage }) => {
     const {birdHouseName} = useParams();
-    const [data, setData] = useState({"paramName": { timestamp: "", value: "-25", min: "-25", max: "100" }});
+    const [data, setData] = useState({"paramName": { timestamp: "", value: "-25", min: "-25", max: "100", value_range: { tag: "default", description: ""}, param_ranges: [ { "lower_bound": 0, tag: "default", description: ""}] }});
     const [lastTimestamp, setLastTimestamp] = useState(new Date(0).getTime());
     const [isDash, setIsDash] = useState(false);
 
@@ -18,6 +18,7 @@ const BirdHouse = ({ showMessage }) => {
         async function fetchData() {
             try {
                 const response = await axios.get(`/sensorknoten-vogelhaus/location/${birdHouseName}`);
+                console.dir(response.data)
                 setData(response.data);
                 const timeResponse = await axios.get(`/sensorknoten-vogelhaus/location/${birdHouseName}/latest`);
                 setLastTimestamp(timeResponse.data);
