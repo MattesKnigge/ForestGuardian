@@ -23,13 +23,9 @@ class Sensor(models.Model):
 class Parameter(models.Model):
     name = models.CharField(max_length=256)
     description = models.CharField(max_length=1024, unique=False)
-    min = models.FloatField(blank=False)
-    max = models.FloatField(blank=False)
-    lower_good_bound = models.FloatField(blank=False)
-    upper_good_bound = models.FloatField(blank=False)
 
     def __str__(self):
-        return self.name
+        return f'{self.name} ({self.description[:20]}...)'
 
 
 class MeasuredParameter(models.Model):
@@ -52,9 +48,9 @@ class SensorValue(models.Model):
 
 class ParameterRange(models.Model):
     parameter = models.ForeignKey(Parameter, on_delete=models.CASCADE)
-    value = models.FloatField(blank=False)
+    lower_bound = models.FloatField(blank=False)
     description = models.CharField(max_length=512, unique=False)
     tag = models.CharField(max_length=32, unique=False)
 
     def __str__(self):
-        return f'{self.parameter.name} {self.value}: {self.description}'
+        return f'{self.parameter.name} {self.lower_bound} ({self.tag}): {self.description}'

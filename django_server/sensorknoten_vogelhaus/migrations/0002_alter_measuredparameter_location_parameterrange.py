@@ -22,7 +22,7 @@ class Migration(migrations.Migration):
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('value', models.FloatField()),
                 ('description', models.CharField(max_length=512)),
-                ('tag', models.CharField(max_length=32))
+                ('tag', models.CharField(max_length=32)),
                 ('parameter', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='sensorknoten_vogelhaus.parameter')),
             ],
         ),
