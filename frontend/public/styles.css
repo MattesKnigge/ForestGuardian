@@ -6,9 +6,20 @@ body, h1, p {
 
 /* Body styles */
 body {
-    font-family: Dosis, sans-serif;
-    background-color: #1C352E;
-    color: #8E6F52;
+    font-family: 'Dosis', sans-serif;
+}
+
+body::before {
+    content: '';
+    background-image: url("wallpaper.jpg");
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(7px);
+    background-size: cover;
 }
 
 .layout {
@@ -120,9 +131,8 @@ body {
     grid-template-columns: 1fr 1fr;
     column-gap: 1em;
     padding: 1em;
-
-    background-color: rgb(52, 26, 6);
-    background-image: url('tree_texture.jpg'); /* Replace with the path to your wood texture image */
+    background-image: url('tree_texture.jpg');
+    border-radius: 25px;
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -148,6 +158,10 @@ body {
     margin: auto;
     justify-content: center;
     align-items: center;
+}
+
+.card-big-value {
+    font-size: 6rem;
 }
 
 .tree-spacer {
@@ -177,13 +191,16 @@ body {
     text-align: center;
 }
 
+.param-card {
+    position: relative;
+}
+
 .param-card-title {
     font-size: 2rem;
-    text-shadow: 2px 2px 2px #fbf7f5;
     font-family: 'Dosis', sans-serif;
     background: url('sign_texture.jpg');
     background-size: 80%;
-    color: #1C352E;
+    color: #D4A82B;
     margin: auto;
     justify-content: center;
     align-items: center;
@@ -193,6 +210,20 @@ body {
     border-radius: 10px;
     outline: 1px solid #8E6F52;
     width: 20rem;
+    position: relative;
+    z-index: 1;
+}
+
+.param-card-title::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(40, 26, 13, 0.8);
+    border-radius: 10px;
+    z-index: -1;
 }
 
 .more-info-button {

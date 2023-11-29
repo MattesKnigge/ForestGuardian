@@ -12,7 +12,7 @@ const ParamCard = ({name, data}) => {
         <div className="param-card">
             <h1 className="param-card-title">{sensorNames[name]}</h1>
             <div className="param-card-content">
-                <div className="card-value">
+                <div className={`card-value ${data.value > 999 ? "card-big-value" : ""}`}>
                     {data.value}
                     <div className="card-unit">
                         {data.unit}
