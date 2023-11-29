@@ -25,14 +25,17 @@ def get_location(request, location_name: str):
         measured_params = MeasuredParameter.objects.filter(location=location).prefetch_related('parameter').all()
 
         for mp in measured_params:
-            param_range = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
+            param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
+            val = random.randint(param_ranges[0].lower_bound, param_ranges[-1].lower_bound)
+            param_range = [pr for pr in param_ranges if pr.lower_bound < val][-1]
             data[mp.parameter.name] = {
                 'id': f'random_{mp.parameter.name}',
                 'timestamp': datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
-                'value': random.randint(param_range[0].lower_bound, param_range[-1].lower_bound),
-                'min': param_range[0].lower_bound,
-                'max': param_range[-1].lower_bound,
-                'sections': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag} for pr in param_range[1:-1]]
+                'value': val,
+                'min': param_ranges[0].lower_bound,
+                'max': param_ranges[-1].lower_bound,
+                'value_range': {'description': param_range.description, 'tag': param_range.tag},
+                'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag} for pr in param_ranges[1:-1]]
             }
     else:
         location = Location.objects.get(name=location_name)
@@ -40,14 +43,16 @@ def get_location(request, location_name: str):
 
         for mp in measured_params:
             sv = SensorValue.objects.filter(measuredParameter=mp).latest('created_at')
-            param_range = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
+            param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
+            param_range = [pr for pr in param_ranges if pr.lower_bound > sv.value][0]
             data[mp.parameter.name] = {
                 'id': mp.id,
                 'timestamp': sv.created_at,
                 'value': sv.value,
-                'min': param_range[0].lower_bound,
-                'max': param_range[-1].lower_bound,
-                'sections': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag} for pr in param_range[1:-1]]
+                'min': param_ranges[0].lower_bound,
+                'max': param_ranges[-1].lower_bound,
+                'value_range': {'description': param_ranges.description, 'tag': param_ranges.tag},
+                'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag} for pr in param_ranges[1:-1]]
             }
 
     return Response(data)
