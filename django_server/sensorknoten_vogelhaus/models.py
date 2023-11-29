@@ -23,9 +23,10 @@ class Sensor(models.Model):
 class Parameter(models.Model):
     name = models.CharField(max_length=256)
     description = models.CharField(max_length=1024, unique=False)
+    unit = models.CharField(max_length=8, unique=False)
 
     def __str__(self):
-        return f'{self.name} ({self.description[:20]}...)'
+        return f'{self.name} [{self.unit}] ({self.description[:20]}...)'
 
 
 class MeasuredParameter(models.Model):
