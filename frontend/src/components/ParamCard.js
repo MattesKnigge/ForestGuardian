@@ -1,13 +1,7 @@
 import {sensorNames} from "../util/utils";
 import Button from "@mui/material/Button";
 
-const ParamCard = ({name, data}) => {
-    const handleButtonClick = () => {
-        // Add your click handling logic here
-        console.log('More Info clicked');
-        //TODO: Open Detail.js on click
-    };
-
+const ParamCard = ({name, data, onShowDetails}) => {
     return (
         <div className="param-card">
             <h1 className="param-card-title">{sensorNames[name]}</h1>
@@ -21,8 +15,8 @@ const ParamCard = ({name, data}) => {
                 <div className={`param-svg bird-${data.value_range.tag}`} />
             </div>
             <div>
-                <Button class="more-info-button" onClick={handleButtonClick}>
-                    More Info
+                <Button class="more-info-button" onClick={() => onShowDetails(data.id)}>
+                    More Information
                 </Button>
             </div>
         </div>
