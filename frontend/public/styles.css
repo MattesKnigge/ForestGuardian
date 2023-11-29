@@ -157,6 +157,14 @@ body {
     background-image: url("bird_cold.svg");
 }
 
+.bird-hot {
+    background-image: url("bird_hot.svg");
+}
+
+.bird-average {
+    background-image: url("bird_average.svg");
+}
+
 /* Media queries for smaller screens */
 @media (max-width: 768px) {
     body {

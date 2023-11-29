@@ -9,9 +9,7 @@ const ParamCard = ({name, data}) => {
                 <div>
                     {data.value}
                 </div>
-                {name === "temperature" ?
-                    <div className="param-svg bird-cold" />
-                    : <div></div>}
+                <div className={`param-svg bird-${data.value_range.tag}`} />
             </div>
             <div>
                 TODO: Button for more details
