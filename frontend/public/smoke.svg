@@ -1,22 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 10" width="200" height="100">
-    <!-- Smoke Plume -->
-    <circle cx="50" cy="50" r="10" fill="gray" />
-    <circle cx="60" cy="40" r="15" fill="gray" />
-    <circle cx="40" cy="40" r="12" fill="gray" />
-    <circle cx="50" cy="30" r="18" fill="gray" />
-    <circle cx="30" cy="30" r="10" fill="gray" />
-    <circle cx="70" cy="30" r="12" fill="gray" />
-    <circle cx="50" cy="20" r="15" fill="gray" />
-    <circle cx="50" cy="10" r="10" fill="gray" />
-    <circle cx="50" cy="0" r="12" fill="gray" />
-    <circle cx="50" cy="-10" r="15" fill="gray" />
-    <circle cx="50" cy="-20" r="10" fill="gray" />
-    <circle cx="50" cy="-30" r="12" fill="gray" />
-    <circle cx="50" cy="-40" r="15" fill="gray" />
-    <circle cx="50" cy="-50" r="10" fill="gray" />
-    <circle cx="50" cy="-60" r="12" fill="gray" />
-    <circle cx="50" cy="-70" r="15" fill="gray" />
-    <circle cx="50" cy="-80" r="10" fill="gray" />
-    <circle cx="50" cy="-90" r="12" fill="gray" />
-    <circle cx="50" cy="-100" r="15" fill="gray" />
+<?xml version="1.0" encoding="utf-8"?>
+<svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg">
+  <g id="g6749" transform="matrix(2.120803, 0, 0, 2.177683, 319.014252, 100.573601)">
+    <g transform="matrix(0.398606,0.000000,0.000000,0.306917,-284.8704,-161.4006)" style="fill:#bdbdbd;" id="g873">
+      <path d="M 811.712 652.203 C 811.712 597.296 682.34 519.822 616.268 547.276 C 585.603 560.016 499.7 620.575 493.059 645.011 C 464.175 751.3 675.464 767.486 743.245 736.991 C 773.581 723.343 811.712 677.685 811.712 652.203 Z" style="fill-rule: evenodd; stroke-width: 1pt; transform-box: fill-box; transform-origin: 50% 50%;" id="path857" transform="matrix(0, 1.264819, -0.790627, 0, -0.000034, 0.000045)"/>
+      <path d="M 680.8 678.917 C 680.8 642.405 614.123 635.737 556.755 637.84 C 444.069 641.975 405.841 607.323 422.84 683.235 C 450.945 808.739 583.248 740.415 639.451 719.993 C 664.837 710.768 680.8 695.863 680.8 678.917 Z" style="fill-rule: evenodd; stroke-width: 1pt; transform-box: fill-box; transform-origin: 50% 50%;" id="path858" transform="matrix(0, 1.264819, -0.790627, 0, -0.00005, -0.000013)"/>
+      <path d="M 640.467 821.443 C 642.992 769.677 597.31 711.243 549.215 784.757 C 537.267 803.018 518.799 806.308 518.799 821.443 C 518.799 854.051 563.521 926.221 604.077 909.918 C 622.9 902.349 639.73 836.556 640.467 821.443 Z" style="fill-rule: evenodd; stroke-width: 1pt; transform-box: fill-box; transform-origin: 50% 50%;" id="path859" transform="matrix(0, 1.264819, -0.790627, 0, 0.000024, -0.000029)"/>
+      <path d="M 617.844 918.787 C 617.844 872.935 563.762 814.064 530.849 836.992 C 515.573 847.634 519.104 897.506 519.104 918.787 C 519.104 964.644 564.226 1039.336 597.14 1016.41 C 612.415 1005.767 617.844 940.071 617.844 918.787 Z" style="fill-rule: evenodd; stroke-width: 1pt; transform-box: fill-box; transform-origin: 50% 50%;" id="path860" transform="matrix(0, 1.264819, -0.790627, 0, -0.000001, -0.000014)"/>
+      <path d="M 616.469 1010.176 C 616.469 975.895 532.842 971.732 515.31 988.873 C 507.174 996.828 502.162 1011.53 502.162 1027.441 C 502.162 1061.721 553.938 1100.41 571.468 1083.271 C 579.606 1075.313 616.469 1026.087 616.469 1010.176 Z" style="fill-rule: evenodd; stroke-width: 1pt; transform-box: fill-box; transform-origin: 50% 50%;" id="path861" transform="matrix(0, 1.264819, -0.790627, 0, 0.000063, 0.000107)"/>
+    </g>
+  </g>
 </svg>
