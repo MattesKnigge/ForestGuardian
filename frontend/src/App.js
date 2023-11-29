@@ -137,9 +137,9 @@ const App = ({ showMessage }) => {
                         </Grid>
                         <Grid item xs={30} md={6} style={{ textAlign: 'center', whiteSpace: 'pre-line', marginTop: '7rem' }}>
                             <img
-                                src="/tree.png"
+                                src="/Birdhouse.svg"
                                 alt="Sleeping Bird"
-                                style={{ maxWidth: '55%', height: 'auto', marginLeft: '7rem', marginTop: '3rem' }}
+                                style={{ width: '120%', height: 'auto', marginLeft: '-3rem' }}
                             />
                             <Typography color={"#D4A82B"} style={{ textAlign: 'left', fontFamily: 'Dosis, sans-serif', maxWidth: '60%', marginLeft: '8rem', fontSize: '1.3rem' }}>
                                 ForestGuardian is a project at the Ostfalia Hochschule and features an autonomous birdhouse with sensors tracking tree health and environmental data.{'\n'} Equipped with smart sensors, it monitors the forest ecosystem, providing insights into tree health and environmental conditions. Join us in creating a smarter, greener world.

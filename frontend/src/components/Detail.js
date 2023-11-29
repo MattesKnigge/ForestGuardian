@@ -1,8 +1,8 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 import axios from 'axios';
 import Dialog from '@mui/material/Dialog';
-import dayjs from "dayjs";
+import dayjs from 'dayjs';
 
 const Detail = ({ open, onClose, measured_parameter_id }) => {
     const [data, setData] = useState({
@@ -15,48 +15,41 @@ const Detail = ({ open, onClose, measured_parameter_id }) => {
     useEffect(() => {
         async function fetchData() {
             try {
-                let from = dayjs().subtract(1, 'week').unix();
+                const from = dayjs().subtract(1, 'week').unix();
                 const to = dayjs().unix();
-                const response = await axios.get(`/sensorknoten-vogelhaus/measured_parameter/${measured_parameter_id}?from=${from}&to=${to}`);
-                console.dir(response.data);
+                const response = await axios.get(
+                    `/sensorknoten-vogelhaus/measured_parameter/${measured_parameter_id}?from=${from}&to=${to}`
+                );
                 setData(response.data);
             } catch (error) {
-                console.dir(error);
+                console.error(error);
             }
         }
+
         if (open) {
             fetchData();
         }
     }, [open, measured_parameter_id]);
 
     return (
-        <Dialog open={open} onClose={onClose}>
+        <Dialog open={open} onClose={onClose} PaperProps={{ style: { backgroundColor: '#1C352E', color: '#D4A82B', padding: '20px' } }}>
             <div className="detail">
-                <div className="detail-layout">
-                    <h1 style={{gridArea: "a"}}>{data.name}</h1>
-                    {/* <h2 style={{gridArea: "b"}}>{data.sensor}</h2> */}
-                    {/* <div style={{gridArea: "c"}}>add sensor display here</div> */}
-                    <div style={{ gridArea: 'e' }}>
-                        <LineChart
-                            width={500}
-                            height={150}
-                            margin={{ top: 5, right: 20, left: 10, bottom: 5 }}
-                            data={data.values}
-                        >
-                            <XAxis
-                                dataKey="timestamp"
-                                type="number"
-                                scale="time"
-                                domain={['dataMin', 'dataMax + 1']}
-                                tickFormatter={(msTime) => new Date(msTime).toLocaleString()}
-                            />
-                            <YAxis />
-                            <Tooltip labelFormatter={(msTime) => new Date(msTime).toLocaleString()} />
-                            <Line dataKey="value" data={data.values} name={data.name} dot={false} />
-                        </LineChart>
-                        <div style={{ marginTop: '10px', textAlign: 'center' }}>
-                            <p>{data.parameter_description}</p>
-                        </div>
+                <h1 style={{ marginBottom: '15px', textAlign: 'center', fontSize: '24px', fontFamily: "Dosis" }}>{data.name}</h1>
+                <div style={{ textAlign: 'center' }}>
+                    <LineChart width={500} height={250} margin={{ top: 10, right: 20, left: 10, bottom: 10 }} data={data.values}>
+                        <XAxis
+                            dataKey="timestamp"
+                            type="number"
+                            scale="time"
+                            domain={['dataMin', 'dataMax + 1']}
+                            tickFormatter={(msTime) => new Date(msTime).toLocaleString()}
+                        />
+                        <YAxis />
+                        <Tooltip labelFormatter={(msTime) => new Date(msTime).toLocaleString()} />
+                        <Line dataKey="value" data={data.values} name={data.name} dot={false} />
+                    </LineChart>
+                    <div style={{ marginTop: '20px', textAlign: 'center' }}>
+                        <p style={{ fontSize: '16px', fontFamily: "Dosis" }}>{data.parameter_description}</p>
                     </div>
                 </div>
             </div>

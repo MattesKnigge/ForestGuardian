@@ -246,9 +246,6 @@ body::before {
 }
 
 
-
-
-
 .bird-cold {
     background-image: url("bird_cold.svg");
 }
@@ -259,6 +256,26 @@ body::before {
 
 .bird-average {
     background-image: url("bird_average.svg");
+}
+
+.bird-wet {
+    background-image: url("bird_wet.svg");
+    background-size: 230%;
+}
+
+.bird-dry {
+    background-image: url("bird_dry.svg");
+    background-size: 210%;
+}
+
+.bird-normal {
+    background-image: url("bird_normal.svg");
+}
+
+.bird-range { /*Campfire*/
+    background-image: url("Campfire.svg");
+    background-size: 160%;
+    margin-top: 8rem;
 }
 
 /* Media queries for smaller screens */
@@ -291,7 +308,6 @@ body::before {
 
 .detail {
     padding: 20px;
-    border: 1px solid #ccc;
     border-radius: 8px;
     margin: 10px;
 }
