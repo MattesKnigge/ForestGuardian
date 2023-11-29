@@ -118,22 +118,36 @@ body {
     width: var(--width);
     display: grid;
     grid-template-columns: 1fr 1fr;
-    background-color: rgb(52, 26, 6);
     column-gap: 1em;
     padding: 1em;
+
+    background-color: rgb(52, 26, 6);
+    background-image: url('tree_texture.jpg'); /* Replace with the path to your wood texture image */
+    background-size: cover;
+    background-repeat: no-repeat;
 }
+
 
 .param-card {
     grid-row: span 3;
     width: 100%;
     aspect-ratio: 1/1;
-    background-color: rgba(80,31,6,0.98);
+    background-color: rgba(80,31,6,0.80);
     box-sizing: border-box;
     border: 5px solid rgba(55,17,7,0.98) ;
     border-radius: 30px;
     display: grid;
     grid-template-rows: 5vh auto 5vh;
     justify-items: center;
+}
+
+.card-value {
+    font-size: 10rem;
+    font-family: Bebas Neue, sans-serif;
+    color: #8E6F52;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
 }
 
 .tree-spacer {
@@ -148,10 +162,42 @@ body {
 }
 
 .param-svg {
-    background-size: contain;
+    background-size: 85%;
     background-position: center;
     background-repeat: no-repeat;
 }
+
+.card-unit {
+    font-size: .5rem;
+    font-family: Bebas Neue, sans-serif;
+    color: #8E6F52;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.info-button {
+    font-size: 1.5rem;
+    padding: 12px 24px;
+    margin: auto;
+    background-color: #D4A82B;
+    color: #333333;
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.info-button:hover {
+    background-color: #a98622;
+    transform: scale(0.95) rotate(5deg);
+}
+
+
+
+
 
 .bird-cold {
     background-image: url("bird_cold.svg");
