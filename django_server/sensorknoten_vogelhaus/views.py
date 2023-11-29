@@ -53,7 +53,7 @@ def get_location(request, location_name: str):
                 'unit': mp.parameter.unit,
                 'min': param_ranges[0].lower_bound,
                 'max': param_ranges[-1].lower_bound,
-                'value_range': {'description': param_ranges.description, 'tag': param_ranges.tag},
+                'value_range': {'description': param_range.description, 'tag': param_range.tag},
                 'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag} for pr in param_ranges[1:-1]]
             }
 
