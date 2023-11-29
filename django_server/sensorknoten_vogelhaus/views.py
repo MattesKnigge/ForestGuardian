@@ -32,7 +32,7 @@ def get_location(request, location_name: str):
                 'value': random.randint(mp.parameter.min, mp.parameter.max),
                 'min': mp.parameter.min,
                 'max': mp.parameter.max,
-                'sections': [{'value': pr.value, 'description': pr.description} for pr in param_range]
+                'sections': [{'value': pr.value, 'description': pr.description, 'tag': pr.tag} for pr in param_range]
             }
     else:
         location = Location.objects.get(name=location_name)
@@ -47,7 +47,7 @@ def get_location(request, location_name: str):
                 'value': sv.value,
                 'min': mp.parameter.min,
                 'max': mp.parameter.max,
-                'sections': [{'value': pr.value, 'description': pr.description} for pr in param_range]
+                'sections': [{'value': pr.value, 'description': pr.description, 'tag': pr.tag} for pr in param_range]
             }
 
     return Response(data)

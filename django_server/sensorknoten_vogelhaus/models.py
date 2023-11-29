@@ -54,6 +54,7 @@ class ParameterRange(models.Model):
     parameter = models.ForeignKey(Parameter, on_delete=models.CASCADE)
     value = models.FloatField(blank=False)
     description = models.CharField(max_length=512, unique=False)
+    tag = models.CharField(max_length=32, unique=False)
 
     def __str__(self):
         return f'{self.parameter.name} {self.value}: {self.description}'
