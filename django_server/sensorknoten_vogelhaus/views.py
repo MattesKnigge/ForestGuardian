@@ -7,7 +7,7 @@ from drf_yasg.utils import swagger_auto_schema
 from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Location, MeasuredParameter, SensorValue
+from .models import Location, MeasuredParameter, SensorValue, ParameterRange
 
 
 @api_view(['GET'])
@@ -19,49 +19,35 @@ def get_locations(request):
 
 @api_view(['GET'])
 def get_location(request, location_name: str):
+    data = {}
     if location_name == "random":
-        data = {
-            'temperature': {
-                'id': 'random_temperature',
+        location = Location.objects.get(name='prototype')
+        measured_params = MeasuredParameter.objects.filter(location=location).prefetch_related('parameter').all()
+
+        for mp in measured_params:
+            param_range = ParameterRange.objects.filter(parameter=mp.parameter).order_by('value').all()
+            data[mp.parameter.name] = {
+                'id': f'random_{mp.parameter.name}',
                 'timestamp': datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
-                'value': random.randint(-25, 42),
-                'min': -25,
-                'max': 42,
-            },
-            'humidity': {
-                'id': 'random_humidity',
-                'timestamp': datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
-                'value': random.randint(0, 100),
-                'min': 0,
-                'max': 100,
-            },
-            'air_quality': {
-                'id': 'random_airQuality',
-                'timestamp': datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
-                'value': random.randint(400, 60000),
-                'min': 400,
-                'max': 60000,
-            },
-            'pressure': {
-                'id': 'random_pressure',
-                'timestamp': datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
-                'value': random.randint(800, 1100),
-                'min': 800,
-                'max': 1100,
-            },
-        }
+                'value': random.randint(mp.parameter.min, mp.parameter.max),
+                'min': mp.parameter.min,
+                'max': mp.parameter.max,
+                'sections': [{'value': pr.value, 'description': pr.description} for pr in param_range]
+            }
     else:
-        data = {}
         location = Location.objects.get(name=location_name)
         measured_params = MeasuredParameter.objects.filter(location=location).prefetch_related('parameter').all()
+
         for mp in measured_params:
             sv = SensorValue.objects.filter(measuredParameter=mp).latest('created_at')
+            param_range = ParameterRange.objects.filter(parameter=mp.parameter).order_by('value').all()
             data[mp.parameter.name] = {
                 'id': mp.id,
                 'timestamp': sv.created_at,
                 'value': sv.value,
                 'min': mp.parameter.min,
                 'max': mp.parameter.max,
+                'sections': [{'value': pr.value, 'description': pr.description} for pr in param_range]
             }
 
     return Response(data)
@@ -79,9 +65,9 @@ def get_measured_parameter_details(request, measured_parameter_id: str):
     if measured_parameter_id.startswith('random'):
         hours_between = int((dt_to - dt_from).total_seconds() / 60 / 60)
 
-        param = measured_parameter_id.split('_')
+        param = measured_parameter_id.split('_', maxsplit=1)
         min_max = {'temperature': {'min': -25, 'max': 42}, 'humidity': {'min': 0, 'max': 100},
-                   'pressure': {'min': 800, 'max': 1100}, 'airQuality': {'min': 400, 'max': 60000}}
+                   'pressure': {'min': 800, 'max': 1100}, 'air_quality': {'min': 400, 'max': 60000}}
         mm = min_max.get(param[1])
         timestamps = [dt_from + datetime.timedelta(hours=i) for i in range(hours_between)]
 

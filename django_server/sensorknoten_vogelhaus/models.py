@@ -48,3 +48,12 @@ class SensorValue(models.Model):
 
     def __str__(self):
         return f'{self.measuredParameter.location.name} {self.measuredParameter.parameter.name}: {self.value} {self.created_at.strftime("%d.%m.%Y %H:%M:%S")}'
+
+
+class ParameterRange(models.Model):
+    parameter = models.ForeignKey(Parameter, on_delete=models.CASCADE)
+    value = models.FloatField(blank=False)
+    description = models.CharField(max_length=512, unique=False)
+
+    def __str__(self):
+        return f'{self.parameter.name} {self.value}: {self.description}'
