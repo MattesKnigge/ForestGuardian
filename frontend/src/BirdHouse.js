@@ -6,12 +6,13 @@ import withSnackbar from "./withSnackbar";
 import Dashboard from "./components/Dashboard";
 import Header from "./components/Header";
 import Credits from "./components/Credits";
+import Overview from "./components/Overview";
 
 const BirdHouse = ({ showMessage }) => {
     const {birdHouseName} = useParams();
     const [data, setData] = useState({"paramName": { timestamp: "", value: "-25", min: "-25", max: "100" }});
     const [lastTimestamp, setLastTimestamp] = useState(new Date(0).getTime());
-    const [isDash, setIsDash] = useState(true);
+    const [isDash, setIsDash] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
@@ -30,17 +31,19 @@ const BirdHouse = ({ showMessage }) => {
     }, [birdHouseName, showMessage]);
 
     useInterval(async () => {
-        try {
-            const timeResponse = await axios.get(`/sensorknoten-vogelhaus/location/${birdHouseName}/latest`);
-            if (timeResponse.data > lastTimestamp) {
-                setLastTimestamp(timeResponse.data);
-                const response = await axios.get(`/sensorknoten-vogelhaus/location/${birdHouseName}`);
-                setData(response.data);
-                console.log("polling")
+        if (isDash) {
+            try {
+                const timeResponse = await axios.get(`/sensorknoten-vogelhaus/location/${birdHouseName}/latest`);
+                if (timeResponse.data > lastTimestamp) {
+                    setLastTimestamp(timeResponse.data);
+                    const response = await axios.get(`/sensorknoten-vogelhaus/location/${birdHouseName}`);
+                    setData(response.data);
+                    console.log("polling")
+                }
+            } catch (error) {
+                console.dir(error);
+                showMessage('An error occurred while fetching data.', 'error');
             }
-        } catch (error) {
-            console.dir(error);
-            showMessage('An error occurred while fetching data.', 'error');
         }
     }, 5 * 1000);
 
@@ -48,10 +51,10 @@ const BirdHouse = ({ showMessage }) => {
         <div className="layout">
             <Header onToggleClick={() => setIsDash(!isDash)} toggleOn={isDash} showToggle={true} />
             <div className="content-container">
-                {isDash ? (
+                {isDash ?
                     <Dashboard sensors={data}/>
-                ):
-                null
+                :
+                    <Overview sensors={data} />
                 }
             </div>
             <Credits />

@@ -5,21 +5,15 @@ import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from 'dayjs';
 import 'dayjs/locale/de';
+import {sensorNames} from "../util/utils";
 
 const Dashboard = ({ sensors }) => {
     const [from, setFrom] = useState(dayjs().subtract(1, 'week'));
     const [to, setTo] = useState(dayjs());
 
-    const sensorNames = {
-        temperature: "Temperature",
-        humidity: "Humidity",
-        pressure: "Pressure",
-        air_quality: "Air Quality (CO2)",
-    };
-
     return (
         <div className="flex-column">
-            <div className="dashboard-date-picker-row">
+            <div className="flex-row">
                 <label style={{fontFamily: 'Bebas Neue, sans-serif',}}>from:</label>
                 <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
                     <DateTimePicker value={from} onChange={(v) => setFrom(v)} maxDateTime={dayjs().subtract(1, 'day')} />
@@ -32,7 +26,7 @@ const Dashboard = ({ sensors }) => {
             {Object.keys(sensors).map((key) => (
                 <>
                     <h3 style={{fontFamily: 'Dosis, sans-serif'}}>{sensorNames[key] || key}</h3>
-                    <div key={key} className="dashboard-row" style={{fontFamily: 'Bebas Neue, sans-serif'}}>
+                    <div key={key} className="dashboard-row">
                         {key === "temperature" ? (
                             <GaugeComponent data={sensors[key]} arcs={[20 / 67, 35 / 67, 12 / 67]} colours={["#EA4228", "#4cda15", "#EA4228"]} unit={" °C"} />
                         ) : key === "humidity" ? (
