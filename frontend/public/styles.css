@@ -41,18 +41,11 @@ body {
     display: flex;
 }
 
-/* Dashboard styles */
-.headline-plot {
-    font-size: 1rem;
-    margin: 0;
-    color: #91A799;
-    cursor: default;
-    font-family: Dosis, sans-serif;
-}
-
 .content-container {
     grid-area: content;
     padding-top: 1vh;
+    display: grid;
+    justify-items: center;
 }
 
 .footer-container {
@@ -61,14 +54,6 @@ body {
     justify-content: space-around;
     align-items: center;
     padding: 0 2vw;
-}
-
-.sensor-name {
-    font-size: 1rem;
-    margin: 0;
-    color: #91A799;
-    cursor: default;
-    font-family: Dosis, sans-serif;
 }
 
 .flex-column {
@@ -81,13 +66,7 @@ body {
     display: grid;
     grid-template-columns: 1fr 2fr;
     max-width: 1000px;
-}
-
-.dashboard-date-picker-row {
-    display: flex;
-    align-items: center;
-    flex-direction: row;
-    gap: 1rem;
+    font-family: Bebas Neue, sans-serif;
 }
 
 @media (max-width: 800px) {
@@ -96,25 +75,11 @@ body {
     }
 }
 
-.gauge-item, .temp, .hum, .pres {
-    margin: 10px;
-}
-
-.temp {
-    width: 400px;
-    height: 400px;
-    margin-bottom: -150px;
-}
-
-.hum-pres {
+.flex-row {
     display: flex;
-    justify-content: center;
     align-items: center;
-    text-align: center;
-}
-
-.hum, .pres {
-    height: 280px;
+    flex-direction: row;
+    gap: 1rem;
 }
 
 /* Credits styles */
@@ -138,24 +103,8 @@ body {
     text-decoration: underline;
     cursor: pointer;
 }
-.landing-page {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: auto;
-}
-
-.bottom-button {
-    margin-top: 1rem!important;
-    font-size: 1.5rem!important;
-    font-family: "Bebas Neue", monospace !important;
-    background: #8E6F52!important;
-    color: #333333!important;
-}
 
 .second-button {
-    margin-top: 1rem!important;
     font-size: 1.5rem!important;
     font-family: "Bebas Neue", monospace !important;
     background: #8E6F52 !important;
@@ -164,14 +113,52 @@ body {
     margin-top: 10rem!important;
 }
 
+.overview {
+    --width: 120ch;
+    width: var(--width);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background-color: rgb(52, 26, 6);
+    column-gap: 1em;
+    padding: 1em;
+}
+
+.param-card {
+    grid-row: span 3;
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: rgba(80,31,6,0.98);
+    box-sizing: border-box;
+    border: 5px solid rgba(55,17,7,0.98) ;
+    border-radius: 30px;
+    display: grid;
+    grid-template-rows: 5vh auto 5vh;
+    justify-items: center;
+}
+
+.tree-spacer {
+    width: 100%;
+    aspect-ratio: 3/1;
+}
+
+.param-card-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+
+.param-svg {
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.bird-cold {
+    background-image: url("bird_cold.svg");
+}
 
 /* Media queries for smaller screens */
 @media (max-width: 768px) {
-    .gauge-item, .temp, .hum, .pres {
-        width: 300px;
-        height: 150px;
-        margin: 10% auto;
-    }
     body {
         font-family: Dosis, sans-serif;
         background-color: #1C352E;
@@ -191,33 +178,4 @@ body {
     .header h1 {
         font-size: 2rem;
     }
-
-    .headline-plot {
-        font-size: 1rem;
-        margin: 0;
-        color: #91A799;
-        cursor: default;
-        font-family: Dosis, sans-serif;
-    }
-    .sensor-name {
-        font-size: 1rem;
-        margin: 0;
-        color: #91A799;
-        cursor: default;
-        font-family: Dosis, sans-serif;
-    }
-
-}
-
-.detail {
-    max-width: 40vw;
-}
-
-.detail-layout {
-    display: grid;
-    grid-template-areas:
-            "a a b"
-            "c d d"
-            "c d d"
-            "c e e";
 }
