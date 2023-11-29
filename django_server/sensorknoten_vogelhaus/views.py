@@ -45,7 +45,7 @@ def get_location(request, location_name: str):
         for mp in measured_params:
             sv = SensorValue.objects.filter(measuredParameter=mp).latest('created_at')
             param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
-            param_range = [pr for pr in param_ranges if pr.lower_bound > sv.value][0]
+            param_range = [pr for pr in param_ranges if pr.lower_bound >= sv.value][0]
             data[mp.parameter.name] = {
                 'id': mp.id,
                 'timestamp': sv.created_at,
