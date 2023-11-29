@@ -8,14 +8,14 @@
 Created by potrace 1.15, written by Peter Selinger 2001-2017
 </metadata>
     <defs>
-        <linearGradient id="coldGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-            <stop offset="0%" style="stop-color:#0D68A7;stop-opacity:1" /> <!-- Darker Blue -->
-            <stop offset="50%" style="stop-color:#3C91E6;stop-opacity:1" /> <!-- Light Blue -->
-            <stop offset="100%" style="stop-color:#6A0572;stop-opacity:1" /> <!-- Purple -->
+        <linearGradient id="hotGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#B85B17;stop-opacity:1" /> <!-- Darker Yellow -->
+            <stop offset="50%" style="stop-color:#FCA311;stop-opacity:1" /> <!-- Orange -->
+            <stop offset="100%" style="stop-color:#74121D;stop-opacity:1" /> <!-- Red -->
         </linearGradient>
     </defs>
 <g transform="translate(0.000000,1280.000000) scale(0.100000,-0.100000)"
-fill="url(#coldGradient)" stroke="#ffff" stroke-width="5">
+fill="url(#hotGradient)" stroke="#ffff" stroke-width="5">
 <path d="M8545 12776 c-33 -12 -128 -57 -210 -101 -290 -153 -512 -248 -605
 -259 -96 -11 -271 -46 -420 -83 -379 -93 -389 -95 -482 -89 -148 10 -279 42
 -608 148 -266 85 -511 154 -674 187 -459 95 -975 130 -1497 101 -508 -29 -840
