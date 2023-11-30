@@ -126,8 +126,7 @@ body::before {
 }
 
 .overview {
-    --width: 120ch;
-    width: var(--width);
+    width: 120ch;
     display: grid;
     grid-template-columns: 1fr 1fr;
     column-gap: 1em;
@@ -143,7 +142,7 @@ body::before {
     aspect-ratio: 3/1;
 }
 
-@media (width < 120ch) {
+@media (width < 130ch) {
     .overview {
         width: calc(100% - 2em);
         display: grid;

@@ -10,7 +10,14 @@ import Overview from "./components/Overview";
 
 const BirdHouse = ({ showMessage }) => {
     const {birdHouseName} = useParams();
-    const [data, setData] = useState({"paramName": { timestamp: "", value: "-25", min: "-25", max: "100", value_range: { tag: "default", description: ""}, param_ranges: [ { "lower_bound": 0, tag: "default", description: ""}] }});
+    const [data, setData] = useState({ season: "",
+        values: {
+            paramName: { timestamp: "", value: 0, min: 0, max: 100,
+                value_range: { tag: "default", description: ""},
+                param_ranges: [ { lower_bound: 0, tag: "default", description: ""}]
+            }
+        }
+    });
     const [lastTimestamp, setLastTimestamp] = useState(new Date(0).getTime());
     const [isDash, setIsDash] = useState(false);
 
@@ -53,9 +60,9 @@ const BirdHouse = ({ showMessage }) => {
             <Header onToggleClick={() => setIsDash(!isDash)} toggleOn={isDash} showToggle={true} />
             <div className="content-container">
                 {isDash ?
-                    <Dashboard sensors={data}/>
+                    <Dashboard sensors={data.values}/>
                 :
-                    <Overview sensors={data} />
+                    <Overview data={data} />
                 }
             </div>
             <Credits />
