@@ -12,9 +12,9 @@ const BirdHouse = ({ showMessage }) => {
     const {birdHouseName} = useParams();
     const [data, setData] = useState({ season: "",
         values: {
-            paramName: { timestamp: "", value: 0, min: 0, max: 100,
+            paramName: { id: "random_temperature", timestamp: "", value: 0, min: 0, max: 100,
                 value_range: { tag: "default", description: ""},
-                param_ranges: [ { lower_bound: 0, tag: "default", description: ""}]
+                param_ranges: [ { lower_bound: 0, tag: "default", description: "", color: ""}, { lower_bound: 1, tag: "default", description: "", color: ""}]
             }
         }
     });

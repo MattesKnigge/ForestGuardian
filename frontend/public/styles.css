@@ -80,6 +80,7 @@ body::before {
 }
 
 .dashboard-row {
+    width: 95%;
     display: grid;
     align-items: center;
     font-family: Bebas Neue, sans-serif;
@@ -96,6 +97,10 @@ body::before {
 @media (max-width: 800px) {
     .two-cols {
         grid-template-columns: 1fr;
+    }
+
+    .dashboard-layout {
+        width: 90vw;
     }
 }
 

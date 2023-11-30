@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import GaugeComponent from "./GaugeComponent";
+import GaugeChart from 'react-gauge-chart';
 import ChartComponent from "./ChartComponent";
 import {sensorNames} from "../util/utils";
 import {createTheme, ThemeProvider} from "@mui/material";
@@ -34,6 +34,32 @@ const Dashboard = ({ sensors }) => {
     const [to, setTo] = useState(dayjs());
     const [showGraphs, setShowGraphs] = useState(true);
 
+    const calcArcs = (ranges) => {
+        if (ranges.length === 2) {
+            return [0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05, 0.05];
+        } else {
+            let percentages = []
+            const fullRange = ranges[ranges.length -1].lower_bound - ranges[0].lower_bound;
+            for (let i = 0; i < ranges.length - 1; i++) {
+                const range = ranges[i+1].lower_bound - ranges[i].lower_bound;
+                percentages.push(range / fullRange);
+            }
+            return percentages;
+        }
+    }
+
+    const calcColors = (ranges) => {
+        if (ranges.length === 2) {
+            return [ranges[0].color, ranges[1].color];
+        } else {
+            let colors = [];
+            for (let i = 0; i < ranges.length - 1; i++) {
+                colors.push(ranges[i].color);
+            }
+            return colors;
+        }
+    }
+
     return (
         <div style={{minWidth: '40ch', maxWidth: '120ch'}}>
             <div className="dashboard-layout">
@@ -63,15 +89,15 @@ const Dashboard = ({ sensors }) => {
                     <>
                         <h3 style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B'}}>{sensorNames[key] || key}</h3>
                         <div key={key} className={`dashboard-row ${showGraphs? 'two-cols':'one-col'}`}>
-                            {key === "temperature" ? (
-                                <GaugeComponent data={sensors[key]} arcs={[20 / 67, 35 / 67, 12 / 67]} colours={["#EA4228", "#4cda15", "#EA4228"]} />
-                            ) : key === "humidity" ? (
-                                <GaugeComponent data={sensors[key]} colours={["#EA4228", "#4cda15", "#4cda15"]} />
-                            ) : key === "pressure" ? (
-                                 <GaugeComponent data={sensors[key]} padding={0} nrLevels={20} colours={["#6699CC", "#993333"]} />
-                            ) : key === "air_quality" ? (
-                                <GaugeComponent data={sensors[key]} colours={["#4cda15", "#F8C630", "#EA4228"]} />
-                            ) : null}
+                            <GaugeChart id={sensors[key].id}
+                                        percent={(sensors[key].value - sensors[key].min) / (sensors[key].max - sensors[key].min)}
+                                        colors={calcColors(sensors[key].param_ranges)}
+                                        arcsLength={calcArcs(sensors[key].param_ranges)}
+                                        formatTextValue={() => sensors[key].value +' '+ sensors[key].unit}
+                                        needleColor={"#D4A82B"}
+                                        needleBaseColor={"#D4A82B"}
+                                        arcPadding={sensors[key].param_ranges.length === 2 ? 0 : 0.02}
+                            />
                             {showGraphs?
                                 <ChartComponent measured_parameter_id={sensors[key].id} from={from} to={to} />
                                 : null
