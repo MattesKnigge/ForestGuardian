@@ -40,7 +40,7 @@ def get_location(request, location_name: str):
                 'unit': mp.parameter.unit,
                 'min': param_ranges[0].lower_bound,
                 'max': param_ranges[-1].lower_bound,
-                'value_range': {'description': param_range.description, 'tag': param_range.tag},
+                'value_range': {'description': param_range.description, 'tag': param_range.tag, 'color': param_range.color},
                 'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag, 'color': pr.color} for pr in param_ranges]
             }
     else:
@@ -58,7 +58,7 @@ def get_location(request, location_name: str):
                 'unit': mp.parameter.unit,
                 'min': param_ranges[0].lower_bound,
                 'max': param_ranges[-1].lower_bound,
-                'value_range': {'description': param_range.description, 'tag': param_range.tag},
+                'value_range': {'description': param_range.description, 'tag': param_range.tag, 'color': param_range.color},
                 'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag, 'color': pr.color} for pr in param_ranges]
             }
 
