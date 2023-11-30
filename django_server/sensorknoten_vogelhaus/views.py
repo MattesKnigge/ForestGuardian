@@ -41,7 +41,7 @@ def get_location(request, location_name: str):
                 'min': param_ranges[0].lower_bound,
                 'max': param_ranges[-1].lower_bound,
                 'value_range': {'description': param_range.description, 'tag': param_range.tag},
-                'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag} for pr in param_ranges[1:-1]]
+                'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag, 'color': pr.color} for pr in param_ranges]
             }
     else:
         location = Location.objects.get(name=location_name)
@@ -50,7 +50,7 @@ def get_location(request, location_name: str):
         for mp in measured_params:
             sv = SensorValue.objects.filter(measuredParameter=mp).latest('created_at')
             param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
-            param_range = [pr for pr in param_ranges if pr.lower_bound <= sv.value][0]
+            param_range = [pr for pr in param_ranges if pr.lower_bound <= sv.value][-1]
             data['values'][mp.parameter.name] = {
                 'id': mp.id,
                 'timestamp': sv.created_at,
@@ -59,7 +59,7 @@ def get_location(request, location_name: str):
                 'min': param_ranges[0].lower_bound,
                 'max': param_ranges[-1].lower_bound,
                 'value_range': {'description': param_range.description, 'tag': param_range.tag},
-                'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag} for pr in param_ranges[1:-1]]
+                'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag, 'color': pr.color} for pr in param_ranges]
             }
 
     return Response(data)

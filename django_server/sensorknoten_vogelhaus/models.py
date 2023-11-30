@@ -52,6 +52,7 @@ class ParameterRange(models.Model):
     lower_bound = models.FloatField(blank=False)
     description = models.CharField(max_length=512, unique=False)
     tag = models.CharField(max_length=32, unique=False)
+    color = models.CharField(max_length=16, unique=False)
 
     def __str__(self):
-        return f'{self.parameter.name} {self.lower_bound} ({self.tag}): {self.description}'
+        return f'{self.parameter.name} {self.lower_bound} ({self.tag}) ({self.color}): {self.description}'
