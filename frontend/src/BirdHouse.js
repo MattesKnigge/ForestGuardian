@@ -19,7 +19,7 @@ const BirdHouse = ({ showMessage }) => {
         }
     });
     const [lastTimestamp, setLastTimestamp] = useState(new Date(0).getTime());
-    const [isDash, setIsDash] = useState(false);
+    const [isDash, setIsDash] = useState(true);
 
     useEffect(() => {
         async function fetchData() {

@@ -25,22 +25,23 @@ const ChartComponent =  ({ measured_parameter_id, from, to }) => {
     }, [from, measured_parameter_id, to]);
 
     return (
-        <div className="flex-column">
-            <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={data.values}>
-                    <XAxis
-                        dataKey="timestamp"
-                        type="number"
-                        scale="time"
-                        domain={['dataMin', 'dataMax + 1']}
-                        tickFormatter={(msTime) => new Date(msTime).toLocaleString()}
-                    />
-                    <YAxis domain={['dataMin', 'dataMax']} />
-                    <Tooltip labelFormatter={(msTime) => new Date(msTime).toLocaleString()} />
-                    <Line dataKey="value" data={data.values} name={data.name} dot={false} />
-                </LineChart>
-            </ResponsiveContainer>
-        </div>
+        <ResponsiveContainer width="99%" aspect={3}>
+            <LineChart data={data.values}>
+                <XAxis
+                    dataKey="timestamp"
+                    type="number"
+                    scale="time"
+                    domain={['dataMin', 'dataMax + 1']}
+                    tickFormatter={(msTime) => new Date(msTime).toLocaleString()}
+                    tick={{ fill: '#D4A82B' }}
+                    tickLine={{ stroke: '#D4A82B' }}
+                    stroke='#D4A82B'
+                />
+                <YAxis domain={['dataMin', 'dataMax']} tick={{ fill: '#D4A82B' }} tickLine={{ stroke: '#D4A82B' }} stroke='#D4A82B' />
+                <Tooltip labelFormatter={(msTime) => new Date(msTime).toLocaleString()} />
+                <Line dataKey="value" data={data.values} name={data.name} dot={false} />
+            </LineChart>
+        </ResponsiveContainer>
     );
 }
 
