@@ -20,6 +20,7 @@ body::before {
     z-index: -1;
     filter: blur(7px);
     background-size: cover;
+    transform: scale(1.1);
 }
 
 .layout {
@@ -137,6 +138,23 @@ body::before {
     background-repeat: no-repeat;
 }
 
+.tree-spacer {
+    width: 100%;
+    aspect-ratio: 3/1;
+}
+
+@media (width < 120ch) {
+    .overview {
+        width: calc(100% - 2em);
+        display: grid;
+        grid-template-columns: 1fr;
+        row-gap: 0.5em;
+    }
+
+    .tree-spacer {
+        height: 0;
+    }
+}
 
 .param-card {
     grid-row: span 3;
@@ -164,11 +182,6 @@ body::before {
     font-size: 6rem;
 }
 
-.tree-spacer {
-    width: 100%;
-    aspect-ratio: 3/1;
-}
-
 .param-card-content {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -191,39 +204,20 @@ body::before {
     text-align: center;
 }
 
-.param-card {
-    position: relative;
-}
-
 .param-card-title {
     font-size: 2rem;
     font-family: 'Dosis', sans-serif;
-    background: url('sign_texture.jpg');
+    background-image: url('sign_texture.jpg');
+    background-color: rgba(40, 26, 13, 0.8);
+    background-blend-mode: hue;
     background-size: 80%;
     color: #D4A82B;
     margin: auto;
-    justify-content: center;
-    align-items: center;
+    padding: 0.5em 0;
     text-align: center;
-    padding: 20px;
-    border: 2px solid #8E6F52;
+    border: 3px solid #8E6F52;
     border-radius: 10px;
-    outline: 1px solid #8E6F52;
-    width: 20rem;
-    position: relative;
-    z-index: 1;
-}
-
-.param-card-title::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(40, 26, 13, 0.8);
-    border-radius: 10px;
-    z-index: -1;
+    width: 75%; /* even width for all signs */
 }
 
 .more-info-button {
@@ -244,7 +238,6 @@ body::before {
     background-color: #a98622;
     transform: scale(0.95) rotate(5deg);
 }
-
 
 .bird-cold {
     background-image: url("bird_cold.svg");
