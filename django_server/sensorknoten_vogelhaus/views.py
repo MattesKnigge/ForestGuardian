@@ -8,6 +8,7 @@ from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Location, MeasuredParameter, SensorValue, ParameterRange
+from .utils import get_current_season
 
 
 @api_view(['GET'])
@@ -19,7 +20,11 @@ def get_locations(request):
 
 @api_view(['GET'])
 def get_location(request, location_name: str):
-    data = {}
+    data = {
+        'season': get_current_season(),
+        'values': {}
+    }
+
     if location_name == "random":
         location = Location.objects.get(name='prototype')
         measured_params = MeasuredParameter.objects.filter(location=location).prefetch_related('parameter').all()
@@ -27,8 +32,8 @@ def get_location(request, location_name: str):
         for mp in measured_params:
             param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
             val = random.randint(param_ranges[0].lower_bound, param_ranges[-1].lower_bound)
-            param_range = [pr for pr in param_ranges if pr.lower_bound < val][-1]
-            data[mp.parameter.name] = {
+            param_range = [pr for pr in param_ranges if pr.lower_bound <= val][-1]
+            data['values'][mp.parameter.name] = {
                 'id': f'random_{mp.parameter.name}',
                 'timestamp': datetime.datetime.now().strftime("%d.%m.%Y %H:%M:%S"),
                 'value': val,
@@ -45,8 +50,8 @@ def get_location(request, location_name: str):
         for mp in measured_params:
             sv = SensorValue.objects.filter(measuredParameter=mp).latest('created_at')
             param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
-            param_range = [pr for pr in param_ranges if pr.lower_bound >= sv.value][0]
-            data[mp.parameter.name] = {
+            param_range = [pr for pr in param_ranges if pr.lower_bound <= sv.value][0]
+            data['values'][mp.parameter.name] = {
                 'id': mp.id,
                 'timestamp': sv.created_at,
                 'value': sv.value,
