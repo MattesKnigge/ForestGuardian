@@ -6,9 +6,9 @@ const ParamCard = ({name, data, onShowDetails}) => {
         <div className="param-card">
             <h1 className="param-card-title">{sensorNames[name]}</h1>
             <div className="param-card-content">
-                <div className={`card-value ${data.value > 999 ? "card-big-value" : ""}`}>
+                <div className={`card-value ${data.value > 999 ? "card-big-value" : ""}`} style={{ color: data.value_range.color }}>
                     {data.value}
-                    <div className="card-unit">
+                    <div className="card-unit" style={{ color: data.value_range.color }}>
                         {data.unit}
                     </div>
                 </div>

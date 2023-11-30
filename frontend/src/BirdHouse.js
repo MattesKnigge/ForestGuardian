@@ -13,13 +13,13 @@ const BirdHouse = ({ showMessage }) => {
     const [data, setData] = useState({ season: "",
         values: {
             paramName: { id: "random_temperature", timestamp: "", value: 0, min: 0, max: 100,
-                value_range: { tag: "default", description: ""},
+                value_range: { tag: "default", description: "", color: ""},
                 param_ranges: [ { lower_bound: 0, tag: "default", description: "", color: ""}, { lower_bound: 1, tag: "default", description: "", color: ""}]
             }
         }
     });
     const [lastTimestamp, setLastTimestamp] = useState(new Date(0).getTime());
-    const [isDash, setIsDash] = useState(true);
+    const [isDash, setIsDash] = useState(false);
 
     useEffect(() => {
         async function fetchData() {
