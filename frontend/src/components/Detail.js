@@ -3,6 +3,7 @@ import { Line, LineChart, Tooltip, XAxis, YAxis } from 'recharts';
 import axios from 'axios';
 import Dialog from '@mui/material/Dialog';
 import dayjs from 'dayjs';
+import {sensorNames} from "../util/utils";
 
 const Detail = ({ open, onClose, measured_parameter_id }) => {
     const [data, setData] = useState({
@@ -34,7 +35,7 @@ const Detail = ({ open, onClose, measured_parameter_id }) => {
     return (
         <Dialog open={open} onClose={onClose} PaperProps={{ style: { backgroundColor: '#1C352E', color: '#D4A82B', padding: '20px' } }}>
             <div className="detail">
-                <h1 style={{ marginBottom: '15px', textAlign: 'center', fontSize: '24px', fontFamily: "Dosis" }}>{data.name}</h1>
+                <h1 style={{ marginBottom: '15px', textAlign: 'center', fontSize: '24px', fontFamily: "Dosis" }}>{sensorNames[data.name] || data.name}</h1>
                 <div style={{ textAlign: 'center' }}>
                     <LineChart width={500} height={250} margin={{ top: 10, right: 20, left: 10, bottom: 10 }} data={data.values}>
                         <XAxis

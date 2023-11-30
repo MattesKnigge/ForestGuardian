@@ -68,6 +68,11 @@ body::before {
     padding: 0 2vw;
 }
 
+.multi-dashboard-layout {
+    display: flex;
+    gap: 1em;
+}
+
 .dashboard-layout {
     display: flex;
     align-items: center;
