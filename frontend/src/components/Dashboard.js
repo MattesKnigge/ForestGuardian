@@ -1,31 +1,50 @@
 import React, {useState} from "react";
 import GaugeComponent from "./GaugeComponent";
 import ChartComponent from "./ChartComponent";
-import {DateTimePicker, LocalizationProvider} from "@mui/x-date-pickers";
+import {sensorNames} from "../util/utils";
+import {createTheme, ThemeProvider} from "@mui/material";
+import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import dayjs from 'dayjs';
 import 'dayjs/locale/de';
-import {sensorNames} from "../util/utils";
 
 const Dashboard = ({ sensors }) => {
+    const datePickerTheme = createTheme({
+        palette: {
+            primary: {
+                main: '#D4A82B',
+                contrastText: '#fff',
+            },
+            text: {
+                primary: '#D4A82B',
+                secondary: '#D4A82B',
+            },
+            background: {
+                paper: '#1C352E',
+            },
+            action: {
+                active: '#D4A82B',
+            }
+        },
+    });
     const [from, setFrom] = useState(dayjs().subtract(1, 'week'));
     const [to, setTo] = useState(dayjs());
 
     return (
         <div className="flex-column">
-            <div className="flex-row">
-                <label style={{fontFamily: 'Bebas Neue, sans-serif',}}>from:</label>
-                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
-                    <DateTimePicker value={from} onChange={(v) => setFrom(v)} maxDateTime={dayjs().subtract(1, 'day')} />
-                </LocalizationProvider>
-                <label style={{fontFamily: 'Bebas Neue, sans-serif',}}>to:</label>
-                <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
-                    <DateTimePicker value={to} onChange={(v) => setTo(v)} maxDateTime={dayjs()} />
-                </LocalizationProvider>
-            </div>
+            <ThemeProvider theme={datePickerTheme}>
+                <div className="flex-row">
+                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+                        <DatePicker label="FROM" value={from} onChange={(v) => setFrom(v)} maxDateTime={dayjs().subtract(1, 'day')} />
+                    </LocalizationProvider>
+                    <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+                        <DatePicker label="TO" value={to} onChange={(v) => setTo(v)} maxDateTime={dayjs()} />
+                    </LocalizationProvider>
+                </div>
+            </ThemeProvider>
             {Object.keys(sensors).map((key) => (
                 <>
-                    <h3 style={{fontFamily: 'Dosis, sans-serif'}}>{sensorNames[key] || key}</h3>
+                    <h3 style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B'}}>{sensorNames[key] || key}</h3>
                     <div key={key} className="dashboard-row">
                         {key === "temperature" ? (
                             <GaugeComponent data={sensors[key]} arcs={[20 / 67, 35 / 67, 12 / 67]} colours={["#EA4228", "#4cda15", "#EA4228"]} />
