@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import GaugeChart from 'react-gauge-chart';
 import ChartComponent from "./ChartComponent";
-import {sensorNames} from "../util/utils";
+import {sensorNames, violet} from "../util/utils";
 import {createTheme, ThemeProvider} from "@mui/material";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
@@ -10,23 +10,24 @@ import 'dayjs/locale/de';
 import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
+import {brown, gold, green} from '../util/utils';
 
 const Dashboard = ({ title, sensors }) => {
     const datePickerTheme = createTheme({
         palette: {
             primary: {
-                main: '#D4A82B',
+                main: gold,
                 contrastText: '#fff',
             },
             text: {
-                primary: '#D4A82B',
-                secondary: '#D4A82B',
+                primary: gold,
+                secondary: gold,
             },
             background: {
-                paper: '#1C352E',
+                paper: green,
             },
             action: {
-                active: '#D4A82B',
+                active: gold,
             }
         },
     });
@@ -63,14 +64,14 @@ const Dashboard = ({ title, sensors }) => {
     return (
         <div className={`dashboard-layout ${showGraphs ? 'with-graph' : ''}`}>
             {title !== '' ?
-                <h1 style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B'}}>{title}</h1>
+                <h1 style={{fontFamily: 'Dosis, sans-serif', color: gold}}>{title}</h1>
             :null}
             <ThemeProvider theme={datePickerTheme}>
                 <div className="dashboard-controls">
                     <FormControlLabel
-                        control={<Switch Switch checked={showGraphs} onChange={() => setShowGraphs(!showGraphs)} style={{ color: "#8E6F52" }} />}
+                        control={<Switch Switch checked={showGraphs} onChange={() => setShowGraphs(!showGraphs)} style={{ color: brown }} />}
                         label={
-                            <Typography variant="body2" style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B', fontSize: '1.3em', fontWeight: 'bold'}}>
+                            <Typography variant="body2" style={{fontFamily: 'Dosis, sans-serif', color: gold, fontSize: '1.3em', fontWeight: 'bold'}}>
                                 Graphs
                             </Typography>}
                         labelPlacement="start"
@@ -87,15 +88,15 @@ const Dashboard = ({ title, sensors }) => {
 
             {Object.keys(sensors).map((key) => (
                 <>
-                    <h3 style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B'}}>{sensorNames[key] || key}</h3>
+                    <h3 style={{fontFamily: 'Dosis, sans-serif', color: gold}}>{sensorNames[key] || key}</h3>
                     <div key={key} className={`dashboard-row ${showGraphs? 'two-cols':'one-col'}`}>
                         <GaugeChart id={sensors[key].id}
                                     percent={(sensors[key].value - sensors[key].min) / (sensors[key].max - sensors[key].min)}
                                     colors={calcColors(sensors[key].param_ranges)}
                                     arcsLength={calcArcs(sensors[key].param_ranges)}
                                     formatTextValue={() => sensors[key].value +' '+ sensors[key].unit}
-                                    needleColor={"#D4A82B"}
-                                    needleBaseColor={"#D4A82B"}
+                                    needleColor={gold}
+                                    needleBaseColor={gold}
                                     arcPadding={sensors[key].param_ranges.length === 2 ? 0 : 0.02}
                         />
                         {showGraphs?

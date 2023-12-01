@@ -1,6 +1,7 @@
 import ParamCard from "./ParamCard";
 import Detail from "./Detail";
 import React, {useState} from "react";
+import {gold} from '../util/utils';
 
 const Overview = ({ title, data }) => {
     const [open, setOpen] = useState(false);
@@ -13,7 +14,7 @@ const Overview = ({ title, data }) => {
     return (
         <div className="overview">
             {title !== '' ?
-                <h1 style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B'}}>{title}</h1>
+                <h1 style={{fontFamily: 'Dosis, sans-serif', color: gold}}>{title}</h1>
                 :null}
             <div className={`overview-grid ${title !== '' ? 'overview-one-col' : 'overview-two-col'}`}>
                 {Object.keys(data.values).map((key) => (

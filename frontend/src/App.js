@@ -10,6 +10,7 @@ import Header from "./components/Header";
 import Credits from "./components/Credits";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import {brown, gold, green} from "./util/utils";
 
 const App = ({ showMessage }) => {
     const [data, setData] = useState([]);
@@ -72,7 +73,7 @@ const App = ({ showMessage }) => {
                                 left: '50%',
                                 transform: 'translateX(-50%)',
                                 zIndex: 1,
-                                color: '#D4A82B',
+                                color: gold,
                                 fontFamily: 'Dosis, sans-serif',
                             }}
                         >
@@ -92,9 +93,9 @@ const App = ({ showMessage }) => {
                                         marginTop: '7rem'
                                     }}
                                 >
-                                    <span style={{ color: '#D4A82B', fontSize: '1.3em' }}>Analytics</span>{'\n'}
-                                    <span style={{ color: '#9e7400', fontSize: '1.5em', textTransform: "uppercase" }}>Data-Driven{'\n'}Wilderness Insights</span>{'\n'}
-                                    <span style={{ color: "#D4A82B", fontSize: '1em' }}>Discover the forest’s hidden tales with our data-driven analytics.{'\n'}
+                                    <span style={{ color: gold, fontSize: '1.3em' }}>Analytics</span>{'\n'}
+                                    <span style={{ color: brown, fontSize: '1.5em', textTransform: "uppercase" }}>Data-Driven{'\n'}Wilderness Insights</span>{'\n'}
+                                    <span style={{ color: gold, fontSize: '1em' }}>Discover the forest’s hidden tales with our data-driven analytics.{'\n'}
                                         Uncover insights into air quality, tree health, and bird activity,{'\n'}
                                         empowering a deeper connection with nature.{'\n'}
                                         ForestGuardian’s analytics - your path to a greener world</span>
@@ -116,7 +117,7 @@ const App = ({ showMessage }) => {
                                 PaperProps={{
                                     elevation: 4,
                                     style: {
-                                        backgroundColor: '#2E3B4E',
+                                        backgroundColor: green,
                                         width: '25rem',
                                     },
                                 }}
@@ -125,7 +126,7 @@ const App = ({ showMessage }) => {
                                     <MenuItem
                                         key={name}
                                         onClick={() => handleBirdhouseClick(name)}
-                                        style={{ color: '#D4A82B',
+                                        style={{ color: gold,
                                             fontFamily: 'Dosis, sans-serif',
                                         textTransform: 'uppercase',
                                         fontSize: '1.5rem'}}
@@ -141,7 +142,7 @@ const App = ({ showMessage }) => {
                                 alt="Sleeping Bird"
                                 style={{ width: '120%', height: 'auto', marginLeft: '-3rem' }}
                             />
-                            <Typography color={"#D4A82B"} style={{ textAlign: 'left', fontFamily: 'Dosis, sans-serif', maxWidth: '60%', marginLeft: '8rem', fontSize: '1.3rem' }}>
+                            <Typography color={gold} style={{ textAlign: 'left', fontFamily: 'Dosis, sans-serif', maxWidth: '60%', marginLeft: '8rem', fontSize: '1.3rem' }}>
                                 ForestGuardian is a project at the Ostfalia Hochschule and features an autonomous birdhouse with sensors tracking tree health and environmental data.{'\n'} Equipped with smart sensors, it monitors the forest ecosystem, providing insights into tree health and environmental conditions. Join us in creating a smarter, greener world.
                             </Typography>
                         </Grid>

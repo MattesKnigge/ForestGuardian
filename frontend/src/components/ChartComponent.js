@@ -1,6 +1,7 @@
 import {Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis} from "recharts";
 import {useEffect, useState} from "react";
 import axios from "axios";
+import {gold, violet} from '../util/utils';
 
 const ChartComponent =  ({ measured_parameter_id, from, to }) => {
     const [data, setData] = useState({
@@ -33,11 +34,11 @@ const ChartComponent =  ({ measured_parameter_id, from, to }) => {
                     scale="time"
                     domain={['dataMin', 'dataMax + 1']}
                     tickFormatter={(msTime) => new Date(msTime).toLocaleString()}
-                    tick={{ fill: '#D4A82B' }}
-                    tickLine={{ stroke: '#D4A82B' }}
+                    tick={{ fill: gold }}
+                    tickLine={{ stroke: gold }}
                     stroke='#D4A82B'
                 />
-                <YAxis domain={['dataMin', 'dataMax']} tick={{ fill: '#D4A82B' }} tickLine={{ stroke: '#D4A82B' }} stroke='#D4A82B' />
+                <YAxis domain={['dataMin', 'dataMax']} tick={{ fill: gold }} tickLine={{ stroke: gold }} stroke={violet} />
                 <Tooltip labelFormatter={(msTime) => new Date(msTime).toLocaleString()} />
                 <Line dataKey="value" data={data.values} name={data.name} dot={false} />
             </LineChart>

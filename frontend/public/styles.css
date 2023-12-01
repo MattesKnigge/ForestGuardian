@@ -1,3 +1,10 @@
+:root {
+    --green: #1C352E;
+    --green-50a: rgba(28,53,46,0.5);
+    --gold: #D4A82B;
+    --brown: #8E6F52;
+    --violet: #B58BC2;
+}
 /* Reset default styles */
 body, h1, p {
     margin: 0;
@@ -35,7 +42,7 @@ body::before {
 
 /* Header styles */
 .header {
-    background-color: #D4A82B;
+    background-color: var(--gold);
     padding: 1vh 2vw;
     display: flex;
     justify-content: space-between;
@@ -83,7 +90,7 @@ body::before {
     flex-direction: column;
     margin-top: 0.5em;
     padding: 0.5em;
-    background-color: rgba(28,53,46,0.5);
+    background-color: var(--green-50a);
     backdrop-filter: blur(10px);
     border-radius: 30px;
     width: 40ch;
@@ -133,7 +140,7 @@ body::before {
 /* Credits styles */
 .credits-content {
     font-family: Bebas Neue, sans-serif;
-    color: #8E6F52;
+    color: var(--brown);
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -141,7 +148,7 @@ body::before {
 }
 
 .credit-link, .country {
-    color: #8E6F52;
+    color: var(--brown);
     text-decoration: none;
     transition: text-decoration 0.3s, color 0.3s, cursor 0.3s;
     cursor: pointer;
@@ -155,8 +162,8 @@ body::before {
 .second-button {
     font-size: 1.5rem!important;
     font-family: "Bebas Neue", monospace !important;
-    background: #8E6F52 !important;
-    color: #333333!important;
+    background: var(--brown) !important;
+    color: var(--green)!important;
     box-shadow: none !important;
     margin-top: 10rem!important;
 }
@@ -234,7 +241,6 @@ body::before {
 .card-value {
     font-size: 10rem;
     font-family: Bebas Neue, sans-serif;
-    color: #8E6F52;
     margin: auto;
     justify-content: center;
     align-items: center;
@@ -259,7 +265,6 @@ body::before {
 .card-unit {
     font-size: 5rem;
     font-family: Bebas Neue, sans-serif;
-    color: #8E6F52;
     margin-top: -3rem;
     justify-content: center;
     align-items: center;
@@ -273,11 +278,11 @@ body::before {
     background-color: rgba(40, 26, 13, 0.8);
     background-blend-mode: hue;
     background-size: 80%;
-    color: #D4A82B;
+    color: var(--gold);
     margin: auto;
     padding: 0.5em 0;
     text-align: center;
-    border: 3px solid #8E6F52;
+    border: 3px solid var(--brown);
     border-radius: 10px;
     width: 75%; /* even width for all signs */
 }
@@ -286,8 +291,8 @@ body::before {
     font-size: 1.5rem;
     padding: 12px 24px;
     margin: auto;
-    background-color: #D4A82B;
-    color: #333333;
+    background-color: var(--gold);
+    color: var(--green);
     font-family: 'Dosis', sans-serif;
     font-weight: bold;
     border: none;
@@ -297,7 +302,7 @@ body::before {
 }
 
 .more-info-button:hover {
-    background-color: #a98622;
+    background-color: var(--gold);
     transform: scale(0.95) rotate(5deg);
 }
 
@@ -337,20 +342,10 @@ body::before {
 @media (max-width: 768px) {
     body {
         font-family: Dosis, sans-serif;
-        background-color: #1C352E;
+        background-color: var(--green);
         overflow-y: auto;
     }
 
-    .credits-container {
-        color: #484A47;
-        display: compact;
-        flex-direction: column;
-        justify-content: flex-start;
-        align-items: center;
-        position: relative;
-        font-size: 0.2rem;
-        cursor: default;
-    }
     .header h1 {
         font-size: 2rem;
     }
