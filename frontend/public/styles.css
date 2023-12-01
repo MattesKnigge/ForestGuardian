@@ -285,6 +285,7 @@ body::before {
     border: 3px solid var(--brown);
     border-radius: 10px;
     width: 75%; /* even width for all signs */
+    z-index: 2;
 }
 
 .more-info-button {
@@ -332,11 +333,29 @@ body::before {
     background-image: url("bird_normal.svg");
 }
 
-.bird-range { /*Campfire*/
+.bird-range { /* Campfire */
+    position: relative;
+    margin-top: 8rem;
     background-image: url("Campfire.svg");
     background-size: 160%;
-    margin-top: 8rem;
+    background-repeat: no-repeat;
 }
+
+.bird-range::before { /* Smoke */
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("smoke.svg");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    margin-left: 2.5rem;
+    margin-top: -17rem;
+    opacity: 90%; /* TODO: set opacity according to ppm */
+    z-index: 0;
+}
+
 
 /* Media queries for smaller screens */
 @media (max-width: 768px) {
