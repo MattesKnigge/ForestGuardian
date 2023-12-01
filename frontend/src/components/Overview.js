@@ -1,8 +1,8 @@
 import ParamCard from "./ParamCard";
 import Detail from "./Detail";
-import {useState} from "react";
+import React, {useState} from "react";
 
-const Overview = ({ data }) => {
+const Overview = ({ title, data }) => {
     const [open, setOpen] = useState(false);
     const [measuredParamId, setMeasuredParamId] = useState("");
     const openDetails = (measured_param_id) => {
@@ -11,22 +11,25 @@ const Overview = ({ data }) => {
     }
 
     return (
-        <>
-            <div className="overview">
+        <div className="overview">
+            {title !== '' ?
+                <h1 style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B'}}>{title}</h1>
+                :null}
+            <div className={`overview-grid ${title !== '' ? 'overview-one-col' : 'overview-two-col'}`}>
                 {Object.keys(data.values).map((key) => (
                     <>
                         <ParamCard name={key} data={data.values[key]} onShowDetails={openDetails} />
-                        <div className="tree-spacer" />
-                        {key === Object.keys(data.values)[0] ?
+                        {title === '' ?
                             <div className="tree-spacer" />
-                            :
-                            null
-                        }
+                        :null}
+                        {title === '' && key === Object.keys(data.values)[0] ?
+                            <div className="tree-spacer" />
+                        :null}
                     </>
                 ))}
             </div>
             <Detail open={open} onClose={() => setOpen(false)} measured_parameter_id={measuredParamId} />
-        </>
+        </div>
     );
 }
 

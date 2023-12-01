@@ -38,9 +38,10 @@ body::before {
     background-color: #D4A82B;
     padding: 1vh 2vw;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     grid-area: header;
+    cursor: default;
 }
 
 .header h1 {
@@ -70,18 +71,26 @@ body::before {
 
 .multi-dashboard-layout {
     display: flex;
+    flex-wrap: wrap;
     gap: 1em;
+    max-width: 95vw;
 }
 
 .dashboard-layout {
     display: flex;
     align-items: center;
+    justify-content: space-around;
     flex-direction: column;
     margin-top: 0.5em;
     padding: 0.5em;
     background-color: rgba(28,53,46,0.5);
     backdrop-filter: blur(10px);
     border-radius: 30px;
+    width: 40ch;
+}
+
+.with-graph {
+    width: 120ch;
 }
 
 .dashboard-row {
@@ -106,6 +115,10 @@ body::before {
 
     .dashboard-layout {
         width: 90vw;
+    }
+
+    .with-graph {
+        width: unset;
     }
 }
 
@@ -148,16 +161,40 @@ body::before {
     margin-top: 10rem!important;
 }
 
+.multi-overview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1em;
+    max-width: 95vw;
+}
+
 .overview {
-    width: 120ch;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    column-gap: 1em;
-    padding: 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     background-image: url('tree_texture.jpg');
     border-radius: 25px;
     background-size: cover;
     background-repeat: no-repeat;
+}
+
+.overview-grid {
+    width: 100%;
+    display: grid;
+    column-gap: 1em;
+    padding: 1em;
+}
+
+.overview-one-col {
+    grid-template-columns: 1fr;
+    row-gap: 0.5em;
+    width: 60ch;
+}
+
+.overview-two-col {
+    grid-template-columns: 1fr 1fr;
+    width: 120ch;
 }
 
 .tree-spacer {
@@ -166,9 +203,12 @@ body::before {
 }
 
 @media (width < 130ch) {
-    .overview {
+    .overview-one-col {
         width: calc(100% - 2em);
-        display: grid;
+    }
+
+    .overview-two-col {
+        width: calc(100% - 2em);
         grid-template-columns: 1fr;
         row-gap: 0.5em;
     }

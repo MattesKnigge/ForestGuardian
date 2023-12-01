@@ -25,7 +25,7 @@ const ChartComponent =  ({ measured_parameter_id, from, to }) => {
     }, [from, measured_parameter_id, to]);
 
     return (
-        <ResponsiveContainer width="100%" aspect={3}>
+        <ResponsiveContainer width="100%" aspect={3.5}>
             <LineChart data={data.values}>
                 <XAxis
                     dataKey="timestamp"

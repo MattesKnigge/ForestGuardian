@@ -30,13 +30,6 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false }) => {
         alignItems: 'center',
     };
 
-    const headerStyle = {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        cursor: 'default',
-    };
-
     const handleHomeClick = () => {
         navigate('/');
     };
@@ -57,7 +50,7 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false }) => {
     };
 
     return (
-        <header className="header" style={headerStyle}>
+        <header className="header">
             <div className="header-content">
                 <h1 style={titleStyle}>ForestGuardian</h1>
             </div>

@@ -11,7 +11,7 @@ import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 
-const Dashboard = ({ sensors }) => {
+const Dashboard = ({ title, sensors }) => {
     const datePickerTheme = createTheme({
         palette: {
             primary: {
@@ -32,7 +32,7 @@ const Dashboard = ({ sensors }) => {
     });
     const [from, setFrom] = useState(dayjs().subtract(1, 'week'));
     const [to, setTo] = useState(dayjs());
-    const [showGraphs, setShowGraphs] = useState(true);
+    const [showGraphs, setShowGraphs] = useState(false);
 
     const calcArcs = (ranges) => {
         if (ranges.length === 2) {
@@ -61,51 +61,50 @@ const Dashboard = ({ sensors }) => {
     }
 
     return (
-        <div style={{minWidth: '40ch', maxWidth: '120ch'}}>
-            <div className="dashboard-layout">
-                <ThemeProvider theme={datePickerTheme}>
-                    <div className="dashboard-controls">
-                        <FormControlLabel
-                            control={<Switch Switch checked={showGraphs} onChange={() => setShowGraphs(!showGraphs)} style={{ color: "#8E6F52" }} />}
-                            label={
-                                <Typography variant="body2" style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B', fontSize: '1.3em', fontWeight: 'bold'}}>
-                                    Graphs
-                                </Typography>}
-                            labelPlacement="start"
-                            style={{ marginRight: '1rem' }}
-                        />
-                        {showGraphs ?
-                            <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
-                                <DatePicker label="FROM" value={from} onChange={(v) => setFrom(v)} maxDateTime={dayjs().subtract(1, 'day')} />
-                                <DatePicker label="TO" value={to} onChange={(v) => setTo(v)} maxDateTime={dayjs()} />
-                            </LocalizationProvider>
-                        : null}
-                    </div>
-                </ThemeProvider>
-            </div>
+        <div className={`dashboard-layout ${showGraphs ? 'with-graph' : ''}`}>
+            {title !== '' ?
+                <h1 style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B'}}>{title}</h1>
+            :null}
+            <ThemeProvider theme={datePickerTheme}>
+                <div className="dashboard-controls">
+                    <FormControlLabel
+                        control={<Switch Switch checked={showGraphs} onChange={() => setShowGraphs(!showGraphs)} style={{ color: "#8E6F52" }} />}
+                        label={
+                            <Typography variant="body2" style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B', fontSize: '1.3em', fontWeight: 'bold'}}>
+                                Graphs
+                            </Typography>}
+                        labelPlacement="start"
+                        style={{ marginRight: '1rem' }}
+                    />
+                    {showGraphs ?
+                        <LocalizationProvider dateAdapter={AdapterDayjs} adapterLocale='de'>
+                            <DatePicker label="FROM" value={from} onChange={(v) => setFrom(v)} maxDateTime={dayjs().subtract(1, 'day')} />
+                            <DatePicker label="TO" value={to} onChange={(v) => setTo(v)} maxDateTime={dayjs()} />
+                        </LocalizationProvider>
+                    : null}
+                </div>
+            </ThemeProvider>
 
-            <div className='dashboard-layout'>
-                {Object.keys(sensors).map((key) => (
-                    <>
-                        <h3 style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B'}}>{sensorNames[key] || key}</h3>
-                        <div key={key} className={`dashboard-row ${showGraphs? 'two-cols':'one-col'}`}>
-                            <GaugeChart id={sensors[key].id}
-                                        percent={(sensors[key].value - sensors[key].min) / (sensors[key].max - sensors[key].min)}
-                                        colors={calcColors(sensors[key].param_ranges)}
-                                        arcsLength={calcArcs(sensors[key].param_ranges)}
-                                        formatTextValue={() => sensors[key].value +' '+ sensors[key].unit}
-                                        needleColor={"#D4A82B"}
-                                        needleBaseColor={"#D4A82B"}
-                                        arcPadding={sensors[key].param_ranges.length === 2 ? 0 : 0.02}
-                            />
-                            {showGraphs?
-                                <ChartComponent measured_parameter_id={sensors[key].id} from={from} to={to} />
-                                : null
-                            }
-                        </div>
-                    </>
-                ))}
-            </div>
+            {Object.keys(sensors).map((key) => (
+                <>
+                    <h3 style={{fontFamily: 'Dosis, sans-serif', color: '#D4A82B'}}>{sensorNames[key] || key}</h3>
+                    <div key={key} className={`dashboard-row ${showGraphs? 'two-cols':'one-col'}`}>
+                        <GaugeChart id={sensors[key].id}
+                                    percent={(sensors[key].value - sensors[key].min) / (sensors[key].max - sensors[key].min)}
+                                    colors={calcColors(sensors[key].param_ranges)}
+                                    arcsLength={calcArcs(sensors[key].param_ranges)}
+                                    formatTextValue={() => sensors[key].value +' '+ sensors[key].unit}
+                                    needleColor={"#D4A82B"}
+                                    needleBaseColor={"#D4A82B"}
+                                    arcPadding={sensors[key].param_ranges.length === 2 ? 0 : 0.02}
+                        />
+                        {showGraphs?
+                            <ChartComponent measured_parameter_id={sensors[key].id} from={from} to={to} />
+                            : null
+                        }
+                    </div>
+                </>
+            ))}
         </div>
     );
 };
