@@ -12,10 +12,18 @@ from .models import Location, MeasuredParameter, SensorValue
         'values': openapi.Schema(type=openapi.TYPE_OBJECT,
                                  description='dictionary of all parameters with their values',
                                  properties={
-                                     'temperature': openapi.Schema(type=openapi.TYPE_NUMBER),
-                                     'humidity': openapi.Schema(type=openapi.TYPE_NUMBER),
-                                     'pressure': openapi.Schema(type=openapi.TYPE_NUMBER),
-                                     'air_quality': openapi.Schema(type=openapi.TYPE_NUMBER)
+                                     'temperature': openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                   items=openapi.Schema(
+                                                                       type=openapi.TYPE_NUMBER)),
+                                     'humidity': openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                items=openapi.Schema(
+                                                                    type=openapi.TYPE_NUMBER)),
+                                     'pressure': openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                items=openapi.Schema(
+                                                                    type=openapi.TYPE_NUMBER)),
+                                     'air_quality': openapi.Schema(type=openapi.TYPE_ARRAY,
+                                                                   items=openapi.Schema(
+                                                                       type=openapi.TYPE_NUMBER)),
                                  })
     },
 ), method='POST')
