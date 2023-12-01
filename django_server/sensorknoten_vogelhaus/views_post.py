@@ -28,9 +28,10 @@ def location_data(request):
     print(data)
     values = []
     for mp in mps:
-        v = data['values'].get(mp.parameter.name, None)
-        if v is not None:
-            values.append(SensorValue(value=v, measuredParameter=mp))
+        sent_vals = data['values'].get(mp.parameter.name, None)
+        if sent_vals is not None:
+            for v in sent_vals:
+                values.append(SensorValue(value=v, measuredParameter=mp))
 
     SensorValue.objects.bulk_create(values)
 
