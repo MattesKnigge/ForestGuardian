@@ -4,7 +4,6 @@ import random
 
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
-from rest_framework import status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from .models import Location, MeasuredParameter, SensorValue, ParameterRange
@@ -12,14 +11,14 @@ from .utils import get_current_season
 
 
 @api_view(['GET'])
-def get_locations(request):
+def locations(request):
     data = [loc.name for loc in Location.objects.all()]
     data.append('random')
     return Response(data)
 
 
 @api_view(['GET'])
-def get_location(request, location_name: str):
+def location(request, location_name: str):
     data = {
         'season': get_current_season(),
         'values': {}
@@ -70,7 +69,7 @@ def get_location(request, location_name: str):
     openapi.Parameter(name='to', in_=openapi.IN_QUERY, description='in seconds', type=openapi.TYPE_INTEGER)
 ])
 @api_view(['GET'])
-def get_measured_parameter_details(request, measured_parameter_id: str):
+def measured_parameter_details(request, measured_parameter_id: str):
     dt_from = datetime.datetime.utcfromtimestamp(int(request.query_params['from']))
     dt_to = datetime.datetime.utcfromtimestamp(int(request.query_params['to']))
 
@@ -105,7 +104,7 @@ def get_measured_parameter_details(request, measured_parameter_id: str):
 
 
 @api_view(['GET'])
-def get_latest_sensor_value_timestamp(request, location_name: str):
+def latest_sensor_value_timestamp(request, location_name: str):
     if location_name == 'random':
         return Response(time.mktime(datetime.datetime.now().timetuple())*1000)
 
@@ -118,32 +117,3 @@ def get_latest_sensor_value_timestamp(request, location_name: str):
     return Response(time.mktime(max_time.timetuple())*1000)
 
 
-@swagger_auto_schema(request_body=openapi.Schema(
-    type=openapi.TYPE_OBJECT,
-    properties={
-        'values': openapi.Schema(type=openapi.TYPE_OBJECT,
-                                 description='dictionary of all parameters with their values',
-                                 properties={
-                                     'temperature': openapi.Schema(type=openapi.TYPE_NUMBER),
-                                     'humidity': openapi.Schema(type=openapi.TYPE_NUMBER),
-                                     'pressure': openapi.Schema(type=openapi.TYPE_NUMBER),
-                                     'air_quality': openapi.Schema(type=openapi.TYPE_NUMBER)
-                                 })
-    },
-), method='POST')
-@api_view(['POST'])
-def post_location_data(request):
-    loc = Location.objects.get(name='prototype')  # get Ident from payload (not name tho, then anyone could just send in random data...
-    mps = MeasuredParameter.objects.filter(location=loc).prefetch_related('parameter').all()
-
-    data = request.data
-    print(data)
-    values = []
-    for mp in mps:
-        v = data['values'].get(mp.parameter.name, None)
-        if v is not None:
-            values.append(SensorValue(value=v, measuredParameter=mp))
-
-    SensorValue.objects.bulk_create(values)
-
-    return Response(status=status.HTTP_200_OK)
