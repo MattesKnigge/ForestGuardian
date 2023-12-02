@@ -29,6 +29,9 @@ const Overview = ({ title, data }) => {
                     </>
                 ))}
             </div>
+            {data['image_url'] !== '' ?
+                <img src={`/sensorknoten-vogelhaus${data['image_url']}`} alt='location' />
+            :null}
             <Detail open={open} onClose={() => setOpen(false)} measured_parameter_id={measuredParamId} />
         </div>
     );
