@@ -1,12 +1,12 @@
 import datetime
-import time
 import random
+import requests
 
 from drf_yasg import openapi
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from .models import Location, MeasuredParameter, SensorValue, ParameterRange
+from .models import Location, MeasuredParameter, SensorValue, ParameterRange, WeatherData
 from .utils import get_current_season
 
 
@@ -21,13 +21,21 @@ def locations(request):
 def location(request, location_name: str):
     data = {
         'season': get_current_season(),
-        'values': {}
+        'weather': {},
+        'values': {},
     }
 
     if location_name == "random":
         location = Location.objects.get(name='prototype')
-        measured_params = MeasuredParameter.objects.filter(location=location).prefetch_related('parameter').all()
 
+        weather = WeatherData.objects.filter(location=location).latest('created_at')
+        data['weather'] = {
+            'name': weather.weather,
+            'description': weather.weather_description,
+            'wind_speed': weather.wind_speed,
+        }
+
+        measured_params = MeasuredParameter.objects.filter(location=location).prefetch_related('parameter').all()
         for mp in measured_params:
             param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
             val = random.randint(param_ranges[0].lower_bound, param_ranges[-1].lower_bound)
@@ -44,8 +52,31 @@ def location(request, location_name: str):
             }
     else:
         location = Location.objects.get(name=location_name)
-        measured_params = MeasuredParameter.objects.filter(location=location).prefetch_related('parameter').all()
+        if location.latitude != -100:
+            try:
+                weather = WeatherData.objects.filter(location=location).latest('created_at')
+                created = weather.created_at.replace(tzinfo=None)
+            except:
+                created = datetime.datetime.min
 
+            if created < datetime.datetime.now() - datetime.timedelta(minutes=30):
+                api_key = '61895a5d9f6c5a2c45314d1a6f8de99c'
+                response = requests.get(f'http://api.openweathermap.org/data/2.5/weather?lat={location.latitude}&lon={location.longitude}&units=metric&appid={api_key}')
+                dat = response.json()
+                weather = WeatherData.objects.create(
+                    location=location,
+                    weather=dat['weather'][0]['main'],
+                    weather_description=dat['weather'][0]['description'],
+                    wind_speed=dat['wind']['speed'],
+                )
+
+            data['weather'] = {
+                'name': weather.weather,
+                'description': weather.weather_description,
+                'wind_speed': weather.wind_speed,
+            }
+
+        measured_params = MeasuredParameter.objects.filter(location=location).prefetch_related('parameter').all()
         for mp in measured_params:
             sv = SensorValue.objects.filter(measuredParameter=mp).latest('created_at')
             param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
@@ -87,7 +118,7 @@ def measured_parameter_details(request, measured_parameter_id: str):
             'sensor': 'Random Sensor',
             'parameter_description': 'Random Sensor Description',
             'sensor_description': 'Random Parameter Description',
-            'values': [{'timestamp': time.mktime(timestamps[idx].timetuple())*1000, 'value': v} for idx, v in enumerate([random.randint(mm['min'], mm['max']) for i in range(hours_between)])]
+            'values': [{'timestamp': int(timestamps[idx].timestamp())*1000, 'value': v} for idx, v in enumerate([random.randint(mm['min'], mm['max']) for i in range(hours_between)])]
         }
     else:
         mp = MeasuredParameter.objects.select_related('parameter', 'sensor').get(id=measured_parameter_id)
@@ -97,7 +128,7 @@ def measured_parameter_details(request, measured_parameter_id: str):
             'sensor': mp.sensor.name,
             'parameter_description': mp.parameter.description,
             'sensor_description': mp.sensor.description,
-            'values': [{'timestamp': time.mktime(v.created_at.timetuple())*1000, 'value': v.value} for v in values]
+            'values': [{'timestamp': int(v.created_at.timestamp())*1000, 'value': v.value} for v in values]
         }
 
     return Response(data)
@@ -106,14 +137,17 @@ def measured_parameter_details(request, measured_parameter_id: str):
 @api_view(['GET'])
 def latest_sensor_value_timestamp(request, location_name: str):
     if location_name == 'random':
-        return Response(time.mktime(datetime.datetime.now().timetuple())*1000)
+        return Response(int(datetime.datetime.now().timestamp())*1000)
 
     location = Location.objects.get(name=location_name)
     measured_params = MeasuredParameter.objects.filter(location=location).all()
     max_time = datetime.datetime.min
     for mp in measured_params:
-        max_time = max(max_time, SensorValue.objects.filter(measuredParameter=mp).latest('created_at').created_at.replace(tzinfo=None))
+        try:
+            max_time = max(max_time, SensorValue.objects.filter(measuredParameter=mp).latest('created_at').created_at.replace(tzinfo=None))
+        except:
+            pass
 
-    return Response(time.mktime(max_time.timetuple())*1000)
+    return Response(int(max_time.timestamp())*1000)
 
 

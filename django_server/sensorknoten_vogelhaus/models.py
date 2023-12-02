@@ -58,3 +58,14 @@ class ParameterRange(models.Model):
 
     def __str__(self):
         return f'{self.parameter.name} {self.lower_bound} ({self.tag}) ({self.color}): {self.description}'
+
+
+class WeatherData(models.Model):
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
+    weather = models.CharField(max_length=64, unique=False)
+    weather_description = models.CharField(max_length=128, unique=False)
+    wind_speed = models.FloatField()
+
+    def __str__(self):
+        return f'{self.location.name} {self.created_at} {self.weather}'
