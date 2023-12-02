@@ -6,6 +6,7 @@ import Header from "./components/Header";
 import Credits from "./components/Credits";
 import Overview from "./components/Overview";
 import Dashboard from "./components/Dashboard";
+import useInterval from "./util/UseInterval";
 
 const BirdHouse = ({ showMessage }) => {
     const {birdHouseNames} = useParams();
@@ -21,20 +22,25 @@ const BirdHouse = ({ showMessage }) => {
     });
     const [houseCount, setHouseCount] =useState(1);
     const [isDash, setIsDash] = useState(false);
+    const [lastTimestamps, setLastTimestamps] = useState( { house: new Date(0).getTime()});
 
     useEffect(() => {
         async function fetchData() {
             try {
-                const names = birdHouseNames.split(';');
-                const dat = {};
+                const names = birdHouseNames.split(',');
+                let dat = {};
+                let timestamps = {};
                 for (const name of names) {
                     const response = await axios.get(`/sensorknoten-vogelhaus/location/${name}`);
                     dat[name] = response.data;
+                    const timeResponse = await axios.get(`/sensorknoten-vogelhaus/location/${name}/latest`);
+                    timestamps[name] = timeResponse.data;
                 }
                 console.dir(dat);
 
                 setData(dat);
                 setHouseCount(names.length);
+                setLastTimestamps(timestamps);
             } catch (error) {
                 console.dir(error);
                 showMessage('An error occurred while fetching data.', 'error');
@@ -43,6 +49,33 @@ const BirdHouse = ({ showMessage }) => {
 
         fetchData();
     }, [birdHouseNames, showMessage]);
+
+    useInterval(async () => {
+        if (isDash) {
+            try {
+                const names = birdHouseNames.split(',');
+                let dat = data;
+                let timestamps = lastTimestamps;
+                let update = false;
+                for (const name of names) {
+                    const timeResponse = await axios.get(`/sensorknoten-vogelhaus/location/${name}/latest`);
+                    if (timeResponse.data > timestamps[name]) {
+                        timestamps[name] = timeResponse.data;
+                        const response = await axios.get(`/sensorknoten-vogelhaus/location/${name}`);
+                        dat[name] = response.data;
+                        update = true;
+                    }
+                }
+                if (update) {
+                    setData(dat);
+                    setLastTimestamps(timestamps);
+                }
+            } catch (error) {
+                console.dir(error);
+                showMessage('An error occurred while fetching data.', 'error');
+            }
+        }
+    }, 5 * 1000);
 
     return(
         <div className="layout">
