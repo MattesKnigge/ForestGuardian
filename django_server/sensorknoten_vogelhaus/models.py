@@ -11,7 +11,7 @@ class Location(models.Model):
     latitude = models.FloatField(default=-1, blank=False)
 
     def __str__(self):
-        return f'{self.name} + {self.longitude}/{self.latitude}'
+        return f'{self.name} {self.longitude}/{self.latitude}'
 
 
 class Sensor(models.Model):
@@ -58,6 +58,12 @@ class ParameterRange(models.Model):
 
     def __str__(self):
         return f'{self.parameter.name} {self.lower_bound} ({self.tag}) ({self.color}): {self.description}'
+
+
+class LocationImage(models.Model):
+    location = models.ForeignKey(Location, on_delete=models.CASCADE)
+    created_at = models.DateTimeField(default=timezone.now)
+    image = models.ImageField()
 
 
 class WeatherData(models.Model):

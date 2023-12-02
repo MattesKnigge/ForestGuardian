@@ -1,4 +1,7 @@
 from django.urls import path
+from django.conf import settings as conf
+from django.conf.urls.static import static
+
 from . import views_get
 from . import views_post
 
@@ -10,3 +13,6 @@ urlpatterns = [
     path('location/<location_name>/latest', views_get.latest_sensor_value_timestamp, name='location_last_timestamp'),
     path('measured_parameter/<measured_parameter_id>', views_get.measured_parameter_details, name='mp_details'),
 ]
+
+if conf.DEBUG:
+    urlpatterns += static(conf.MEDIA_URL, document_root=conf.MEDIA_ROOT)
