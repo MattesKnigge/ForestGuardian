@@ -384,6 +384,7 @@ body::before {
 
 .bird-medium {
     background-image: url("medium_pressure.svg");
+    background-size: 160%;
 }
 
 
