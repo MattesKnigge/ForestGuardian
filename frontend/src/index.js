@@ -5,7 +5,6 @@ import reportWebVitals from './reportWebVitals';
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import BirdHouse from "./BirdHouse";
 import App from './App';
-import MultiHouse from "./MultiHouse";
 
 const router = createBrowserRouter([
     {
@@ -13,12 +12,8 @@ const router = createBrowserRouter([
         element: <App />,
     },
     {
-        path: "/bird-house/:birdHouseName",
+        path: "/bird-house/:birdHouseNames",
         element: <BirdHouse />
-    },
-    {
-        path: "/multi-house/:birdHouseNames",
-        element: <MultiHouse />
     },
 ]);
 

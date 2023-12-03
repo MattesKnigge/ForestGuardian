@@ -4,10 +4,11 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
+import {green, gold, brown} from "../util/utils";
 
 const InfoDialog = ({ open, onClose }) => {
     return (
-        <Dialog open={open} onClose={onClose} PaperProps={{style: {backgroundColor: "#1C352E", color: "#F1FAFF"}}}>
+        <Dialog open={open} onClose={onClose} PaperProps={{style: {backgroundColor: green, color: gold}}}>
             <DialogTitle style={styles.title}>Welcome to ForestGuardian</DialogTitle>
             <DialogContent>
                 <p style={styles.paragraph}>
@@ -47,8 +48,8 @@ const styles = {
     closeButton: {
         fontFamily: 'Bebas Neue, sans-serif',
         fontSize: '1.3rem',
-        color: '#333333',
-        backgroundColor: '#8E6F52',
+        color: green,
+        backgroundColor: brown,
     },
 };
 

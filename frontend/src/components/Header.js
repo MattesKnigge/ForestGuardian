@@ -7,6 +7,7 @@ import QuestionMarkRoundedIcon from '@mui/icons-material/QuestionMarkRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
 import { useNavigate } from 'react-router-dom';
 import Typography from "@mui/material/Typography";
+import {brown, green} from "../util/utils";
 
 const Header = ({ onToggleClick, toggleOn, showToggle = false }) => {
     const [isInfoOpen, setIsInfoOpen] = useState(false);
@@ -30,13 +31,6 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false }) => {
         alignItems: 'center',
     };
 
-    const headerStyle = {
-        display: 'flex',
-        justifyContent: 'space-between',
-        alignItems: 'center',
-        cursor: 'default',
-    };
-
     const handleHomeClick = () => {
         navigate('/');
     };
@@ -50,14 +44,14 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false }) => {
     };
 
     const titleStyle = {
-        color: '#333333',
+        color: green,
         display: 'flex',
         alignItems: 'center',
         marginLeft: '-1%',
     };
 
     return (
-        <header className="header" style={headerStyle}>
+        <header className="header">
             <div className="header-content">
                 <h1 style={titleStyle}>ForestGuardian</h1>
             </div>
@@ -65,11 +59,12 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false }) => {
                 {showToggle && (
                     <div style={buttonContainerStyle}>
                         <FormControlLabel
-                            control={<Switch Switch checked={toggleOn} onChange={onToggleClick} style={{ color: "#8E6F52" }} />}
+                            control={<Switch Switch checked={toggleOn} onChange={onToggleClick} style={{ color: brown }} />}
                             label={
-                            <Typography variant="body2" style={{fontFamily: 'Dosis, sans-serif', color: '#2E3B4E', fontSize: '1.3em', fontWeight: 'bold'}}
-                            > Dashboard <
-                            /Typography>}
+                                <Typography variant="body2" style={{fontFamily: 'Dosis, sans-serif', color: green, fontSize: '1.3em', fontWeight: 'bold'}}>
+                                    Dashboard
+                                </Typography>
+                            }
                             labelPlacement="start"
                             style={{ marginRight: '1rem' }}
                         />
