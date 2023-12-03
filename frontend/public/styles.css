@@ -372,6 +372,19 @@ body::before {
     animation: smokeAnimation 3s infinite; /* Adjust the duration as needed */
 }
 
+.bird-high {
+    background-image: url("high_pressure.svg");
+    background-size: 160%;
+}
+
+.bird-low {
+    background-image: url("low_pressure.svg");
+    background-size: 160%;
+}
+
+.bird-medium {
+    background-image: url("medium_pressure.svg");
+}
 
 
 /* Media queries for smaller screens */
