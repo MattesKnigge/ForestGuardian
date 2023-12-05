@@ -1,11 +1,11 @@
 # Import necessary modules
 import bme280
 import smbus
-from time import sleep
+import time
 import requests
 
 # Define the IP address and port for the server where sensor data will be sent
-ip_addr = "http://192.168.78.52:8080"
+ip_addr = "http://192.168.235.52:8080"
 port = 1
 
 # I2C addresses for the BME280 and ISL29125 sensors
@@ -17,9 +17,16 @@ bus = smbus.SMBus(port)
 
 # Define a global variable to store sensor data
 global sensor_data
+global sensor_data_dict
+sensor_data_dict = {}
+
 # Set a placeholder, used when Sensor-values are not available
 placeholder = "N/A"
 sensor_data = placeholder
+
+# Define a global variable to count iterations since the last transmission
+global iteration_count
+iteration_count = 0
 
 # Function to read RGB color values from the ISL29125 sensor
 def read_color_values(bus, addr):
@@ -56,8 +63,8 @@ def loop():
         # Update the sensor data with the humidity value
         sensor_data = humidity
         
-        # Create a JSON object with sensor data
-        sensor_json = {
+        # Create a dict with sensor data
+        sensor_dict = {
             "sensors": {
                 "Humidity": humidity,
                 "Pressure": pressure,
@@ -67,12 +74,24 @@ def loop():
                 "Blue": blue
             }
         }
+
+        # Store the sensor data in the dictionary with the current Linux timestamp as the key
+        sensor_data_dict[int(time.time())] = sensor_dict
         
-        # Send the sensor data to the specified server using an HTTP POST request
-        requests.post(url=f"{ip_addr}/location/data", json=sensor_json)
+        global iteration_count
+
+        # only send data every 6 hours
+        if iteration_count >= 11:
+            # Send the sensor data to the specified server using an HTTP POST request
+            requests.post(url=f"{ip_addr}/location/data", json=sensor_data_dict)
+            # Reset the iteration count
+            iteration_count = 0
+
+	# increment the iteration count
+        iteration_count+=1
         
-        # Sleep for 5 seconds before the next iteration
-        sleep(5)
+        # Sleep for 30 minutes before the next iteration
+        time.sleep(1800)
 
 if __name__ == "__main__":
     # Iterate through I2C addresses to find connected sensors
