@@ -59,7 +59,7 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false }) => {
                 {showToggle && (
                     <div style={buttonContainerStyle}>
                         <FormControlLabel
-                            control={<Switch Switch checked={toggleOn} onChange={onToggleClick} style={{ color: brown }} />}
+                            control={<Switch Switch checked={toggleOn} onChange={onToggleClick} style={{ color: brown }} title={'Toggle dashboard view'} />}
                             label={
                                 <Typography variant="body2" style={{fontFamily: 'Dosis, sans-serif', color: green, fontSize: '1.3em', fontWeight: 'bold'}}>
                                     Dashboard
@@ -73,12 +73,14 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false }) => {
                 <IconButton
                     sx={buttonStyle}
                     onClick={handleHomeClick}
+                    title={'Go to home page'}
                 >
                     <HomeRoundedIcon />
                 </IconButton>
                 <IconButton
                     sx={buttonStyle}
                     onClick={handleInfoClick}
+                    title={'Show information dialog'}
                 >
                     <QuestionMarkRoundedIcon />
                 </IconButton>

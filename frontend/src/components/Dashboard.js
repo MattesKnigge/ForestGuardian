@@ -69,7 +69,7 @@ const Dashboard = ({ title, sensors }) => {
             <ThemeProvider theme={datePickerTheme}>
                 <div className="dashboard-controls">
                     <FormControlLabel
-                        control={<Switch Switch checked={showGraphs} onChange={() => setShowGraphs(!showGraphs)} style={{ color: brown }} />}
+                        control={<Switch Switch checked={showGraphs} onChange={() => setShowGraphs(!showGraphs)} style={{ color: brown }} title={'Show or hide graphs'} />}
                         label={
                             <Typography variant="body2" style={{fontFamily: 'Dosis, sans-serif', color: gold, fontSize: '1.3em', fontWeight: 'bold'}}>
                                 Graphs

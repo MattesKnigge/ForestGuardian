@@ -40,7 +40,7 @@ const ChartComponent =  ({ measured_parameter_id, from, to }) => {
                 />
                 <YAxis domain={['dataMin', 'dataMax']} tick={{ fill: gold }} tickLine={{ stroke: gold }} stroke={violet} />
                 <Tooltip labelFormatter={(msTime) => new Date(msTime).toLocaleString()} />
-                <Line dataKey="value" data={data.values} name={data.name} dot={false} />
+                <Line dataKey="value" data={data.values} name={data.name} dot={false} stroke={'#B58BC2'} />
             </LineChart>
         </ResponsiveContainer>
     );

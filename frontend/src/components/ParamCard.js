@@ -15,7 +15,10 @@ const ParamCard = ({name, data, onShowDetails}) => {
                 <div className={`param-svg bird-${data.value_range.tag}`} />
             </div>
             <div>
-                <Button class="more-info-button" onClick={() => onShowDetails(data.id)}>
+                <Button class="more-info-button"
+                        onClick={() => onShowDetails(data.id)}
+                        title={`More information about ${sensorNames[name]}`}
+                >
                     More Information
                 </Button>
             </div>
