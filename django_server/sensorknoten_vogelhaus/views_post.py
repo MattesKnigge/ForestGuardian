@@ -58,7 +58,7 @@ def location_image(request):
     loc = Location.objects.get(name='prototype')
     data = request.data
     for timestamp, image_as_base64 in data.items():
-        filename = loc.name + '_' + timestamp + '.png'
+        filename = loc.name + '_' + timestamp + '.jpg'
         with open(os.path.join(settings.MEDIA_ROOT, filename), "xb") as binary_file:
             binary_file.write(base64.b64decode(image_as_base64))
 
