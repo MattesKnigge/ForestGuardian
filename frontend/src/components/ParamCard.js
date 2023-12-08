@@ -1,10 +1,9 @@
-import {sensorNames} from "../util/utils";
 import Button from "@mui/material/Button";
 
 const ParamCard = ({name, data, onShowDetails}) => {
     return (
         <div className="param-card">
-            <h1 className="param-card-title">{sensorNames[name]}</h1>
+            <h1 className="param-card-title">{data.display_name}</h1>
             <div className="param-card-content">
                 <div className={`card-value ${data.value > 999 ? "card-big-value" : ""}`} style={{ color: data.value_range.color }}>
                     {data.value}
@@ -17,7 +16,7 @@ const ParamCard = ({name, data, onShowDetails}) => {
             <div>
                 <Button class="more-info-button"
                         onClick={() => onShowDetails(data.id)}
-                        title={`More information about ${sensorNames[name]}`}
+                        title={`More information about ${data.display_name}`}
                 >
                     More Information
                 </Button>

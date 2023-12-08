@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import GaugeChart from 'react-gauge-chart';
 import ChartComponent from "./ChartComponent";
-import {sensorNames, violet} from "../util/utils";
 import {createTheme, ThemeProvider} from "@mui/material";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
@@ -88,7 +87,7 @@ const Dashboard = ({ title, sensors }) => {
 
             {Object.keys(sensors).map((key) => (
                 <>
-                    <h3 style={{fontFamily: 'Dosis, sans-serif', color: gold}}>{sensorNames[key] || key}</h3>
+                    <h3 style={{fontFamily: 'Dosis, sans-serif', color: gold}}>{sensors[key].display_name || key}</h3>
                     <div key={key} className={`dashboard-row ${showGraphs? 'two-cols':'one-col'}`}>
                         <GaugeChart id={sensors[key].id}
                                     percent={(sensors[key].value - sensors[key].min) / (sensors[key].max - sensors[key].min)}
