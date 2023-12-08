@@ -2,14 +2,22 @@ import ParamCard from "./ParamCard";
 import Detail from "./Detail";
 import React, {useState} from "react";
 import {gold} from '../util/utils';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import IconButton from '@mui/material/IconButton';
+
 
 const Overview = ({ title, data }) => {
     const [open, setOpen] = useState(false);
     const [measuredParamId, setMeasuredParamId] = useState("");
+    const [showImage, setShowImage] = useState(false);
     const openDetails = (measured_param_id) => {
         setMeasuredParamId(measured_param_id);
         setOpen(true);
     }
+    const toggleImage = () => {
+        setShowImage(!showImage);
+    };
 
     return (
         <div className="overview">
@@ -34,14 +42,21 @@ const Overview = ({ title, data }) => {
             </div>
             {
                 data['image_url'] !== '' && (
-                    <div className={"camera-picture"}
-                    >
+                    <div className="camera-picture" style={{ position: 'relative', height: showImage ? 'auto' : '150px' }}>
                         <div className="image-text">Take a look inside</div>
-                        <img
-                            src={`/sensorknoten-vogelhaus${data['image_url']}`}
-                            alt='location'
-                            style={{ maxWidth: '100%', borderRadius: '3px' }}
-                        />
+                        {showImage && (
+                            <img
+                                src={`/sensorknoten-vogelhaus${data['image_url']}`}
+                                alt='location'
+                                style={{ maxWidth: '100%', borderRadius: '3px' }}
+                            />
+                        )}
+                        <IconButton
+                            onClick={toggleImage}
+                            style={{ position: 'absolute', top: '5px', right: '10px' }}
+                        >
+                            {showImage ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        </IconButton>
                     </div>
                 )
             }
