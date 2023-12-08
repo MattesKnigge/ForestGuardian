@@ -7,8 +7,8 @@ from django.utils import timezone
 class Location(models.Model):
     id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     name = models.CharField(max_length=256, unique=True)
-    longitude = models.FloatField(default=-1, blank=False)
-    latitude = models.FloatField(default=-1, blank=False)
+    longitude = models.FloatField(default=-100, blank=False)
+    latitude = models.FloatField(default=-100, blank=False)
 
     def __str__(self):
         return f'{self.name} {self.longitude}/{self.latitude}'
@@ -26,9 +26,10 @@ class Parameter(models.Model):
     name = models.CharField(max_length=256)
     description = models.CharField(max_length=1024, unique=False)
     unit = models.CharField(max_length=8, unique=False)
+    display_name = models.CharField(max_length=256, unique=False)
 
     def __str__(self):
-        return f'{self.name} [{self.unit}] ({self.description[:20]}...)'
+        return f'{self.name} ({self.display_name}) [{self.unit}] ({self.description[:20]}...)'
 
 
 class MeasuredParameter(models.Model):

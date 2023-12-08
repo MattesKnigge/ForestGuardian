@@ -43,7 +43,8 @@ def location(request, location_name: str):
             val = random.randint(param_ranges[0].lower_bound, param_ranges[-1].lower_bound)
             param_range = [pr for pr in param_ranges if pr.lower_bound <= val][-1]
             data['values'][mp.parameter.name] = {
-                'id': f'random_{mp.parameter.name}',
+                'id': f'random_{mp.parameter.id}',
+                'display_name': mp.parameter.display_name,
                 'timestamp': timezone.now().strftime("%d.%m.%Y %H:%M:%S"),
                 'value': val,
                 'unit': mp.parameter.unit,
@@ -85,6 +86,7 @@ def location(request, location_name: str):
             param_range = [pr for pr in param_ranges if pr.lower_bound <= sv.value][-1]
             data['values'][mp.parameter.name] = {
                 'id': mp.id,
+                'display_name': mp.parameter.display_name,
                 'timestamp': sv.created_at,
                 'value': sv.value,
                 'unit': mp.parameter.unit,
@@ -116,23 +118,26 @@ def measured_parameter_details(request, measured_parameter_id: str):
         hours_between = int((dt_to - dt_from).total_seconds() / 60 / 60)
 
         param = measured_parameter_id.split('_', maxsplit=1)
-        min_max = {'temperature': {'min': -25, 'max': 42}, 'humidity': {'min': 0, 'max': 100},
-                   'pressure': {'min': 800, 'max': 1100}, 'air_quality': {'min': 400, 'max': 60000}}
-        mm = min_max.get(param[1])
+        mp = MeasuredParameter.objects.select_related('parameter', 'sensor').get(id=param[1])
+        param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
+        min_val = int(param_ranges[0].lower_bound)
+        max_val = int(param_ranges[-1].lower_bound)
         timestamps = [dt_from + timedelta(hours=i) for i in range(hours_between)]
 
         data = {
-            'name': param[1],
-            'sensor': 'Random Sensor',
-            'parameter_description': 'Random Sensor Description',
-            'sensor_description': 'Random Parameter Description',
-            'values': [{'timestamp': int(timestamps[idx].timestamp())*1000, 'value': v} for idx, v in enumerate([random.randint(mm['min'], mm['max']) for i in range(hours_between)])]
+            'name': mp.parameter.name,
+            'display_name': mp.parameter.display_name,
+            'sensor': mp.sensor.name,
+            'parameter_description': mp.parameter.description,
+            'sensor_description': mp.sensor.description,
+            'values': [{'timestamp': int(timestamps[idx].timestamp())*1000, 'value': v} for idx, v in enumerate([random.randint(min_val, max_val) for i in range(hours_between)])]
         }
     else:
         mp = MeasuredParameter.objects.select_related('parameter', 'sensor').get(id=measured_parameter_id)
         values = SensorValue.objects.filter(measuredParameter=mp, created_at__range=(dt_from, dt_to)).all()  # how many is max count?
         data = {
             'name': mp.parameter.name,
+            'display_name': mp.parameter.display_name,
             'sensor': mp.sensor.name,
             'parameter_description': mp.parameter.description,
             'sensor_description': mp.sensor.description,
