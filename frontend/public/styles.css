@@ -308,29 +308,29 @@ body::before {
 }
 
 .bird-cold {
-    background-image: url("bird_cold.svg");
+    background-image: url("temperature_cold.svg");
 }
 
 .bird-hot {
-    background-image: url("bird_hot.svg");
+    background-image: url("temperature_hot.svg");
 }
 
 .bird-average {
-    background-image: url("bird_average.svg");
+    background-image: url("temperature_average.svg");
 }
 
 .bird-wet {
-    background-image: url("bird_wet.svg");
+    background-image: url("humidity_wet.svg");
     background-size: 230%;
 }
 
 .bird-dry {
-    background-image: url("bird_dry.svg");
+    background-image: url("humidity_dry.svg");
     background-size: 210%;
 }
 
 .bird-normal {
-    background-image: url("bird_normal.svg");
+    background-image: url("humidity_normal.svg");
 }
 
 @keyframes smokeAnimation {
@@ -374,17 +374,17 @@ body::before {
 }
 
 .bird-high {
-    background-image: url("high_pressure.svg");
+    background-image: url("pressure_high.svg");
     background-size: 160%;
 }
 
 .bird-low {
-    background-image: url("low_pressure.svg");
+    background-image: url("pressure_low.svg");
     background-size: 160%;
 }
 
 .bird-medium {
-    background-image: url("medium_pressure.svg");
+    background-image: url("pressure_medium.svg");
     background-size: 160%;
 }
 
