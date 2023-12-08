@@ -36,11 +36,13 @@ def location_data(request):
     data = request.data
     print(data)
     values = []
-    for mp in mps:
-        sent_vals = data['values'].get(mp.parameter.name, None)
-        if sent_vals is not None:
-            for v in sent_vals:
-                values.append(SensorValue(value=v, measuredParameter=mp))
+    for timestamp, vals in data['values'].items():
+        dt = datetime.datetime.utcfromtimestamp(int(timestamp))
+        for mp in mps:
+            sent_vals = vals.get(mp.parameter.name, None)
+            if sent_vals is not None:
+                for v in sent_vals:
+                    values.append(SensorValue(value=v, measuredParameter=mp, created_at=dt))
 
     SensorValue.objects.bulk_create(values)
 
