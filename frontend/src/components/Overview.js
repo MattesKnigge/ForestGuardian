@@ -42,7 +42,7 @@ const Overview = ({ title, data }) => {
             </div>
             {
                 data['image_url'] !== '' && (
-                    <div className="camera-picture" style={{ position: 'relative', height: showImage ? 'auto' : '150px' }}>
+                    <div className="camera-picture" style={{ position: 'relative', height: showImage ? 'auto' : '150px', marginBottom: "15px" }}>
                         <div className="image-text">Take a look inside</div>
                         {showImage && (
                             <img
