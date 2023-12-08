@@ -14,8 +14,11 @@ const Overview = ({ title, data }) => {
     return (
         <div className="overview">
             {title !== '' ?
-                <h1 style={{fontFamily: 'Dosis, sans-serif', color: gold}}>{title}</h1>
+                <h1 style={{fontFamily: 'Dosis, sans-serif', color: gold}}>{data.display_name}</h1>
                 :null}
+            <div style={{fontFamily: 'Dosis, sans-serif', color: gold}}>
+                {data.description}
+            </div>
             <div className={`overview-grid ${title !== '' ? 'overview-one-col' : 'overview-two-col'}`}>
                 {Object.keys(data.values).map((key) => (
                     <>

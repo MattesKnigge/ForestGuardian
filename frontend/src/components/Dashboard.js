@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import GaugeChart from 'react-gauge-chart';
-import ChartComponent from "./ChartComponent";
+import {ChartComponent} from "./ChartComponent";
 import {createTheme, ThemeProvider} from "@mui/material";
 import {DatePicker, LocalizationProvider} from "@mui/x-date-pickers";
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";

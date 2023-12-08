@@ -6,7 +6,6 @@ import {gold, violet} from '../util/utils';
 const ChartComponent =  ({ measured_parameter_id, from, to }) => {
     const [data, setData] = useState({
         name: '',
-        sensor: '',
         parameter_description: '',
         values: [{ timestamp: '', value: 0 }],
     });
@@ -26,8 +25,14 @@ const ChartComponent =  ({ measured_parameter_id, from, to }) => {
     }, [from, measured_parameter_id, to]);
 
     return (
+        <ChartDisplay name={data.name} id={measured_parameter_id} values={data.values} />
+    );
+}
+
+const ChartDisplay = ({ name, id, values }) => {
+    return (
         <ResponsiveContainer width="100%" aspect={3.5}>
-            <LineChart data={data.values}>
+            <LineChart data={values} id={id}>
                 <XAxis
                     dataKey="timestamp"
                     type="number"
@@ -40,10 +45,10 @@ const ChartComponent =  ({ measured_parameter_id, from, to }) => {
                 />
                 <YAxis domain={['dataMin', 'dataMax']} tick={{ fill: gold }} tickLine={{ stroke: gold }} stroke={violet} />
                 <Tooltip labelFormatter={(msTime) => new Date(msTime).toLocaleString()} />
-                <Line dataKey="value" data={data.values} name={data.name} dot={false} stroke={'#B58BC2'} />
+                <Line dataKey="value" data={values} name={name} dot={false} stroke={'#B58BC2'} />
             </LineChart>
         </ResponsiveContainer>
     );
 }
 
-export default ChartComponent;
+export {ChartComponent, ChartDisplay};

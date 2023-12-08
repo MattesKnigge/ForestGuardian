@@ -11,6 +11,8 @@ import useInterval from "./util/UseInterval";
 const BirdHouse = ({ showMessage }) => {
     const {birdHouseNames} = useParams();
     const [data, setData] = useState({ house: {
+            display_name: "",
+            description: "",
             season: "",
             values: {
                 paramName: { id: "random_temperature", display_name: "", timestamp: "", value: 0, min: 0, max: 100,
@@ -54,7 +56,7 @@ const BirdHouse = ({ showMessage }) => {
         if (isDash) {
             try {
                 const names = birdHouseNames.split(',');
-                let dat = data;
+                let dat = structuredClone(data);
                 let timestamps = lastTimestamps;
                 let update = false;
                 for (const name of names) {
@@ -84,7 +86,7 @@ const BirdHouse = ({ showMessage }) => {
                 {isDash ?
                     <div className='multi-dashboard-layout'>
                         {Object.keys(data).map((house) => (
-                            <Dashboard title={houseCount > 1 ? house : ''} sensors={data[house].values} />
+                            <Dashboard title={houseCount > 1 ? data[house].display_name : ''} sensors={data[house].values} />
                         ))}
                     </div>
                 :

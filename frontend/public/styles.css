@@ -354,6 +354,7 @@ body::before {
     background-image: url("Campfire.svg");
     background-size: 160%;
     background-repeat: no-repeat;
+    z-index: 1;
 }
 
 .bird-range::before {
@@ -366,9 +367,9 @@ body::before {
     background-size: 80%;
     background-repeat: no-repeat;
     margin-left: 2.5rem;
-    margin-top: -17rem;
+    margin-top: -8rem;
     opacity: 90%;
-    z-index: 0;
+    z-index: -1;
     animation: smokeAnimation 3s infinite; /* Adjust the duration as needed */
 }
 
