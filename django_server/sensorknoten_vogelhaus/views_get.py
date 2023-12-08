@@ -29,6 +29,8 @@ def location(request, location_name: str):
 
     if location_name == "random":
         loc = Location.objects.get(name='prototype')
+        data['display_name'] = 'Random'
+        data['description'] = loc.description
 
         weather = WeatherData.objects.filter(location=loc).latest('created_at')
         data['weather'] = {
@@ -55,6 +57,9 @@ def location(request, location_name: str):
             }
     else:
         loc = Location.objects.get(name=location_name)
+        data['display_name'] = loc.display_name
+        data['description'] = loc.description
+
         if loc.latitude != -100:
             try:
                 weather = WeatherData.objects.filter(location=loc).latest('created_at')
@@ -117,8 +122,9 @@ def measured_parameter_details(request, measured_parameter_id: str):
     if measured_parameter_id.startswith('random'):
         hours_between = int((dt_to - dt_from).total_seconds() / 60 / 60)
 
-        param = measured_parameter_id.split('_', maxsplit=1)
-        mp = MeasuredParameter.objects.select_related('parameter', 'sensor').get(id=param[1])
+        param = measured_parameter_id.split('_')
+        print(param[1])
+        mp = MeasuredParameter.objects.select_related('parameter').get(id=param[1])
         param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
         min_val = int(param_ranges[0].lower_bound)
         max_val = int(param_ranges[-1].lower_bound)
@@ -127,20 +133,16 @@ def measured_parameter_details(request, measured_parameter_id: str):
         data = {
             'name': mp.parameter.name,
             'display_name': mp.parameter.display_name,
-            'sensor': mp.sensor.name,
             'parameter_description': mp.parameter.description,
-            'sensor_description': mp.sensor.description,
             'values': [{'timestamp': int(timestamps[idx].timestamp())*1000, 'value': v} for idx, v in enumerate([random.randint(min_val, max_val) for i in range(hours_between)])]
         }
     else:
-        mp = MeasuredParameter.objects.select_related('parameter', 'sensor').get(id=measured_parameter_id)
+        mp = MeasuredParameter.objects.select_related('parameter').get(id=measured_parameter_id)
         values = SensorValue.objects.filter(measuredParameter=mp, created_at__range=(dt_from, dt_to)).all()  # how many is max count?
         data = {
             'name': mp.parameter.name,
             'display_name': mp.parameter.display_name,
-            'sensor': mp.sensor.name,
             'parameter_description': mp.parameter.description,
-            'sensor_description': mp.sensor.description,
             'values': [{'timestamp': int(v.created_at.timestamp())*1000, 'value': v.value} for v in values]
         }
 

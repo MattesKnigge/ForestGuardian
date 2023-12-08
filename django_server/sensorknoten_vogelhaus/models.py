@@ -9,17 +9,11 @@ class Location(models.Model):
     name = models.CharField(max_length=256, unique=True)
     longitude = models.FloatField(default=-100, blank=False)
     latitude = models.FloatField(default=-100, blank=False)
+    display_name = models.CharField(max_length=256, unique=False)
+    description = models.CharField(max_length=512, unique=False)
 
     def __str__(self):
         return f'{self.name} {self.longitude}/{self.latitude}'
-
-
-class Sensor(models.Model):
-    name = models.CharField(max_length=256, unique=True)
-    description = models.CharField(max_length=1024, unique=False)
-
-    def __str__(self):
-        return self.name
 
 
 class Parameter(models.Model):
@@ -34,11 +28,10 @@ class Parameter(models.Model):
 
 class MeasuredParameter(models.Model):
     location = models.ForeignKey(Location, on_delete=models.CASCADE, related_name='loc_mp')
-    sensor = models.ForeignKey(Sensor, on_delete=models.CASCADE)
     parameter = models.ForeignKey(Parameter, on_delete=models.CASCADE)
 
     def __str__(self):
-        return f'{self.location.name} {self.parameter.name} {self.sensor.name}'
+        return f'{self.location.name} {self.parameter.name}'
 
 
 class SensorValue(models.Model):
