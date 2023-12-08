@@ -32,9 +32,20 @@ const Overview = ({ title, data }) => {
                     </>
                 ))}
             </div>
-            {data['image_url'] !== '' ?
-                <img src={`/sensorknoten-vogelhaus${data['image_url']}`} alt='location' />
-            :null}
+            {
+                data['image_url'] !== '' && (
+                    <div className={"camera-picture"}
+                    >
+                        <div className="image-text">Take a look inside</div>
+                        <img
+                            src={`/sensorknoten-vogelhaus${data['image_url']}`}
+                            alt='location'
+                            style={{ maxWidth: '100%', borderRadius: '3px' }}
+                        />
+                    </div>
+                )
+            }
+
             <Detail open={open} onClose={() => setOpen(false)} measured_parameter_id={measuredParamId} />
         </div>
     );
