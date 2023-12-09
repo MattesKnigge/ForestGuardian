@@ -126,6 +126,8 @@ def measured_parameter_details(request, measured_parameter_id: str):
         print(param[1])
         mp = MeasuredParameter.objects.select_related('parameter').get(id=param[1])
         param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
+        val = random.randint(param_ranges[0].lower_bound, param_ranges[-1].lower_bound)
+        param_range = [pr for pr in param_ranges if pr.lower_bound <= val][-1]
         min_val = int(param_ranges[0].lower_bound)
         max_val = int(param_ranges[-1].lower_bound)
         timestamps = [dt_from + timedelta(hours=i) for i in range(hours_between)]
@@ -134,15 +136,21 @@ def measured_parameter_details(request, measured_parameter_id: str):
             'name': mp.parameter.name,
             'display_name': mp.parameter.display_name,
             'parameter_description': mp.parameter.description,
+            'value': val,
+            'value_range': {'description': param_range.description, 'tag': param_range.tag, 'color': param_range.color},
             'values': [{'timestamp': int(timestamps[idx].timestamp())*1000, 'value': v} for idx, v in enumerate([random.randint(min_val, max_val) for i in range(hours_between)])]
         }
     else:
         mp = MeasuredParameter.objects.select_related('parameter').get(id=measured_parameter_id)
         values = SensorValue.objects.filter(measuredParameter=mp, created_at__range=(dt_from, dt_to)).all()  # how many is max count?
+        param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
+        param_range = [pr for pr in param_ranges if pr.lower_bound <= values[-1].value][-1]
         data = {
             'name': mp.parameter.name,
             'display_name': mp.parameter.display_name,
             'parameter_description': mp.parameter.description,
+            'value': values[-1].value,
+            'value_range': {'description': param_range.description, 'tag': param_range.tag, 'color': param_range.color},
             'values': [{'timestamp': int(v.created_at.timestamp())*1000, 'value': v.value} for v in values]
         }
 
