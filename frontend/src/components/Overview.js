@@ -24,9 +24,21 @@ const Overview = ({ title, data }) => {
             {title !== '' ?
                 <h1 style={{fontFamily: 'Dosis, sans-serif', color: gold}}>{data.display_name}</h1>
                 :null}
-            <div style={{fontFamily: 'Dosis, sans-serif', color: gold}}>
+
+            <div style={{
+                fontFamily: 'Dosis, sans-serif',
+                color: 'var(--gold)',
+                fontSize: '1.5rem',
+                fontWeight: '500',
+                padding: '.7em',
+                marginTop: '1em',
+                backdropFilter: 'blur(5px)',
+                borderRadius: '10px',
+                textAlign: 'center',
+            }}>
                 {data.description}
             </div>
+
             <div className={`overview-grid ${title !== '' ? 'overview-one-col' : 'overview-two-col'}`}>
                 {Object.keys(data.values).map((key) => (
                     <>

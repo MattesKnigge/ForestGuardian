@@ -21,6 +21,8 @@ const InfoDialog = ({ open, onClose }) => {
                     <li><strong>Home:</strong> Return to the main screen and navigate effortlessly through the system's features. Your starting point for a seamless and user-friendly experience.</li>
                     <br/>
                     <li><strong>Info:</strong> Dive deeper into the system's capabilities by clicking the "Info" button and discover more about its functionalities.</li>
+                    <br/>
+                    <li><strong>Dashboard:</strong> View the current status of the system's birdhouses and their respective parameters. The dashboard provides a quick overview of the system's current state.</li>
                 </ul>
             </DialogContent>
             <DialogActions>

@@ -10,6 +10,8 @@ const Detail = ({ open, onClose, measured_parameter_id }) => {
         name: '',
         display_name: '',
         parameter_description: '',
+        value: 0,
+        value_range: { tag: "default", description: ""},
         values: [{ timestamp: '', value: 0 }],
     });
 
@@ -59,10 +61,12 @@ const Detail = ({ open, onClose, measured_parameter_id }) => {
                     {data.display_name || data.name}
                 </h1>
                 <div style={{ textAlign: 'center' }}>
-                    <ChartDisplay id={measured_parameter_id} name={data.name} values={data.values} />
+
                     <div style={{ marginTop: '20px', textAlign: 'center' }}>
                         <p style={{ fontSize: '18px', fontFamily: 'Dosis' }}>
                             {data.parameter_description}
+                            {/*TODO: Style this and make it look better*/data.value_range.description}
+                            <ChartDisplay id={measured_parameter_id} name={data.name} values={data.values} />
                         </p>
                     </div>
                 </div>
