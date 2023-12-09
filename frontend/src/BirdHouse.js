@@ -19,6 +19,11 @@ const BirdHouse = ({ showMessage }) => {
                     value_range: { tag: "default", description: ""},
                     param_ranges: [ { lower_bound: 0, tag: "default", description: "", color: ""}, { lower_bound: 1, tag: "default", description: "", color: ""}]
                 }
+            },
+            weather: {
+                name: '',
+                description: '',
+                wind_speed: '',
             }
         }
     });
@@ -81,7 +86,7 @@ const BirdHouse = ({ showMessage }) => {
 
     return(
         <div className="layout">
-            <Header onToggleClick={() => setIsDash(!isDash)} toggleOn={isDash} showToggle={true} />
+            <Header onToggleClick={() => setIsDash(!isDash)} toggleOn={isDash} showToggle={true} weather={birdHouseNames.includes(",") ? null : data[birdHouseNames]?.weather} />
             <div className="content-container">
                 {isDash ?
                     <div className='multi-dashboard-layout'>

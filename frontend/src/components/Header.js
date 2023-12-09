@@ -9,7 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import Typography from "@mui/material/Typography";
 import {brown, green} from "../util/utils";
 
-const Header = ({ onToggleClick, toggleOn, showToggle = false }) => {
+const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
     const [isInfoOpen, setIsInfoOpen] = useState(false);
     const navigate = useNavigate();
 
@@ -54,6 +54,10 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false }) => {
         <header className="header">
             <div className="header-content">
                 <h1 style={titleStyle}>ForestGuardian</h1>
+            </div>
+            <div className="weather_description">
+                {weather ? "Weather Description: " + weather.description : null}
+
             </div>
             <div className="header-button">
                 {showToggle && (

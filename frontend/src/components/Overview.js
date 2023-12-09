@@ -32,7 +32,9 @@ const Overview = ({ title, data }) => {
                 fontWeight: '500',
                 padding: '.7em',
                 marginTop: '1em',
-                backdropFilter: 'blur(5px)',
+                marginLeft: '1em',
+                marginRight: '1em',
+                backdropFilter: 'blur(3px)',
                 borderRadius: '10px',
                 textAlign: 'center',
             }}>

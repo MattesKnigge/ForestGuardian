@@ -65,6 +65,8 @@ const Detail = ({ open, onClose, measured_parameter_id }) => {
                     <div style={{ marginTop: '20px', textAlign: 'center' }}>
                         <p style={{ fontSize: '18px', fontFamily: 'Dosis' }}>
                             {data.parameter_description}
+                            <br />
+                            <br/>
                             {/*TODO: Style this and make it look better*/data.value_range.description}
                             <ChartDisplay id={measured_parameter_id} name={data.name} values={data.values} />
                         </p>

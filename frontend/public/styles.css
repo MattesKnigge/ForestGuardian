@@ -456,3 +456,13 @@ body::before {
         height: 150px; /* Further reduce the height on smaller screens if necessary */
     }
 }
+
+.weather_description {
+    font-size: 20px;
+    font-family: 'Dosis', sans-serif;
+    color: var(--green);
+    text-align: center;
+    justify-content: right;
+    font-weight: 600;
+    text-transform: capitalize;
+}
