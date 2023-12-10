@@ -444,11 +444,20 @@ body::before {
     background-size: 160%;
 }
 
-.bird-methane {
+.bird-methaneLow {
     background-image: url("methan.png");
     background-size: 250%;
 }
 
+.bird-methaneMedium {
+    background-image: url("methan.png");
+    background-size: 250%;
+}
+
+.bird-methaneHigh {
+    background-image: url("methan.png");
+    background-size: 250%;
+}
 
 /* Media queries for smaller screens */
 @media (max-width: 768px) {
