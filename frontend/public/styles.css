@@ -429,7 +429,6 @@ body::before {
     animation: smokeAnimation 3s infinite;
 }
 
-
 .bird-high {
     background-image: url("pressure_high.svg");
     background-size: 160%;
@@ -443,6 +442,11 @@ body::before {
 .bird-medium {
     background-image: url("pressure_medium.svg");
     background-size: 160%;
+}
+
+.bird-methane {
+    background-image: url("methan.png");
+    background-size: 250%;
 }
 
 
