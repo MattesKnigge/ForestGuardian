@@ -359,6 +359,36 @@ body::before {
     background-image: url("humidity_normal.svg");
 }
 
+.bird-co2high {
+    background-image: url("co2_high.svg");
+    background-size: 180%;
+}
+
+.bird-co2low {
+    background-image: url("co2_low.svg");
+    background-size: 100%;
+}
+
+.bird-co2medium {
+    background-image: url("co2_medium.svg");
+    background-size: 100%;
+}
+
+.bird-lmhigh {
+    background-image: url("lumen_high.svg");
+    background-size: 180%;
+}
+
+.bird-lmmedium {
+    background-image: url("lumen_medium.svg");
+    background-size: 180%;
+}
+
+.bird-lmlow {
+    background-image: url("lumen_low.svg");
+    background-size: 150%;
+}
+
 @keyframes smokeAnimation {
     0% {
         transform: translateY(10px);
@@ -395,9 +425,10 @@ body::before {
     margin-left: 2.5rem;
     margin-top: -8rem;
     opacity: 90%;
-    z-index: -1;
-    animation: smokeAnimation 3s infinite; /* Adjust the duration as needed */
+    z-index: 1;
+    animation: smokeAnimation 3s infinite;
 }
+
 
 .bird-high {
     background-image: url("pressure_high.svg");

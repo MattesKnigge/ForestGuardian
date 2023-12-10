@@ -43,9 +43,9 @@ const Detail = ({ open, onClose, measured_parameter_id }) => {
                     backgroundColor: green,
                     color: gold,
                     padding: '20px',
-                    maxWidth: '600px', // Adjusted maximum width
-                    margin: 'auto', // Centered the dialog
-                    borderRadius: '15px', // Added border radius
+                    maxWidth: '600px',
+                    margin: 'auto',
+                    borderRadius: '15px',
                 },
             }}
         >
@@ -67,10 +67,13 @@ const Detail = ({ open, onClose, measured_parameter_id }) => {
                             {data.parameter_description}
                             <br />
                             <br/>
-                            {/*TODO: Style this and make it look better*/data.value_range.description}
+                            <span style={{ fontStyle: 'normal', fontSize: '17px' }}>{data.value_range.description}</span>
+                            <br />
+                            <br />
                             <ChartDisplay id={measured_parameter_id} name={data.name} values={data.values} />
                         </p>
                     </div>
+
                 </div>
             </div>
         </Dialog>
