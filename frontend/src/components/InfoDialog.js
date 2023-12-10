@@ -2,13 +2,11 @@ import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import DialogActions from '@mui/material/DialogActions';
-import Button from '@mui/material/Button';
 import {green, gold, brown} from "../util/utils";
 
 const InfoDialog = ({ open, onClose }) => {
     return (
-        <Dialog open={open} onClose={onClose} PaperProps={{style: {backgroundColor: green, color: gold}}}>
+        <Dialog open={open} onClose={onClose} PaperProps={{style: {backgroundColor: green, color: gold, borderRadius: '15px'}}}>
             <DialogTitle style={styles.title}>Welcome to ForestGuardian</DialogTitle>
             <DialogContent>
                 <p style={styles.paragraph}>
@@ -25,11 +23,6 @@ const InfoDialog = ({ open, onClose }) => {
                     <li><strong>Dashboard:</strong> View the current status of the system's birdhouses and their respective parameters. The dashboard provides a quick overview of the system's current state.</li>
                 </ul>
             </DialogContent>
-            <DialogActions>
-                <Button onClick={onClose} style={styles.closeButton}>
-                    Close
-                </Button>
-            </DialogActions>
         </Dialog>
     );
 };
