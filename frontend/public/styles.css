@@ -333,29 +333,29 @@ body::before {
     transform: scale(0.95) rotate(5deg);
 }
 
-.bird-cold {
+.bird-tempLow {
     background-image: url("temperature_cold.svg");
 }
 
-.bird-hot {
+.bird-tempHigh {
     background-image: url("temperature_hot.svg");
 }
 
-.bird-average {
+.bird-tempMedium {
     background-image: url("temperature_average.svg");
 }
 
-.bird-wet {
+.bird-humidHigh {
     background-image: url("humidity_wet.svg");
     background-size: 230%;
 }
 
-.bird-dry {
+.bird-humidLow {
     background-image: url("humidity_dry.svg");
     background-size: 210%;
 }
 
-.bird-normal {
+.bird-humidMedium {
     background-image: url("humidity_normal.svg");
 }
 
@@ -374,17 +374,17 @@ body::before {
     background-size: 100%;
 }
 
-.bird-lmhigh {
+.bird-luxHigh {
     background-image: url("lumen_high.svg");
     background-size: 180%;
 }
 
-.bird-lmmedium {
+.bird-luxMedium {
     background-image: url("lumen_medium.svg");
     background-size: 180%;
 }
 
-.bird-lmlow {
+.bird-luxLow {
     background-image: url("lumen_low.svg");
     background-size: 150%;
 }
@@ -429,17 +429,17 @@ body::before {
     animation: smokeAnimation 3s infinite;
 }
 
-.bird-high {
+.bird-pressureHigh {
     background-image: url("pressure_high.svg");
     background-size: 160%;
 }
 
-.bird-low {
+.bird-pressureLow {
     background-image: url("pressure_low.svg");
     background-size: 160%;
 }
 
-.bird-medium {
+.bird-pressureMedium {
     background-image: url("pressure_medium.svg");
     background-size: 160%;
 }
