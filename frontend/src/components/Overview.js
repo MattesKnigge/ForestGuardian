@@ -37,6 +37,8 @@ const Overview = ({ title, data }) => {
                 backdropFilter: 'blur(3px)',
                 borderRadius: '10px',
                 textAlign: 'center',
+                width: 'calc(45ch - 2em)',
+                boxSizing: 'border-box',
             }}>
                 {data.description}
             </div>
