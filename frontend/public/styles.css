@@ -43,12 +43,14 @@ body::before {
 /* Header styles */
 .header {
     background-color: var(--gold);
-    padding: 1vh 2vw;
     display: flex;
     justify-content: space-between;
     align-items: center;
     grid-area: header;
     cursor: default;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
 }
 
 .header h1 {
@@ -502,11 +504,13 @@ body::before {
 }
 
 .weather_description {
-    font-size: 20px;
+    font-size: 1.2rem;
     font-family: 'Dosis', sans-serif;
     color: var(--green);
     text-align: center;
-    justify-content: right;
     font-weight: 600;
     text-transform: capitalize;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
 }

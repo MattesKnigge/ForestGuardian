@@ -15,10 +15,11 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
 
     const buttonStyle = {
         backgroundColor: '#8E6F52',
-        marginLeft: '.5rem',
+        marginLeft: '.1rem',
+        marginRight: '1rem',
         borderRadius: '20%',
         color: '#333333',
-        padding: '.5rem',
+        padding: '0.5rem',
         transition: 'background-color 0.3s, transform 0.2s',
         '&:hover': {
             backgroundColor: '#6E4A33',
@@ -48,6 +49,12 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
         display: 'flex',
         alignItems: 'center',
         marginLeft: '-1%',
+        padding: '0 1rem',
+    };
+
+    const weatherDescriptionStyle = {
+        marginLeft: 'auto',
+        marginRight: '2rem',
     };
 
     return (
@@ -55,7 +62,7 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
             <div className="header-content">
                 <h1 style={titleStyle}>ForestGuardian</h1>
             </div>
-            <div className="weather_description">
+            <div className="weather_description" style={weatherDescriptionStyle}>
                 {weather ? "Weather Description: " + weather.description : null}
 
             </div>

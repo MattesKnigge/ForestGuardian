@@ -97,6 +97,7 @@ const Dashboard = ({ title, sensors }) => {
                                     needleColor={gold}
                                     needleBaseColor={gold}
                                     arcPadding={sensors[key].param_ranges.length === 2 ? 0 : 0.02}
+                                    //TODO: maybe implement -> textColor={data.value_range.color}
                         />
                         {showGraphs?
                             <ChartComponent measured_parameter_id={sensors[key].id} from={from} to={to} />
