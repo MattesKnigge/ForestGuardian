@@ -10,7 +10,7 @@ import Header from "./components/Header";
 import Credits from "./components/Credits";
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
-import {brown, gold, green} from "./util/utils";
+import {gold, green} from "./util/utils";
 
 const App = ({ showMessage }) => {
     const [data, setData] = useState([]);
@@ -94,7 +94,7 @@ const App = ({ showMessage }) => {
                                     }}
                                 >
                                     <span style={{ color: gold, fontSize: '1.3em' }}>Analytics</span>{'\n'}
-                                    <span style={{ color: brown, fontSize: '1.5em', textTransform: "uppercase" }}>Data-Driven{'\n'}Wilderness Insights</span>{'\n'}
+                                    <span style={{ color: "darkgoldenrod", fontSize: '1.5em', textTransform: "uppercase" }}>Data-Driven{'\n'}Wilderness Insights</span>{'\n'}
                                     <span style={{ color: gold, fontSize: '1em' }}>Discover the forest’s hidden tales with our data-driven analytics.{'\n'}
                                         Uncover insights into air quality, tree health, and bird activity,{'\n'}
                                         empowering a deeper connection with nature.{'\n'}

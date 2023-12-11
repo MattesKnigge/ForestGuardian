@@ -5,6 +5,14 @@ import dayjs from 'dayjs';
 import { green, gold } from '../util/utils';
 import { ChartDisplay } from './ChartComponent';
 
+const hexToRgb = (hex) => {
+    const bigint = parseInt(hex.slice(1), 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return [r, g, b];
+};
+
 const Detail = ({ open, onClose, measured_parameter_id }) => {
     const [data, setData] = useState({
         name: '',
@@ -34,18 +42,21 @@ const Detail = ({ open, onClose, measured_parameter_id }) => {
         }
     }, [open, measured_parameter_id]);
 
+    const rgbGreen = hexToRgb(green);
+
     return (
         <Dialog
             open={open}
             onClose={onClose}
             PaperProps={{
                 style: {
-                    backgroundColor: green,
+                    backgroundColor: `rgba(${rgbGreen.join(', ')}, 0.7)`,
                     color: gold,
                     padding: '20px',
                     maxWidth: '600px',
                     margin: 'auto',
                     borderRadius: '15px',
+                    backdropFilter: 'blur(10px)',
                 },
             }}
         >

@@ -4,9 +4,28 @@ import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
 import {green, gold, brown} from "../util/utils";
 
+const hexToRgb = (hex) => {
+    // Convert a hex color to an RGB array
+    const bigint = parseInt(hex.slice(1), 16);
+    const r = (bigint >> 16) & 255;
+    const g = (bigint >> 8) & 255;
+    const b = bigint & 255;
+    return [r, g, b];
+};
+
+
 const InfoDialog = ({ open, onClose }) => {
+    const rgbGreen = hexToRgb(green);
     return (
-        <Dialog open={open} onClose={onClose} PaperProps={{style: {backgroundColor: green, color: gold, borderRadius: '15px'}}}>
+        <Dialog open={open} onClose={onClose}
+                PaperProps={{
+                    style: {
+                        backgroundColor: `rgba(${rgbGreen.join(', ')}, 0.7)`, // Adjust the transparency
+                        color: gold,
+                        borderRadius: '15px',
+                        backdropFilter: 'blur(10px)',
+                    }
+                }}>
             <DialogTitle style={styles.title}>Welcome to ForestGuardian</DialogTitle>
             <DialogContent>
                 <p style={styles.paragraph}>
