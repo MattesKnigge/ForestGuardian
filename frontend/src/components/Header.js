@@ -5,6 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import InfoDialog from "./InfoDialog";
 import QuestionMarkRoundedIcon from '@mui/icons-material/QuestionMarkRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
+import ListRoundedIcon from '@mui/icons-material/ListRounded';
 import { useNavigate } from 'react-router-dom';
 import Typography from "@mui/material/Typography";
 import {brown, green} from "../util/utils";
@@ -43,6 +44,10 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
     const handleCloseInfo = () => {
         setIsInfoOpen(false);
     };
+
+    const handleMenuClick = () => {
+        navigate('/bird-house/min,random,max');
+    }
 
     const titleStyle = {
         color: green,
@@ -94,6 +99,14 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
                     title={'Show information dialog'}
                 >
                     <QuestionMarkRoundedIcon />
+                </IconButton>
+                {/*TODO: display menu with all birdhouses to choose from*/}
+                <IconButton
+                    sx={buttonStyle}
+                    onClick={handleMenuClick}
+                    title={'Show birdhouse menu'}
+                >
+                    <ListRoundedIcon />
                 </IconButton>
             </div>
             <InfoDialog open={isInfoOpen} onClose={handleCloseInfo} />

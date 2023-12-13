@@ -447,17 +447,17 @@ body::before {
 }
 
 .bird-methaneLow {
-    background-image: url("methan.png");
+    background-image: url("methane_low.svg");
     background-size: 250%;
 }
 
 .bird-methaneMedium {
-    background-image: url("methan.png");
+    background-image: url("methane_medium.svg");
     background-size: 250%;
 }
 
 .bird-methaneHigh {
-    background-image: url("methan.png");
+    background-image: url("methane_high.svg");
     background-size: 250%;
 }
 
