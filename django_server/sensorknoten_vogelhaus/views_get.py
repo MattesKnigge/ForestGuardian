@@ -45,7 +45,7 @@ def location(request, location_name: str):
             val = random.randint(param_ranges[0].lower_bound, param_ranges[-1].lower_bound)
             param_range = [pr for pr in param_ranges if pr.lower_bound <= val][-1]
             data['values'][mp.parameter.name] = {
-                'id': f'random_{mp.parameter.id}',
+                'id': f'random_{mp.id}',
                 'display_name': mp.parameter.display_name,
                 'timestamp': timezone.now().strftime("%d.%m.%Y %H:%M:%S"),
                 'value': val,
@@ -123,7 +123,6 @@ def measured_parameter_details(request, measured_parameter_id: str):
         hours_between = int((dt_to - dt_from).total_seconds() / 60 / 60)
 
         param = measured_parameter_id.split('_')
-        print(param[1])
         mp = MeasuredParameter.objects.select_related('parameter').get(id=param[1])
         param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
         val = random.randint(param_ranges[0].lower_bound, param_ranges[-1].lower_bound)
@@ -142,9 +141,13 @@ def measured_parameter_details(request, measured_parameter_id: str):
         }
     else:
         mp = MeasuredParameter.objects.select_related('parameter').get(id=measured_parameter_id)
-        values = SensorValue.objects.filter(measuredParameter=mp, created_at__range=(dt_from, dt_to)).all()  # how many is max count?
+        values = list(SensorValue.objects.filter(measuredParameter=mp).all())  # , created_at__range=(dt_from, dt_to)).all())    FOR NOW DISABLED CAUSE WE DON'T HAVE CURRENT DATA YET (also implement guard at no data)
         param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
-        param_range = [pr for pr in param_ranges if pr.lower_bound <= values[-1].value][-1]
+        if len(values) > 0:
+            param_range = [pr for pr in param_ranges if pr.lower_bound <= values[-1].value][-1]
+        else:
+            param_range = {'description': '', 'tag': '', 'color': 'white'}
+
         data = {
             'name': mp.parameter.name,
             'display_name': mp.parameter.display_name,
