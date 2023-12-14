@@ -42,7 +42,8 @@ def location(request, location_name: str):
         measured_params = MeasuredParameter.objects.filter(location=loc).prefetch_related('parameter').all()
         for mp in measured_params:
             param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
-            val = random.randint(param_ranges[0].lower_bound, param_ranges[-1].lower_bound)
+            val = random.uniform(param_ranges[0].lower_bound, param_ranges[-1].lower_bound)
+            val = val if random.randint(0, 1) == 0 else int(val)
             param_range = [pr for pr in param_ranges if pr.lower_bound <= val][-1]
             data['values'][mp.parameter.name] = {
                 'id': f'random_{mp.id}',
