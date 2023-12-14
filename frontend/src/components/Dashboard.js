@@ -93,7 +93,7 @@ const Dashboard = ({ title, sensors }) => {
                                     percent={(sensors[key].value - sensors[key].min) / (sensors[key].max - sensors[key].min)}
                                     colors={calcColors(sensors[key].param_ranges)}
                                     arcsLength={calcArcs(sensors[key].param_ranges)}
-                                    formatTextValue={() => sensors[key].value +' '+ sensors[key].unit}
+                                    formatTextValue={() => (sensors[key].value).toFixed(2) + ' ' + sensors[key].unit}
                                     needleColor={gold}
                                     needleBaseColor={gold}
                                     arcPadding={sensors[key].param_ranges.length === 2 ? 0 : 0.02}
