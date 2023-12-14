@@ -5,8 +5,7 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import InfoDialog from "./InfoDialog";
 import QuestionMarkRoundedIcon from '@mui/icons-material/QuestionMarkRounded';
 import HomeRoundedIcon from '@mui/icons-material/HomeRounded';
-import ListRoundedIcon from '@mui/icons-material/ListRounded';
-import { useNavigate } from 'react-router-dom';
+import DynamicFeedRoundedIcon from '@mui/icons-material/DynamicFeedRounded';import { useNavigate } from 'react-router-dom';
 import Typography from "@mui/material/Typography";
 import {brown, green} from "../util/utils";
 
@@ -104,9 +103,9 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
                 <IconButton
                     sx={buttonStyle}
                     onClick={handleMenuClick}
-                    title={'Show birdhouse menu'}
+                    title={'Show multi-view'}
                 >
-                    <ListRoundedIcon />
+                    <DynamicFeedRoundedIcon />
                 </IconButton>
             </div>
             <InfoDialog open={isInfoOpen} onClose={handleCloseInfo} />
