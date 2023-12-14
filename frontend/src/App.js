@@ -37,7 +37,7 @@ const App = ({ showMessage }) => {
     }, [showMessage]);
 
     const handleBirdhouseClick = (birdHouseName) => {
-        navigate(`/bird-house/${birdHouseName}`, { replace: true });
+        navigate(`/bird-house/${birdHouseName}`);
     };
 
 
