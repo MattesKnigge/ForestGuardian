@@ -5,8 +5,8 @@ const ParamCard = ({name, data, onShowDetails}) => {
         <div className="param-card">
             <h1 className="param-card-title">{data.display_name}</h1>
             <div className="param-card-content">
-                <div className={`card-value ${data.value > 999 ? "card-big-value" : ""}`} style={{ color: data.value_range.color }}>
-                    {Number.isInteger(data.value) ? data.value.toFixed(2) : data.value.toFixed(2)}
+                <div className={`card-value ${data.value > 999 || !Number.isInteger(data.value) ? "card-big-value" : ""}`} style={{ color: data.value_range.color }}>
+                    {Number.isInteger(data.value) ? data.value : data.value.toFixed(2)}
                     <div className="card-unit" style={{ color: data.value_range.color }}>
                         {data.unit}
                     </div>

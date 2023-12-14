@@ -67,7 +67,7 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
                 <h1 style={titleStyle}>ForestGuardian</h1>
             </div>
             <div className="weather_description" style={weatherDescriptionStyle}>
-                {weather ? "Weather Description: " + weather.description : null}
+                {weather ? "Weather Description: " + weather.name : null}
 
             </div>
             <div className="header-button">

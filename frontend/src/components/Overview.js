@@ -63,7 +63,7 @@ const Overview = ({ title, data }) => {
                         {showImage && (
                             <img
                                 src={`/sensorknoten-vogelhaus${data['image_url']}`}
-                                alt='location'
+                                alt='B I R B .'
                                 style={{ maxWidth: '35%', borderRadius: '3px' }}
                             />
                         )}
