@@ -19,7 +19,7 @@ const Detail = ({ open, onClose, measured_parameter_id }) => {
         display_name: '',
         parameter_description: '',
         value: 0,
-        value_range: { tag: "default", description: ""},
+        value_range: { tag: 'default', description: '', color: ''},
         values: [{ timestamp: '', value: 0 }],
     });
 

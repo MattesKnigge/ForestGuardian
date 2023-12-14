@@ -11,20 +11,21 @@ import useInterval from "./util/UseInterval";
 const BirdHouse = ({ showMessage }) => {
     const {birdHouseNames} = useParams();
     const [data, setData] = useState({ house: {
-            display_name: "",
-            description: "",
-            season: "",
+            display_name: '',
+            description: '',
+            season: '',
             values: {
-                paramName: { id: "random_temperature", display_name: "", timestamp: "", value: 0, min: 0, max: 100,
-                    value_range: { tag: "default", description: ""},
-                    param_ranges: [ { lower_bound: 0, tag: "default", description: "", color: ""}, { lower_bound: 1, tag: "default", description: "", color: ""}]
+                paramName: { id: '', display_name: '', timestamp: '', value: 0, unit: '', min: 0, max: 100,
+                    value_range: { tag: 'default', description: '', color: ''},
+                    param_ranges: [ { lower_bound: 0, tag: 'default', description: '', color: ''} ]
                 }
             },
             weather: {
                 name: '',
                 description: '',
                 wind_speed: '',
-            }
+            },
+            image_url: '',
         }
     });
     const [houseCount, setHouseCount] =useState(1);
