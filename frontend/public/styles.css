@@ -293,8 +293,9 @@ body::before {
 }
 
 .camera-picture {
-    width: 60%;
-    aspect-ratio: 2/0.7;
+    width: auto;
+    height: auto;
+    aspect-ratio: 3/0.9;
     background-image: url('sign_texture.jpg');
     background-color: rgba(40, 26, 13, 0.8);
     background-blend-mode: hue;
