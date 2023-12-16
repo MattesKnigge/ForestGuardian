@@ -31,6 +31,8 @@ def location(request, location_name: str):
         loc = Location.objects.get(name='prototype')
         data['display_name'] = 'Random'
         data['description'] = loc.description
+        data['lat'] = loc.latitude
+        data['long'] = loc.longitude
 
         weather = WeatherData.objects.filter(location=loc).latest('created_at')
         data['weather'] = {
@@ -55,8 +57,6 @@ def location(request, location_name: str):
                 'max': param_ranges[-1].lower_bound,
                 'value_range': {'description': param_range.description, 'tag': param_range.tag, 'color': param_range.color},
                 'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag, 'color': pr.color} for pr in param_ranges],
-                'lat': loc.latitude,
-                'long': loc.longitude,
             }
     else:
         loc = Location.objects.get(name=location_name)
@@ -64,6 +64,9 @@ def location(request, location_name: str):
         data['description'] = loc.description
 
         if loc.latitude != -100:
+            data['lat'] = loc.latitude
+            data['long'] = loc.longitude
+
             try:
                 weather = WeatherData.objects.filter(location=loc).latest('created_at')
                 created = weather.created_at
@@ -103,8 +106,6 @@ def location(request, location_name: str):
                     'max': param_ranges[-1].lower_bound,
                     'value_range': {'description': param_range.description, 'tag': param_range.tag, 'color': param_range.color},
                     'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag, 'color': pr.color} for pr in param_ranges],
-                'lat': loc.latitude,
-                'long': loc.longitude,
                 }
             except:
                 pass
