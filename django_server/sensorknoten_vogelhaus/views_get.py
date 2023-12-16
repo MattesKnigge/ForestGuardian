@@ -54,7 +54,9 @@ def location(request, location_name: str):
                 'min': param_ranges[0].lower_bound,
                 'max': param_ranges[-1].lower_bound,
                 'value_range': {'description': param_range.description, 'tag': param_range.tag, 'color': param_range.color},
-                'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag, 'color': pr.color} for pr in param_ranges]
+                'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag, 'color': pr.color} for pr in param_ranges],
+                'lat': loc.latitude,
+                'long': loc.longitude,
             }
     else:
         loc = Location.objects.get(name=location_name)
@@ -99,7 +101,9 @@ def location(request, location_name: str):
                 'min': param_ranges[0].lower_bound,
                 'max': param_ranges[-1].lower_bound,
                 'value_range': {'description': param_range.description, 'tag': param_range.tag, 'color': param_range.color},
-                'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag, 'color': pr.color} for pr in param_ranges]
+                'param_ranges': [{'lower_bound': pr.lower_bound, 'description': pr.description, 'tag': pr.tag, 'color': pr.color} for pr in param_ranges],
+                'lat': loc.latitude,
+                'long': loc.longitude,
             }
 
     try:
