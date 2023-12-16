@@ -97,7 +97,7 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
     const markerLng = 10.556785;
 
     const mapContainerStyle = {
-        height: '500px',
+        height: '40rem',
         width: '100%',
     };
 
@@ -124,13 +124,14 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
                         />
                     </div>
                 )}
+                {window.location.href.includes("bird-house") ?
                 <IconButton
                     sx={buttonStyle}
                     onClick={handleHomeClick}
                     title={'Go to home page'}
                 >
                     <HomeRoundedIcon />
-                </IconButton>
+                </IconButton> : null}
                 <IconButton
                     sx={buttonStyle}
                     onClick={handleInfoClick}
@@ -145,7 +146,7 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
                 >
                     <DynamicFeedRoundedIcon />
                 </IconButton>
-                {window.location.href.includes("bird-house") &&
+                {!window.location.href.includes(",") && window.location.href.includes("bird-house") && (
                     <IconButton
                         sx={buttonStyle}
                         onClick={handleMapClick}
@@ -153,7 +154,8 @@ const Header = ({ onToggleClick, toggleOn, showToggle = false, weather }) => {
                     >
                         <PublicRoundedIcon />
                     </IconButton>
-                }
+                )}
+
             </div>
             <InfoDialog open={isInfoOpen} onClose={handleCloseInfo} />
 
