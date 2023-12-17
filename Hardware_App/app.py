@@ -4,6 +4,8 @@ import smbus
 import time
 import requests
 import datetime
+import picamera
+import base64
 
 # Define the IP address and port for the server where sensor data will be sent
 ip_addr = "http://192.168.167.52:8000"
@@ -29,6 +31,38 @@ sensor_data = placeholder
 # Define a global variable to count iterations since the last transmission
 global iteration_count
 iteration_count = 0
+
+def capture_and_send_image():
+    try:
+        # Start using the camera
+        with picamera.PiCamera() as camera:
+            camera.resolution = (1024, 768)
+            camera.start_preview()
+            # Wait for 2 seconds to let the camera become ready
+            time.sleep(2)
+
+            # Save the captured image
+            image_path = '/home/pi/captured_image.jpg'
+            camera.capture(image_path)
+            print('Image captured and saved:', image_path)
+				
+            # Send the image via HTTP request
+            files = {
+				int(datetime.datetime.utcnow().timestamp()): base64.b64encode(open(image_path, 'rb').read())
+			}
+            response = requests.post(url=f"{ip_addr}/sensorknoten-vogelhaus/location/image", json=files)
+
+            # Check server response
+            if response.status_code == 200:
+                print('Image successfully sent to the server.')
+            else:
+                print('Error sending the image to the server. Status code:', response.status_code)
+
+    except Exception as e:
+        # Send error message
+        error_message = f'Error capturing and sending the image: {str(e)}'
+        print(error_message)
+        # Display the error message to the user or save it to a file or perform any other desired operation
 
 # Main loop to continuously read and send sensor data
 def loop():
@@ -68,6 +102,9 @@ def loop():
             requests.post(url=f"{ip_addr}/sensorknoten-vogelhaus/location/data", json=sensor_data_dict)
             sensor_data_dict.clear()
             sensor_dict.clear()
+			
+			capture_and_send_image()
+
             # Reset the iteration count
             iteration_count = 0
 
