@@ -269,7 +269,7 @@ body::before {
 .card-unit {
     font-size: 5rem;
     font-family: Bebas Neue, sans-serif;
-    margin-top: -3rem;
+    margin-top: -1.5rem;
     justify-content: center;
     align-items: center;
     text-align: center;
@@ -322,7 +322,7 @@ body::before {
 .more-info-button {
     font-size: 1.5rem;
     padding: 12px 24px;
-    margin: auto;
+    margin-top: -1.2rem;
     background-color: var(--gold);
     color: var(--green);
     font-family: 'Dosis', sans-serif;
