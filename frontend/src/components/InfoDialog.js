@@ -2,15 +2,7 @@ import React from 'react';
 import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogContent from '@mui/material/DialogContent';
-import { green, gold, brown } from '../util/utils';
-
-const hexToRgb = (hex) => {
-    const bigint = parseInt(hex.slice(1), 16);
-    const r = (bigint >> 16) & 255;
-    const g = (bigint >> 8) & 255;
-    const b = bigint & 255;
-    return [r, g, b];
-};
+import { green, gold, hexToRgb, dialogStyles } from '../util/utils';
 
 const InfoDialog = ({ open, onClose }) => {
     const rgbGreen = hexToRgb(green);
@@ -28,15 +20,15 @@ const InfoDialog = ({ open, onClose }) => {
                 },
             }}
         >
-            <DialogTitle style={styles.title}>Welcome to ForestGuardian</DialogTitle>
+            <DialogTitle style={dialogStyles.title}>Welcome to ForestGuardian</DialogTitle>
             <DialogContent>
-                <p style={styles.paragraph}>
+                <p style={dialogStyles.paragraph}>
                     <strong>ForestGuardian</strong> is an advanced environmental monitoring system, designed to provide invaluable insights into our natural world.
                 </p>
-                <p style={styles.paragraph}>
+                <p style={dialogStyles.paragraph}>
                     <strong>Explore the following features:</strong>
                 </p>
-                <ul style={styles.featuresList}>
+                <ul style={dialogStyles.featuresList}>
                     <li>
                         <strong>Home:</strong> Return to the main screen and navigate effortlessly through the system's features. Your starting point for a seamless and user-friendly experience.
                     </li>
@@ -54,10 +46,10 @@ const InfoDialog = ({ open, onClose }) => {
                     </li>
                 </ul>
                 <br/>
-                <p style={styles.valueDescription}>
+                <p style={dialogStyles.valueDescription}>
                     <strong>Value Description:</strong>
                 </p>
-                <ul style={styles.valueList}>
+                <ul style={dialogStyles.valueList}>
                     <li>
                         <strong>PPM:</strong> PPM stands for "parts per million" and is a unit of measurement for the concentration of a substance in a medium.
                     </li>
@@ -73,37 +65,6 @@ const InfoDialog = ({ open, onClose }) => {
             </DialogContent>
         </Dialog>
     );
-};
-
-const styles = {
-    title: {
-        fontSize: '24px',
-        fontWeight: 'bold',
-    },
-    paragraph: {
-        margin: '16px 0',
-    },
-    featuresList: {
-        listStyleType: 'disc',
-        marginLeft: '24px',
-        marginTop: '8px',
-    },
-    valueDescription: {
-        marginTop: '16px',
-        marginBottom: '8px',
-        fontWeight: 'bold',
-    },
-    valueList: {
-        listStyleType: 'disc', // or 'none' if you prefer no bullets
-        marginLeft: '24px',
-        marginTop: '8px',
-    },
-    closeButton: {
-        fontFamily: 'Bebas Neue, sans-serif',
-        fontSize: '1.3rem',
-        color: green,
-        backgroundColor: brown,
-    },
 };
 
 export default InfoDialog;

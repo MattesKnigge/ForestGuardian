@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import GaugeChart from 'react-gauge-chart';
 import {ChartComponent} from "./ChartComponent";
 import {createTheme, ThemeProvider} from "@mui/material";
@@ -10,6 +10,9 @@ import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import {brown, gold, green} from '../util/utils';
+import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
+import IconButton from "@mui/material/IconButton";
+import HideValuesDialog from "./HideValuesDialog";
 
 const Dashboard = ({ title, sensors }) => {
     const datePickerTheme = createTheme({
@@ -33,6 +36,14 @@ const Dashboard = ({ title, sensors }) => {
     const [from, setFrom] = useState(dayjs().subtract(1, 'week'));
     const [to, setTo] = useState(dayjs());
     const [showGraphs, setShowGraphs] = useState(false);
+    const [showValuesVisibility, setshowValuesVisibility] = useState(false);
+    const [valueVisibility, setValueVisibility] = useState( { 'value': true, });
+
+    useEffect(() => {
+        let dict = {}
+        Object.keys(sensors).map((key) => ( dict[key] = true ));
+        setValueVisibility(dict);
+    }, [sensors]);
 
     const calcArcs = (ranges) => {
         if (ranges.length === 2) {
@@ -67,6 +78,14 @@ const Dashboard = ({ title, sensors }) => {
             :null}
             <ThemeProvider theme={datePickerTheme}>
                 <div className="dashboard-controls">
+                    <div>
+                        <IconButton
+                            onClick={() => setshowValuesVisibility(true)}
+                            title={'Show Value List'}
+                        >
+                            <PublicRoundedIcon />
+                        </IconButton>
+                    </div>
                     <FormControlLabel
                         control={<Switch Switch checked={showGraphs} onChange={() => setShowGraphs(!showGraphs)} style={{ color: brown }} title={'Show or hide graphs'} />}
                         label={
@@ -87,25 +106,38 @@ const Dashboard = ({ title, sensors }) => {
 
             {Object.keys(sensors).map((key) => (
                 <>
-                    <h3 style={{fontFamily: 'Dosis, sans-serif', color: gold}}>{sensors[key].display_name || key}</h3>
-                    <div key={key} className={`dashboard-row ${showGraphs? 'two-cols':'one-col'}`}>
-                        <GaugeChart id={sensors[key].id}
-                                    percent={(sensors[key].value - sensors[key].min) / (sensors[key].max - sensors[key].min)}
-                                    colors={calcColors(sensors[key].param_ranges)}
-                                    arcsLength={calcArcs(sensors[key].param_ranges)}
-                                    formatTextValue={() => (Number.isInteger(sensors[key].value) ? sensors[key].value : sensors[key].value.toFixed(2)) + ' ' + sensors[key].unit}
-                                    needleColor={sensors[key].value_range.color}
-                                    needleBaseColor={sensors[key].value_range.color}
-                                    arcPadding={sensors[key].param_ranges.length === 2 ? 0 : 0.02}
-                                    textColor={'#EEECE6'}
-                        />
-                        {showGraphs?
-                            <ChartComponent measured_parameter_id={sensors[key].id} from={from} to={to} />
-                            : null
-                        }
-                    </div>
+                    {valueVisibility[key] ?
+                        <>
+                            <h3 style={{
+                                fontFamily: 'Dosis, sans-serif',
+                                color: gold
+                            }}>{sensors[key].display_name || key}</h3>
+                            <div key={key} className={`dashboard-row ${showGraphs ? 'two-cols' : 'one-col'}`}>
+                                <GaugeChart id={sensors[key].id}
+                                            percent={(sensors[key].value - sensors[key].min) / (sensors[key].max - sensors[key].min)}
+                                            colors={calcColors(sensors[key].param_ranges)}
+                                            arcsLength={calcArcs(sensors[key].param_ranges)}
+                                            formatTextValue={() => (Number.isInteger(sensors[key].value) ? sensors[key].value : sensors[key].value.toFixed(2)) + ' ' + sensors[key].unit}
+                                            needleColor={sensors[key].value_range.color}
+                                            needleBaseColor={sensors[key].value_range.color}
+                                            arcPadding={sensors[key].param_ranges.length === 2 ? 0 : 0.02}
+                                            textColor={'#EEECE6'}
+                                />
+                                {showGraphs ?
+                                    <ChartComponent measured_parameter_id={sensors[key].id} from={from} to={to}/>
+                                    : null
+                                }
+                            </div>
+                        </>
+                    : null}
                 </>
             ))}
+            {showValuesVisibility?
+                <>
+                    <HideValuesDialog open={showValuesVisibility} onClose={() => setshowValuesVisibility(false)} valueVisibility={valueVisibility} onChange={setValueVisibility}></HideValuesDialog>
+                </>
+                : null
+            }
         </div>
     );
 };

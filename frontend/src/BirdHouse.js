@@ -28,7 +28,7 @@ const BirdHouse = ({ showMessage }) => {
             image_url: '',
         }
     });
-    const [houseCount, setHouseCount] =useState(1);
+    const [houseCount, setHouseCount] = useState(1);
     const [isDash, setIsDash] = useState(false);
     const [lastTimestamps, setLastTimestamps] = useState( { house: new Date(0).getTime()});
 
@@ -59,7 +59,7 @@ const BirdHouse = ({ showMessage }) => {
     }, [birdHouseNames, showMessage]);
 
     useInterval(async () => {
-        if (isDash) {
+        if (false) {
             try {
                 const names = birdHouseNames.split(',');
                 let dat = structuredClone(data);
