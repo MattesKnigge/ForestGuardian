@@ -102,16 +102,17 @@ def loop():
             requests.post(url=f"{ip_addr}/sensorknoten-vogelhaus/location/data", json=sensor_data_dict)
             sensor_data_dict.clear()
             sensor_dict.clear()
-			
-			capture_and_send_image()
+            
+            capture_and_send_image()
 
             # Reset the iteration count
             iteration_count = 0
 
-	    # increment the iteration count
-        iteration_count+=1
+        # increment the iteration count
+        iteration_count += 1
         
         # Sleep for 30 minutes before the next iteration
+        # XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX  NEEDS TO BE CHANGED LATER   XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
         time.sleep(1)
 
 
