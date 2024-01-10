@@ -64,6 +64,16 @@ def capture_and_send_image():
         print(error_message)
         # Display the error message to the user or save it to a file or perform any other desired operation
 
+# Function that gives the current CPU-Serialnumber
+def get_serial():
+    try:
+        with open('/proc/cpuinfo', 'r') as f:
+            for line in f:
+                if line[0:6] == 'Serial':
+                    return(line[10:26])
+    except:
+        return("0000000000000000")
+
 # Main loop to continuously read and send sensor data
 def loop():
     while True:
