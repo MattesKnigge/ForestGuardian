@@ -8,7 +8,7 @@ import picamera
 import base64
 
 # Define the IP address and port for the server where sensor data will be sent
-ip_addr = "http://192.168.167.52:8000"
+ip_addr = "http://10.82.48.101:8000"
 port = 1
 
 # I2C addresses for the BME280 and ISL29125 sensors
