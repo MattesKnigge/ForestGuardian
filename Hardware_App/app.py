@@ -101,7 +101,9 @@ def loop():
         }
 
         sensor_data_dict={
-            "values":sensor_dict
+            get_serial(): {
+                "values":sensor_dict
+            }
         }
         
         global iteration_count
