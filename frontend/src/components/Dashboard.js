@@ -36,7 +36,7 @@ const Dashboard = ({ title, sensors }) => {
     const [from, setFrom] = useState(dayjs().subtract(1, 'week'));
     const [to, setTo] = useState(dayjs());
     const [showGraphs, setShowGraphs] = useState(false);
-    const [showValuesVisibility, setshowValuesVisibility] = useState(false);
+    const [showValuesVisibility, setShowValuesVisibility] = useState(false);
     const [valueVisibility, setValueVisibility] = useState( { 'value': true, });
 
     useEffect(() => {
@@ -80,7 +80,7 @@ const Dashboard = ({ title, sensors }) => {
                 <div className="dashboard-controls">
                     <div>
                         <IconButton
-                            onClick={() => setshowValuesVisibility(true)}
+                            onClick={() => setShowValuesVisibility(true)}
                             title={'Show Value List'}
                         >
                             <PublicRoundedIcon />
@@ -134,7 +134,7 @@ const Dashboard = ({ title, sensors }) => {
             ))}
             {showValuesVisibility?
                 <>
-                    <HideValuesDialog open={showValuesVisibility} onClose={() => setshowValuesVisibility(false)} valueVisibility={valueVisibility} onChange={setValueVisibility}></HideValuesDialog>
+                    <HideValuesDialog open={showValuesVisibility} onClose={() => setShowValuesVisibility(false)} valueVisibility={valueVisibility} onChange={setValueVisibility}></HideValuesDialog>
                 </>
                 : null
             }

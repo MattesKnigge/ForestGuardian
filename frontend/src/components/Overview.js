@@ -1,6 +1,6 @@
 import ParamCard from "./ParamCard";
 import Detail from "./Detail";
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {gold} from '../util/utils';
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
@@ -13,6 +13,7 @@ import 'leaflet/dist/leaflet.css';
 import icon from 'leaflet/dist/images/marker-icon.png';
 import iconShadow from 'leaflet/dist/images/marker-shadow.png';
 import L from 'leaflet';
+import HideValuesDialog from "./HideValuesDialog";
 
 
 let DefaultIcon = L.icon({
@@ -31,7 +32,14 @@ const Overview = ({ title, data }) => {
     const [measuredParamId, setMeasuredParamId] = useState("");
     const [showImage, setShowImage] = useState(false);
     const [isMapDialogOpen, setIsMapDialogOpen] = useState(false);
+    const [showValuesVisibility, setShowValuesVisibility] = useState(false);
+    const [valueVisibility, setValueVisibility] = useState( { 'value': true, });
 
+    useEffect(() => {
+        let dict = {}
+        Object.keys(data.values).map((key) => ( dict[key] = true ));
+        setValueVisibility(dict);
+    }, [data]);
 
     const mapButtonStyle = {
         backgroundColor: '#8E6F52',
@@ -72,6 +80,14 @@ const Overview = ({ title, data }) => {
 
     return (
         <div className="overview">
+            <div style={{ color: gold}}>
+                <IconButton
+                    onClick={() => setShowValuesVisibility(true)}
+                    title={'Show Value List'}
+                >
+                    <PublicRoundedIcon />
+                </IconButton>
+            </div>
             {title !== '' ?
                 <h1 style={{fontFamily: 'Dosis, sans-serif', color: gold}}>{data.display_name}</h1>
                 :null}
@@ -105,13 +121,17 @@ const Overview = ({ title, data }) => {
             <div className={`overview-grid ${title !== '' ? 'overview-one-col' : 'overview-two-col'}`}>
                 {Object.keys(data.values).map((key) => (
                     <>
-                        <ParamCard name={key} data={data.values[key]} onShowDetails={openDetails} />
-                        {title === '' ?
-                            <div className="tree-spacer" />
-                        :null}
-                        {title === '' && key === Object.keys(data.values)[0] ?
-                            <div className="tree-spacer" />
-                        :null}
+                        {valueVisibility[key] ?
+                            <>
+                                <ParamCard name={key} data={data.values[key]} onShowDetails={openDetails} />
+                                {title === '' ?
+                                    <div className="tree-spacer" />
+                                :null}
+                                {title === '' && key === Object.keys(data.values)[0] ?
+                                    <div className="tree-spacer" />
+                                :null}
+                            </>
+                        : null}
                     </>
                 ))}
             </div>
@@ -152,6 +172,12 @@ const Overview = ({ title, data }) => {
                     </div>
                 </DialogContent>
             </Dialog>
+            {showValuesVisibility?
+                <>
+                    <HideValuesDialog open={showValuesVisibility} onClose={() => setShowValuesVisibility(false)} valueVisibility={valueVisibility} onChange={setValueVisibility}></HideValuesDialog>
+                </>
+                : null
+            }
         </div>
     );
 }
