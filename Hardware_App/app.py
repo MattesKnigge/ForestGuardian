@@ -14,6 +14,7 @@ port = 1
 # I2C addresses for the BME280 and ISL29125 sensors
 bme280_addr = 0x77
 isl29125_addr = 0x44
+mikroe_3527_ADDR = 0x58
 
 # Initialize the I2C bus
 bus = smbus.SMBus(port)
@@ -64,6 +65,15 @@ def capture_and_send_image():
         print(error_message)
         # Display the error message to the user or save it to a file or perform any other desired operation
 
+# Function to read RGB color values from the ISL29125 sensor
+def read_color_values(bus, addr):
+    # Trigger a measurement on the ISL29125
+    bus.write_byte(addr, 0x00)
+    time.sleep(0.5)
+    # Read the RGB color values
+    data = bus.read_i2c_block_data(addr, 0x09, 3)
+    return data[0], data[1], data[2]
+
 # Function that gives the current CPU-Serialnumber
 def get_serial():
     try:
@@ -84,6 +94,13 @@ def loop():
             humidity = bme280_data.humidity
             pressure = bme280_data.pressure
             ambient_temperature = bme280_data.temperature
+
+            # Read data from the ISL29125 sensor
+            red, green, blue = read_color_values(bus, isl29125_addr)
+
+            # Read data from the MIKROE_3527 sensor
+
+
         except:
             humidity = placeholder
             pressure = placeholder
@@ -97,7 +114,8 @@ def loop():
                 "co2": 500,
                 "co": 2,
                 "o2": 3,
-                "light": 10000 
+                "light": (red+green+blue)/3,
+
         }
 
         sensor_data_dict={
