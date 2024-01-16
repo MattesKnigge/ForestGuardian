@@ -3,4 +3,3 @@ djangorestframework~=3.14.0
 drf-yasg~=1.21.7
 requests~=2.31.0
 Pillow~=10.1.0
-gunicorn~=21.2.0

@@ -1,5 +1,8 @@
 FROM python:latest
 
+ENV PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONUNBUFFERED=1
+
 EXPOSE 8000
 
 WORKDIR /usr/src/app
@@ -7,5 +10,5 @@ WORKDIR /usr/src/app
 COPY django_server .
 RUN pip install --no-cache-dir -r requirements.txt
 
-CMD [ "gunicorn", "django_server.wsgi:application", "--bind", "0.0.0.0:8000" ]
+CMD [ "python", "manage.py", "runserver", "0.0.0.0:8000" ]
 
