@@ -1,8 +1,5 @@
 image:
   name: docker/compose:latest
-
-services:
-  - docker:dind    
   
 build-job:
   stage: build
