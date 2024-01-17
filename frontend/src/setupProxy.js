@@ -4,7 +4,7 @@ module.exports = function(app) {
     app.use(
         '/sensorknoten-vogelhaus',
         createProxyMiddleware({
-            target: 'http://127.0.0.1:8000',
+            target: 'http://django:8000',
             changeOrigin: true,
         })
     );

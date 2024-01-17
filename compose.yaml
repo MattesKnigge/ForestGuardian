@@ -4,13 +4,10 @@ services:
             dockerfile: "Dockerfile.django"
         ports:
             - "8000:8000"
-        expose:
-            - 8000
+        command: bash -c "python manage.py runserver 0.0.0.0:8000"
     react:
         build:
             dockerfile: "Dockerfile.react"
-        links:
-            - "django:django"
         ports:
             - "3000:3000"
         depends_on:
