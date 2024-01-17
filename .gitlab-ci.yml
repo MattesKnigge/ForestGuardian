@@ -4,4 +4,4 @@ image:
 build-job:
   stage: build
   script:
-    - docker compose build
+    - docker-compose build
