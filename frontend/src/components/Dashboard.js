@@ -10,9 +10,9 @@ import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import {brown, gold, green} from '../util/utils';
-import PublicRoundedIcon from "@mui/icons-material/PublicRounded";
 import IconButton from "@mui/material/IconButton";
 import HideValuesDialog from "./HideValuesDialog";
+import {ListRounded} from "@mui/icons-material";
 
 const Dashboard = ({ title, sensors }) => {
     const datePickerTheme = createTheme({
@@ -83,7 +83,7 @@ const Dashboard = ({ title, sensors }) => {
                             onClick={() => setShowValuesVisibility(true)}
                             title={'Show Value List'}
                         >
-                            <PublicRoundedIcon />
+                            <ListRounded />
                         </IconButton>
                     </div>
                     <FormControlLabel
@@ -110,7 +110,7 @@ const Dashboard = ({ title, sensors }) => {
                         <>
                             <h3 style={{
                                 fontFamily: 'Dosis, sans-serif',
-                                color: gold
+                                color: gold,
                             }}>{sensors[key].display_name || key}</h3>
                             <div key={key} className={`dashboard-row ${showGraphs ? 'two-cols' : 'one-col'}`}>
                                 <GaugeChart id={sensors[key].id}
