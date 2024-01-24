@@ -105,6 +105,11 @@ def loop():
             humidity = placeholder
             pressure = placeholder
             ambient_temperature = placeholder
+            co2 = placeholder
+            co = placeholder
+            o2 = placeholder
+            red, green, blue = 0, 0, 0
+
         
         # Store the sensor data in the dictionary with the current Linux timestamp as the key
         sensor_dict[int(datetime.datetime.utcnow().timestamp())] = {
