@@ -51,8 +51,6 @@ body::before {
     position: fixed;
     z-index: 1000;
     width: 100%;
-    border-bottom: var(--green) 5px solid;
-    border-top: var(--green) 5px solid;
 }
 
 .header h1 {
@@ -99,6 +97,37 @@ body::before {
     border-radius: 30px;
     width: 40ch;
 }
+
+
+.gauge-container {
+    position: relative; /* Make the container relative to position its children */
+}
+
+.value-out-of-range-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.3); /* Red overlay with transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 30px;
+    z-index: 1; /* Ensure the overlay is above the gauge */
+    pointer-events: none; /* Allow clicks through the overlay */
+}
+
+.value-out-of-range-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 80px;
+}
+
 
 .with-graph {
     width: 120ch;
