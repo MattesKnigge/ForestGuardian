@@ -68,12 +68,15 @@ def capture_and_send_image():
 
 # Function to read RGB color values from the ISL29125 sensor
 def read_color_values(bus, addr):
-    # Trigger a measurement on the ISL29125
-    bus.write_byte(addr, 0x00)
-    time.sleep(0.5)
-    # Read the RGB color values
-    data = bus.read_i2c_block_data(addr, 0x09, 3)
-    return data[0], data[1], data[2]
+    try:
+        # Trigger a measurement on the ISL29125
+        bus.write_byte(addr, 0x00)
+        time.sleep(0.5)
+        # Read the RGB color values
+        data = bus.read_i2c_block_data(addr, 0x09, 3)
+        return data[0], data[1], data[2]
+    except:
+        return 0, 0, 0
 
 # Function that gives the current CPU-Serialnumber
 def get_serial():
@@ -94,33 +97,38 @@ def get_mq_9b():
         return data[0]*265 + data[1]
     except:
         return(placeholder)
+    
+# Function that gives the current bme280 value
+def get_bme280():
+    try:
+        bme280.load_calibration_params(bus, bme280_addr)
+        bme280_data = bme280.sample(bus, bme280_addr)
+        humidity = bme280_data.humidity
+        pressure = bme280_data.pressure
+        ambient_temperature = bme280_data.temperature
+        return humidity, pressure, ambient_temperature
+    except:
+        return(placeholder, placeholder, placeholder)
+    
+# Function that gives the current mikroe_3527 value
+def get_mikroe_3527():
+    try:
+        data = bus.read_i2c_block_data(mikroe_3527_ADDR, 0x00, 6)
+        return data[0]*265 + data[1]
+    except:
+        return(placeholder)
+    
 
 
 # Main loop to continuously read and send sensor data
 def loop():
     while True:
-        try:
-            # Load calibration parameters and read data from the BME280 sensor
-            bme280.load_calibration_params(bus, bme280_addr)
-            bme280_data = bme280.sample(bus, bme280_addr)
-            humidity = bme280_data.humidity
-            pressure = bme280_data.pressure
-            ambient_temperature = bme280_data.temperature
+        # Read the sensor data
+        red, green, blue = read_color_values(bus, isl29125_addr)
+        humidity, pressure, ambient_temperature = get_bme280()
+        co2 = get_mikroe_3527()
+        
 
-            # Read data from the ISL29125 sensor
-            red, green, blue = read_color_values(bus, isl29125_addr)
-
-            # Read data from the MIKROE_3527 sensor
-            co2 = bus.read_i2c_block_data(mikroe_3527_ADDR, 0x00, 6)[0]*265 + bus.read_i2c_block_data(mikroe_3527_ADDR, 0x00, 6)[1]
-
-        except:
-            humidity = placeholder
-            pressure = placeholder
-            ambient_temperature = placeholder
-            co2 = placeholder
-            co = placeholder
-            o2 = placeholder
-            red, green, blue = 0, 0, 0
 
         
         # Store the sensor data in the dictionary with the current Linux timestamp as the key
