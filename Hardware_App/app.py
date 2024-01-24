@@ -6,6 +6,7 @@ import requests
 import datetime
 import picamera
 import base64
+import Adafruit_ADS1x15
 
 # Define the IP address and port for the server where sensor data will be sent
 ip_addr = "http://10.82.48.101:8000"
@@ -16,6 +17,9 @@ bme280_addr = 0x77
 isl29125_addr = 0x44
 mikroe_3527_ADDR = 0x58
 mq_9b_addr = 0x48
+
+# Initialize the ADS1115 ADC for the MQ-9B sensor
+adc = Adafruit_ADS1x15.ADS1115()
 
 # Initialize the I2C bus
 bus = smbus.SMBus(port)
@@ -91,12 +95,26 @@ def get_serial():
 # Function that gives the current mq_9b value by reading the adc-value
 def get_mq_9b():
     try:
-        bus.write_byte(mq_9b_addr, 0x00)
-        time.sleep(0.5)
-        data = bus.read_i2c_block_data(mq_9b_addr, 0x00, 6)
-        return data[0]*265 + data[1]
+        value = adc.read_adc(0, gain=1)
+        sensor_volt = value * (4.096 / 32767.0) # 4.096V is the max voltage of the ADC given by Datasheet and 32767 is a magic number given by a kind stack_overflow user
+        co = (4.096 - sensor_volt) / sensor_volt
+        return co
     except:
         return(placeholder)
+    
+# Function that calibrates the mq_9b sensor (not needed here!)
+def calibrate_mq_9b():
+    try:
+        sensor_value = 0.0
+        for i in range(0, 100):
+            sensor_value += adc.read_adc(0, gain=1)
+        sensor_value /= 100
+        sensor_volt = sensor_value * (4.096 / 32767.0) # 4.096V is the max voltage of the ADC given by Datasheet and 32767 is a magic number given by a kind stack_overflow user
+        RS_air = (4.096 - sensor_volt) / sensor_volt
+        R0 = RS_air / 9.9 # 9.9 is the ratio of RS/R0 given by Datasheet
+        return R0
+    except:
+        return(0.0)
     
 # Function that gives the current bme280 value
 def get_bme280():
@@ -127,7 +145,9 @@ def loop():
         red, green, blue = read_color_values(bus, isl29125_addr)
         humidity, pressure, ambient_temperature = get_bme280()
         co2 = get_mikroe_3527()
-        
+        co = get_mq_9b()
+        o2 = placeholder
+
 
 
         
