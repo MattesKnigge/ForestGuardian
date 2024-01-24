@@ -157,8 +157,8 @@ def loop():
                 "pressure": pressure,
                 "ambient_temperature": ambient_temperature,
                 "co2": co2,
-                "co": 2,
-                "o2": 3,
+                "co": co,
+                "o2": o2,
                 "light": (red+green+blue)/3,
 
         }
