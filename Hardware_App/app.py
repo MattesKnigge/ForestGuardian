@@ -99,7 +99,7 @@ def loop():
             red, green, blue = read_color_values(bus, isl29125_addr)
 
             # Read data from the MIKROE_3527 sensor
-            co2 = bus.read_i2c_block_data(MIKROE_3527_ADDR, 0x00, 6)[0]*265 + bus.read_i2c_block_data(MIKROE_3527_ADDR, 0x00, 6)[1]
+            co2 = bus.read_i2c_block_data(mikroe_3527_ADDR, 0x00, 6)[0]*265 + bus.read_i2c_block_data(mikroe_3527_ADDR, 0x00, 6)[1]
 
         except:
             humidity = placeholder
