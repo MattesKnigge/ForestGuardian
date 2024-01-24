@@ -15,6 +15,7 @@ port = 1
 bme280_addr = 0x77
 isl29125_addr = 0x44
 mikroe_3527_ADDR = 0x58
+mq_9b_addr = 0x48
 
 # Initialize the I2C bus
 bus = smbus.SMBus(port)
@@ -83,6 +84,17 @@ def get_serial():
                     return(line[10:26])
     except:
         return("0000000000000000")
+    
+# Function that gives the current mq_9b value by reading the adc-value
+def get_mq_9b():
+    try:
+        bus.write_byte(mq_9b_addr, 0x00)
+        time.sleep(0.5)
+        data = bus.read_i2c_block_data(mq_9b_addr, 0x00, 6)
+        return data[0]*265 + data[1]
+    except:
+        return(placeholder)
+
 
 # Main loop to continuously read and send sensor data
 def loop():
