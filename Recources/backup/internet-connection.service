@@ -1,0 +1,8 @@
+[Unit]
+Description=Internet Connection Setup
+
+[Service]
+ExecStart=/home/nikla/internet-connection.sh
+
+[Install]
+WantedBy=multi-user.target
