@@ -134,10 +134,10 @@ def measured_parameter_details(request, measured_parameter_id: str):
         param = measured_parameter_id.split('_')
         mp = MeasuredParameter.objects.select_related('parameter').get(id=param[1])
         param_ranges = list(ParameterRange.objects.filter(parameter=mp.parameter).order_by('lower_bound').all())
-        val = random.randint(param_ranges[0].lower_bound, param_ranges[-1].lower_bound)
-        param_range = [pr for pr in param_ranges if pr.lower_bound <= val][-1]
         min_val = int(param_ranges[0].lower_bound)
         max_val = int(param_ranges[-1].lower_bound)
+        val = random.randint(min_val, max_val)
+        param_range = [pr for pr in param_ranges if pr.lower_bound <= val][-1]
         timestamps = [dt_from + timedelta(hours=i) for i in range(hours_between)]
 
         data = {
