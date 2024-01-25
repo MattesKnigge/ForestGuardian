@@ -295,7 +295,6 @@ body::before {
 .camera-picture {
     width: auto;
     height: auto;
-    aspect-ratio: 3/0.9;
     background-image: url('sign_texture.jpg');
     background-color: rgba(40, 26, 13, 0.8);
     background-blend-mode: hue;
@@ -304,9 +303,9 @@ body::before {
     border: 5px solid rgba(55,17,7,0.98) ;
     border-radius: 30px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    position: relative;
 }
 
 .image-text {
@@ -314,9 +313,8 @@ body::before {
     font-family: 'Dosis', sans-serif;
     color: var(--gold);
     text-align: center;
-    position: absolute;
-    top: 0;
     font-weight: 600;
+    margin: 15px;
 }
 
 .more-info-button {

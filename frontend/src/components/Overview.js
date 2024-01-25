@@ -137,21 +137,21 @@ const Overview = ({ title, data }) => {
             </div>
             {
                 data['image_url'] !== '' && (
-                    <div className="camera-picture" style={{ position: 'relative', height: showImage ? 'auto' : '150px', marginBottom: "15px" }}>
-                        <div className="image-text">Take a look inside</div>
+                    <div className="camera-picture" style={{ marginBottom: '15px' }}>
+                        <IconButton
+                            onClick={toggleImage}
+                            style={{marginTop: '15px'}}
+                        >
+                            {showImage ? <VisibilityOffIcon /> : <VisibilityIcon />}
+                        </IconButton>
+                        {!showImage && (<div className="image-text">Take a look inside</div>)}
                         {showImage && (
                             <img
                                 src={`/sensorknoten-vogelhaus${data['image_url']}`}
                                 alt='B I R B .'
-                                style={{ maxWidth: '35%', borderRadius: '100%' }}
+                                style={{ borderRadius: '10%' }}
                             />
                         )}
-                        <IconButton
-                            onClick={toggleImage}
-                            style={{ position: 'absolute', top: '5px', right: '10px' }}
-                        >
-                            {showImage ? <VisibilityOffIcon /> : <VisibilityIcon />}
-                        </IconButton>
                     </div>
                 )
             }
