@@ -9,7 +9,7 @@ import base64
 import Adafruit_ADS1x15
 
 # Server Configuration
-IP_ADDRESS = "http://10.82.48.101:8000"
+IP_ADDRESS = "https://application.5g-smartforestry.ostfalia.de:443"
 PORT = 1
 
 # Sensor I2C Addresses
@@ -38,14 +38,15 @@ def capture_and_send_image():
         with picamera.PiCamera() as camera:
             camera.resolution = (1024, 768)
             camera.start_preview()
-            time.sleep(2)  # Camera warm-up time
+            time.sleep(5)  # Camera warm-up time
             image_path = '/home/pi/captured_image.jpg'
             camera.capture(image_path)
+            camera.close()
 
             # Image encoding and sending via HTTP
             encoded_image = base64.b64encode(open(image_path, 'rb').read())
             timestamp = int(datetime.datetime.utcnow().timestamp())
-            response = requests.post(f"{IP_ADDRESS}/sensorknoten-vogelhaus/location/image", json={timestamp: encoded_image})
+            response = requests.post(f"{IP_ADDRESS}/sensorknoten-vogelhaus/location/image", json={timestamp: encoded_image.decode()})
 
             if response.status_code == 200:
                 print('Image successfully sent to the server.')
@@ -62,6 +63,7 @@ def read_color_values(bus, addr):
         bus.write_byte(addr, 0x00)
         time.sleep(0.5)
         data = bus.read_i2c_block_data(addr, 0x09, 3)
+        print("brightness")
         return data[0], data[1], data[2]
     except Exception as e:
         print(f'Error reading color values: {e}')
@@ -88,6 +90,7 @@ def get_mq_9b():
         value = adc.read_adc(0, gain=1)
         sensor_volt = value * (4.096 / 32767.0) # Magic numbers given by a kind StackOverflow user
         co = (4.096 - sensor_volt) / sensor_volt
+        print("co")
         return co
     except Exception as e:
         print(f'Error reading MQ-9B sensor: {e}')
@@ -114,7 +117,7 @@ def calibrate_mq_9b():
 def get_bme280():
     """
     Retrieves the current BME280 sensor values.
-    """
+    
     try:
         bme280.load_calibration_params(bus, BME280_ADDR)
         bme280_data = bme280.sample(bus, BME280_ADDR)
@@ -122,13 +125,28 @@ def get_bme280():
     except Exception as e:
         print(f'Error reading BME280 sensor: {e}')
         return placeholder, placeholder, placeholder
-    
+    """
+    try:
+        calibration_params = bme280.load_calibration_params(bus, address)
+
+        data = bme280.sample(bus, BME280_ADDR, calibration_params)
+
+        temperature = data.temperature
+        humidity = data.humidity
+        pressure = data.pressure
+        print("hum, press, temp")
+        return humidity, pressure, temperature
+
+    except Exception as e:
+        print(f"Error reading BME280: {e}")
+        return placeholder, placeholder, placeholder
 def get_mikroe_3527():
     """
     Retrieves the current Mikroe-3527 sensor value.
     """
     try:
         data = bus.read_i2c_block_data(MIKROE_3527_ADDR, 0x00, 6)
+        print("co2")
         return data[0] * 256 + data[1]
     except Exception as e:
         print(f'Error reading Mikroe-3527 sensor: {e}')
@@ -144,21 +162,51 @@ def loop():
         humidity, pressure, ambient_temperature = get_bme280()
         co2 = get_mikroe_3527()
         co = get_mq_9b()
+        o2 = placeholder
+        stamp = int(datetime.datetime.utcnow().timestamp())
+        sensor_dict[stamp] = {}
 
+        if humidity is not placeholder:
+            sensor_dict[stamp]["humidity"] = humidity
+            sensor_dict[stamp]["pressure"] = pressure
+            sensor_dict[stamp]["temperature"] = ambient_temperature
+        if co2 is not placeholder:
+            sensor_dict[stamp]["co2"] = co2
+        if co is not placeholder:
+            sensor_dict[stamp]["co"] = co
+        if o2 is not placeholder:
+            sensor_dict[stamp]["o2"] = o2
+        if red != 0 and blue != 0 and green != 0:
+            sensor_dict[stamp]["brightness"] = (0.2126*int(red)+0.7152*int(green)+0.0722*int(blue))
+
+
+        """
         sensor_dict[int(datetime.datetime.utcnow().timestamp())] = {
             "humidity": humidity,
             "pressure": pressure,
-            "ambient_temperature": ambient_temperature,
+            "temperature": ambient_temperature,
             "co2": co2,
             "co": co,
             "o2": placeholder,
             "light": (red + green + blue) / 3,
         }
 
-        sensor_data_dict = {get_serial(): {"values": sensor_dict}}
 
-        if iteration_count >= 11:
+        sensor_dict[int(datetime.datetime.utcnow().timestamp())] = {
+            "humidity":50,
+            "pressure":1000,
+            "temperature": 0,
+            "co2": 500,
+            "co": 10,
+            "brightness": 1000 
+        }
+        """
+
+        sensor_data_dict = {"id":get_serial(), "values": sensor_dict}
+
+        if iteration_count > 11:
             requests.post(f"{IP_ADDRESS}/sensorknoten-vogelhaus/location/data", json=sensor_data_dict)
+            print("Data sent")
             sensor_data_dict.clear()
             sensor_dict.clear()
             capture_and_send_image()
