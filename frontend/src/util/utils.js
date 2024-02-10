@@ -15,6 +15,7 @@ export const dialogStyles = {
     title: {
         fontSize: '24px',
         fontWeight: 'bold',
+        textAlign: 'center',
     },
     paragraph: {
         margin: '16px 0',

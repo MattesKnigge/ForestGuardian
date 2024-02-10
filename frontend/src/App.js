@@ -108,7 +108,7 @@ const App = ({ showMessage }) => {
                                 className="second-button"
                                 onClick={handleMenuOpen}
                             >
-                                Show Our Data
+                                View Our Data
                             </Button>
                             <Menu
                                 anchorEl={anchorEl}
