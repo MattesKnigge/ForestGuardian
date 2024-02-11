@@ -1,0 +1,546 @@
+:root {
+    --green: #1C352E;
+    --green-50a: rgba(28,53,46,0.5);
+    --gold: #D4A82B;
+    --brown: #8E6F52;
+    --violet: #B58BC2;
+}
+/* Reset default styles */
+body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+/* Body styles */
+body {
+    font-family: 'Dosis', sans-serif;
+}
+
+body::before {
+    content: '';
+    background-image: url("wallpaper.jpg");
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    filter: blur(7px);
+    background-size: cover;
+    transform: scale(1.1);
+}
+
+.layout {
+    height: 100vh;
+    display: grid;
+    grid-template-areas:
+            "header"
+            "content"
+            "footer";
+    grid-template-rows: 7vh 1fr 5vh;
+}
+
+/* Header styles */
+.header {
+    background-color: var(--gold);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    grid-area: header;
+    cursor: default;
+    position: fixed;
+    z-index: 1000;
+    width: 100%;
+}
+
+.header h1 {
+    font-family: Dosis, sans-serif;
+    font-size: 3rem;
+}
+
+/* Button styles */
+.header-button {
+    display: flex;
+}
+
+.content-container {
+    grid-area: content;
+    padding-top: 1vh;
+    display: grid;
+    justify-items: center;
+}
+
+.footer-container {
+    grid-area: footer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 0 2vw;
+}
+
+.multi-dashboard-layout {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1em;
+    max-width: 95vw;
+}
+
+.dashboard-layout {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: column;
+    margin-top: 0.5em;
+    padding: 0.5em;
+    background-color: var(--green-50a);
+    backdrop-filter: blur(10px);
+    border-radius: 30px;
+    width: 40ch;
+}
+
+
+.gauge-container {
+    position: relative; /* Make the container relative to position its children */
+}
+
+.value-out-of-range-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 0, 0, 0.3); /* Red overlay with transparency */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1.5rem;
+    color: white;
+    border-radius: 30px;
+    z-index: 1; /* Ensure the overlay is above the gauge */
+    pointer-events: none; /* Allow clicks through the overlay */
+}
+
+.value-out-of-range-text {
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    margin-bottom: 80px;
+}
+
+
+.with-graph {
+    width: 120ch;
+}
+
+.dashboard-row {
+    width: 95%;
+    display: grid;
+    align-items: center;
+    font-family: Bebas Neue, sans-serif;
+}
+
+.two-cols {
+    grid-template-columns: 1fr 2fr;
+}
+
+.one-col {
+    grid-template-columns: 1fr;
+}
+
+@media (max-width: 800px) {
+    .two-cols {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-layout {
+        width: 90vw;
+    }
+
+    .with-graph {
+        width: unset;
+    }
+}
+
+.dashboard-controls {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    gap: 1em;
+    padding: 0.2em 1em;
+}
+
+/* Credits styles */
+.credits-content {
+    font-family: Bebas Neue, sans-serif;
+    color: var(--brown);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: .6rem;
+}
+
+.credit-link, .country {
+    color: var(--brown);
+    text-decoration: none;
+    transition: text-decoration 0.3s, color 0.3s, cursor 0.3s;
+    cursor: pointer;
+}
+
+.credit-link:hover, .country:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.second-button {
+    font-size: 1.5rem!important;
+    font-family: "Bebas Neue", monospace !important;
+    background: var(--brown) !important;
+    color: var(--green)!important;
+    box-shadow: none !important;
+    margin-top: 10rem!important;
+}
+
+.multi-overview {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    gap: 1em;
+    max-width: 95vw;
+}
+
+.overview {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-image: url('tree_texture.jpg');
+    border-radius: 25px;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.overview-grid {
+    width: 100%;
+    display: grid;
+    column-gap: 1em;
+    padding: 1em;
+}
+
+.overview-one-col {
+    grid-template-columns: 1fr;
+    row-gap: 0.5em;
+    width: 60ch;
+}
+
+.overview-two-col {
+    grid-template-columns: 1fr 1fr;
+    width: 120ch;
+}
+
+.tree-spacer {
+    width: 100%;
+    aspect-ratio: 3/1;
+}
+
+@media (width < 130ch) {
+    .overview-one-col {
+        width: calc(100% - 2em);
+    }
+
+    .overview-two-col {
+        width: calc(100% - 2em);
+        grid-template-columns: 1fr;
+        row-gap: 0.5em;
+    }
+
+    .tree-spacer {
+        height: 0;
+    }
+}
+
+.param-card {
+    grid-row: span 3;
+    width: 100%;
+    aspect-ratio: 1/1;
+    background-color: rgba(80,31,6,0.80);
+    box-sizing: border-box;
+    border: 5px solid rgba(55,17,7,0.98) ;
+    border-radius: 30px;
+    display: grid;
+    grid-template-rows: 5vh auto 5vh;
+    justify-items: center;
+}
+
+.card-value {
+    font-size: 10rem;
+    font-family: Bebas Neue, sans-serif;
+    margin: auto;
+    justify-content: center;
+    align-items: center;
+}
+
+.card-big-value {
+    font-size: 6rem;
+}
+
+.param-card-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    width: 100%;
+}
+
+.param-svg {
+    background-size: 250%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.card-unit {
+    font-size: 5rem;
+    font-family: Bebas Neue, sans-serif;
+    margin-top: -1.5rem;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.param-card-title {
+    font-size: 2rem;
+    font-family: 'Dosis', sans-serif;
+    background-image: url('sign_texture.jpg');
+    background-color: rgba(40, 26, 13, 0.8);
+    background-blend-mode: hue;
+    background-size: 80%;
+    color: var(--gold);
+    margin: auto;
+    padding: 0.5em 0;
+    text-align: center;
+    border: 3px solid var(--brown);
+    border-radius: 10px;
+    width: 75%; /* even width for all signs */
+    z-index: 2;
+}
+
+.camera-picture {
+    width: auto;
+    height: auto;
+    background-image: url('sign_texture.jpg');
+    background-color: rgba(40, 26, 13, 0.8);
+    background-blend-mode: hue;
+    background-size: 50%;
+    box-sizing: border-box;
+    border: 5px solid rgba(55,17,7,0.98) ;
+    border-radius: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-text {
+    font-size: 2rem;
+    font-family: 'Dosis', sans-serif;
+    color: var(--gold);
+    text-align: center;
+    font-weight: 600;
+    margin: 15px;
+}
+
+.more-info-button {
+    font-size: 1.5rem;
+    padding: 12px 24px;
+    margin-top: -1.2rem;
+    background-color: var(--gold);
+    color: var(--green);
+    font-family: 'Dosis', sans-serif;
+    font-weight: bold;
+    border: none;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.more-info-button:hover {
+    background-color: var(--gold);
+    transform: scale(0.95) rotate(5deg);
+}
+
+.bird-tempLow {
+    background-image: url("temperature_cold.svg");
+}
+
+.bird-tempHigh {
+    background-image: url("temperature_hot.svg");
+}
+
+.bird-tempMedium {
+    background-image: url("temperature_average.svg");
+}
+
+.bird-humidHigh {
+    background-image: url("humidity_wet.svg");
+    background-size: 230%;
+}
+
+.bird-humidLow {
+    background-image: url("humidity_dry.svg");
+    background-size: 210%;
+}
+
+.bird-humidMedium {
+    background-image: url("humidity_normal.svg");
+}
+
+.bird-co2high {
+    background-image: url("co2_high.svg");
+    background-size: 180%;
+}
+
+.bird-co2low {
+    background-image: url("co2_low.svg");
+    background-size: 100%;
+}
+
+.bird-co2medium {
+    background-image: url("co2_medium.svg");
+    background-size: 100%;
+}
+
+.bird-luxHigh {
+    background-image: url("lumen_high.svg");
+    background-size: 180%;
+}
+
+.bird-luxMedium {
+    background-image: url("lumen_medium.svg");
+    background-size: 180%;
+}
+
+.bird-luxLow {
+    background-image: url("lumen_low.svg");
+    background-size: 150%;
+}
+
+@keyframes smokeAnimation {
+    0% {
+        transform: translateY(10px);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(-15px);
+        opacity: 0.7;
+    }
+    100% {
+        transform: translateY(-30px);
+        opacity: 0;
+    }
+}
+
+.bird-range {
+    position: relative;
+    margin-top: 8rem;
+    background-image: url("Campfire.svg");
+    background-size: 160%;
+    background-repeat: no-repeat;
+    z-index: 1;
+}
+
+.bird-range::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("smoke.svg");
+    background-size: 80%;
+    background-repeat: no-repeat;
+    margin-left: 2.5rem;
+    margin-top: -8rem;
+    opacity: 90%;
+    z-index: 1;
+    animation: smokeAnimation 3s infinite;
+}
+
+.bird-pressureHigh {
+    background-image: url("pressure_high.svg");
+    background-size: 160%;
+}
+
+.bird-pressureLow {
+    background-image: url("pressure_low.svg");
+    background-size: 160%;
+}
+
+.bird-pressureMedium {
+    background-image: url("pressure_medium.svg");
+    background-size: 160%;
+}
+
+.bird-methaneLow {
+    background-image: url("methane_low.svg");
+    background-size: 250%;
+}
+
+.bird-methaneMedium {
+    background-image: url("methane_medium.svg");
+    background-size: 250%;
+}
+
+.bird-methaneHigh {
+    background-image: url("methane_high.svg");
+    background-size: 250%;
+}
+
+/* Media queries for smaller screens */
+@media (max-width: 768px) {
+    body {
+        font-family: Dosis, sans-serif;
+        background-color: var(--green);
+        overflow-y: auto;
+    }
+
+    .header h1 {
+        font-size: 2rem;
+    }
+}
+
+.detail-layout {
+    display: grid;
+    gap: 10px;
+}
+
+.detail {
+    padding: 20px;
+    border-radius: 8px;
+    margin: 10px;
+}
+
+.line-chart {
+    width: 100%; /* Make the chart take up the full width */
+    max-width: 400px; /* Set a maximum width to prevent it from becoming too wide */
+    height: 200px; /* Adjust the height as needed for mobile screens */
+    margin: 0 auto; /* Center the chart within its container */
+}
+
+/* Media query for smaller screens */
+@media screen and (max-width: 600px) {
+    .detail-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .line-chart {
+        height: 150px; /* Further reduce the height on smaller screens if necessary */
+    }
+}
+
+.weather_description {
+    font-size: 1.2rem;
+    font-family: 'Dosis', sans-serif;
+    color: var(--green);
+    text-align: center;
+    font-weight: 600;
+    text-transform: capitalize;
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+}

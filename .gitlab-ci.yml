@@ -1,0 +1,7 @@
+image:
+  name: docker/compose:latest
+  
+build-job:
+  stage: build
+  script:
+    - docker-compose build
